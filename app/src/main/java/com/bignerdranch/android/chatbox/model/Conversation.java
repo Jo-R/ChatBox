@@ -7,9 +7,9 @@ public class Conversation {
     private List<Sentence> mDialogue;
     private String mTitle; //user generated convo name
     private String mType; //overall type per model, might be an enum
-    private List<Integer> mStartItems; //ids of first item(s) to be displayed in conversation
+    private int[] mStartItems; //ids of first item(s) to be displayed in conversation
 
-    public Conversation(List<Sentence> dialogue, String title, String type, List<Integer> startItems) {
+    public Conversation(List<Sentence> dialogue, String title, String type, int[] startItems) {
         mDialogue = dialogue;
         mTitle = title;
         mType = type;
@@ -40,11 +40,11 @@ public class Conversation {
         mType = type;
     }
 
-    public List<Integer> getStartItems() {
+    public int[] getStartItems() {
         return mStartItems;
     }
 
-    public void setStartItems(List<Integer> startItems) {
+    public void setStartItems(int[] startItems) {
         mStartItems = startItems;
     }
 }

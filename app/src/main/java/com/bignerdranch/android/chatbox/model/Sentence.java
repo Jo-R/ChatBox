@@ -9,16 +9,28 @@ public class Sentence {
     private String mContent;
     private String mSpeechType; //might be better as an enum??
     private int mId;
-    private List<Integer> mNextItems;
+    private int[] mNextItems;
     private boolean mIsThought; //can this be a speech type??
 
 
     //idea being that construct sentences in conversation but without the content which is added
     // later
-    public Sentence(String sender, String receiver, String speechType, int id, List<Integer> nextItems,
+    public Sentence(String sender, String receiver, String speechType, int id, int[] nextItems,
                     boolean isThought) {
         mSender = sender;
         mReceiver = receiver;
+        mSpeechType = speechType;
+        mId = id;
+        mNextItems = nextItems;
+        mIsThought = isThought;
+    }
+
+    //ctor all fields
+    public Sentence(String sender, String receiver, String content, String speechType, int id,
+                    int[] nextItems, boolean isThought) {
+        mSender = sender;
+        mReceiver = receiver;
+        mContent = content;
         mSpeechType = speechType;
         mId = id;
         mNextItems = nextItems;
@@ -49,7 +61,7 @@ public class Sentence {
         return mId;
     }
 
-    public List<Integer> getNextItems() {
+    public int[] getNextItems() {
         return mNextItems;
     }
 
