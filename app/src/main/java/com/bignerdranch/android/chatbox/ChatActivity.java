@@ -26,17 +26,9 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        mChatManager = new ChatManager();
-
         mAgentText = findViewById(R.id.agent_text);
         mUserText = findViewById(R.id.user_text);
         mNextBtn = findViewById(R.id.next_button);
-
-        //hard coded for now
-        Conversation currConvo = mChatManager.getConversation("test request");
-        List<Sentence> currDialogue = currConvo.getDialogue();
-        mAgentText.setText(currDialogue.get(0).getContent());
-        mUserText.setText(currDialogue.get(1).getContent());
 
         mNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,5 +37,16 @@ public class ChatActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Button clicked!", Toast.LENGTH_LONG).show();
             }
         });
+
+        updateUI();
+    }
+
+    private void updateUI() {
+        mChatManager = ChatManager.get(this); //current activity context but ctor then sets it to
+        // getApplicationContext()
+        Conversation currConvo = mChatManager.getConversation("test request");
+        List<Sentence> currDialogue = currConvo.getDialogue();
+        mAgentText.setText(currDialogue.get(0).getContent());
+        mUserText.setText(currDialogue.get(1).getContent());
     }
 }

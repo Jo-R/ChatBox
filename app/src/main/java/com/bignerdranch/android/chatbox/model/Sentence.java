@@ -7,10 +7,10 @@ public class Sentence {
     private String mSender;
     private String mReceiver;
     private String mContent;
-    private String mSpeechType; //might be better as an enum??
+    private String mSpeechType; //TODO might be better as an enum??
     private int mId;
     private int[] mNextItems;
-    private boolean mIsThought; //can this be a speech type??
+    private boolean mIsThought; //TODO can this be a speech type??
 
 
     //idea being that construct sentences in conversation but without the content which is added

@@ -6,7 +6,7 @@ public class Conversation {
 
     private List<Sentence> mDialogue;
     private String mTitle; //user generated convo name
-    private String mType; //overall type per model, might be an enum
+    private String mType; //TODO overall type per model, might be an enum
     private int[] mStartItems; //ids of first item(s) to be displayed in conversation
 
     public Conversation(List<Sentence> dialogue, String title, String type, int[] startItems) {
