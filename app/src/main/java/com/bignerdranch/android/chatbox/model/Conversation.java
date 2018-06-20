@@ -47,4 +47,6 @@ public class Conversation {
     public void setStartItems(int[] startItems) {
         mStartItems = startItems;
     }
+
+
 }
