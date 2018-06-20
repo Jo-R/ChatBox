@@ -41,8 +41,7 @@ public class ChatActivity extends AppCompatActivity {
         mNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //something!!
-                Toast.makeText(getApplicationContext(), "Button clicked!", Toast.LENGTH_LONG).show();
+                updateUI();
             }
         });
 
@@ -55,15 +54,35 @@ public class ChatActivity extends AppCompatActivity {
         List<Sentence> currDialogue = currConvo.getDialogue();
 
         //find agent and user IDs for next move
+        boolean agentMoveSet = false;
+        boolean userMoveSet = false;
         //initial move
         if (mCurrAgentMoveId == -1 || mCurrUserMoveId == -1) {
             for (Sentence sentence : currDialogue) {
-                if (sentence.getSender().equals("Agent") && mCurrAgentMoveId == -1) {
+                if (sentence.getSender().equals("Agent") && !agentMoveSet) {
                     mAgentText.setText(sentence.getContent());
                     mCurrAgentMoveId = sentence.getId();
-                } else if (sentence.getSender().equals("User") && mCurrUserMoveId == -1) {
+                    agentMoveSet = true;
+                } else if (sentence.getSender().equals("User") && !userMoveSet) {
                     mUserText.setText(sentence.getContent());
                     mCurrUserMoveId = sentence.getId();
+                    userMoveSet = true;
+                }
+            }
+        } else {
+            for (Sentence sentence : currDialogue) {
+                //this will get the first move for that player that comes after the one they are on
+                //TODO this doesn't really work cf multiple options for users
+                if (sentence.getSender().equals("Agent") && mCurrAgentMoveId != sentence.getId()
+                        && !agentMoveSet) {
+                    mAgentText.setText(sentence.getContent());
+                    mCurrAgentMoveId = sentence.getId();
+                    agentMoveSet = true;
+                } else if (sentence.getSender().equals("User") && mCurrUserMoveId != sentence
+                        .getId() && !userMoveSet) {
+                    mUserText.setText(sentence.getContent());
+                    mCurrUserMoveId = sentence.getId();
+                    userMoveSet = true;
                 }
             }
         }
