@@ -20,6 +20,8 @@ public class ChatActivity extends AppCompatActivity {
     private Button mNextBtn;
 
     private ChatManager mChatManager;
+    private int mCurrAgentMoveId;
+    private int mCurrUserMoveId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,12 @@ public class ChatActivity extends AppCompatActivity {
         mAgentText = findViewById(R.id.agent_text);
         mUserText = findViewById(R.id.user_text);
         mNextBtn = findViewById(R.id.next_button);
+
+        //used in updateUI - wouldn't want to change these if had a savedInstanceState
+        if (savedInstanceState == null) {
+            mCurrAgentMoveId = -1;
+            mCurrUserMoveId = -1;
+        }
 
         mNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,11 +50,24 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        mChatManager = ChatManager.get(this); //current activity context but ctor then sets it to
-        // getApplicationContext()
+        mChatManager = ChatManager.get(this);
         Conversation currConvo = mChatManager.getConversation("test request");
         List<Sentence> currDialogue = currConvo.getDialogue();
-        mAgentText.setText(currDialogue.get(0).getContent());
-        mUserText.setText(currDialogue.get(1).getContent());
+
+        //find agent and user IDs for next move
+        //initial move
+        if (mCurrAgentMoveId == -1 || mCurrUserMoveId == -1) {
+            for (Sentence sentence : currDialogue) {
+                if (sentence.getSender().equals("Agent") && mCurrAgentMoveId == -1) {
+                    mAgentText.setText(sentence.getContent());
+                    mCurrAgentMoveId = sentence.getId();
+                } else if (sentence.getSender().equals("User") && mCurrUserMoveId == -1) {
+                    mUserText.setText(sentence.getContent());
+                    mCurrUserMoveId = sentence.getId();
+                }
+            }
+        }
+
     }
+
 }
