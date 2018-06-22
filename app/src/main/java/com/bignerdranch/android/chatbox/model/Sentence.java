@@ -5,11 +5,11 @@ import java.util.List;
 public class Sentence {
 
     private String mSender;
-    private String mReceiver;
+//    private String mReceiver; only need sender, user or computer
     private String mContent;
     private String mSpeechType; //TODO might be better as an enum??
     private int mId;
-    private int[] mNextItems;
+//    private int[] mNextItems; it's the conversation that would know this
     private boolean mIsThought; //TODO can this be a speech type??
 
 
@@ -18,10 +18,9 @@ public class Sentence {
     public Sentence(String sender, String receiver, String speechType, int id, int[] nextItems,
                     boolean isThought) {
         mSender = sender;
-        mReceiver = receiver;
         mSpeechType = speechType;
         mId = id;
-        mNextItems = nextItems;
+//        mNextItems = nextItems;
         mIsThought = isThought;
     }
 
@@ -29,11 +28,11 @@ public class Sentence {
     public Sentence(String sender, String receiver, String content, String speechType, int id,
                     int[] nextItems, boolean isThought) {
         mSender = sender;
-        mReceiver = receiver;
+//        mReceiver = receiver;
         mContent = content;
         mSpeechType = speechType;
         mId = id;
-        mNextItems = nextItems;
+//        mNextItems = nextItems;
         mIsThought = isThought;
     }
 
@@ -45,9 +44,9 @@ public class Sentence {
         return mSender;
     }
 
-    public String getReceiver() {
-        return mReceiver;
-    }
+//    public String getReceiver() {
+//        return mReceiver;
+//    }
 
     public String getContent() {
         return mContent;
@@ -61,9 +60,9 @@ public class Sentence {
         return mId;
     }
 
-    public int[] getNextItems() {
-        return mNextItems;
-    }
+//    public int[] getNextItems() {
+//        return mNextItems;
+//    }
 
     public boolean isThought() {
         return mIsThought;

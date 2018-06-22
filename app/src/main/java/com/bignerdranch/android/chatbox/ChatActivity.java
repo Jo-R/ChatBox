@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bignerdranch.android.chatbox.model.ChatManager;
+import com.bignerdranch.android.chatbox.model.AskForSomething;
 import com.bignerdranch.android.chatbox.model.Conversation;
 import com.bignerdranch.android.chatbox.model.Sentence;
 

@@ -36,12 +36,11 @@ public class ChatManager {
                 "Request", 3, new int[] {4}, false ));
         dialogue.add(new Sentence("Agent", "User", "Yes","ConfirmRequest", 4,
                 new int[] {}, false )); //TODO how to handle last move in convo??
-        mConversationLibrary.add(new Conversation(dialogue,"test request", "RequestingHelp",
-                new int[] {1}));
+        mConversationLibrary.add(new AskForSomething(dialogue,"test request"));
     }
 
     public Conversation getConversation(String title) {
-        for (Conversation conversation : mConversationLibrary) {
+        for ( Conversation conversation : mConversationLibrary) {
             if (conversation.getTitle().equals(title)) {
                 return conversation;
             }
