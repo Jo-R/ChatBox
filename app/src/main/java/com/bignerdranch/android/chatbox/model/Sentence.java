@@ -3,9 +3,9 @@ package com.bignerdranch.android.chatbox.model;
 
 public class Sentence {
 
-    private String mSender;
+    private String mSender; //?TODO ?is this needed in here - is it not defined by conversation
     private String mContent;
-    private boolean mIsThought; //TODO can this be a speech type??
+    private boolean mIsThought; //TODO also maybe part of convo as a element??
 
 
     //idea being that construct sentences in conversation but without the content which is added

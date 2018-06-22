@@ -7,7 +7,7 @@ public interface Conversation {
 
     String getTitle();
     void setTitle(String title);
-    HashMap<String, List<Sentence>> getConversation();
+    HashMap<String, List<Sentence>> getConversation(); //TODO Enum but diff values in each class?
     void addToConversation(String conversationElement,Sentence sentence);
     List<Sentence> getNextMove(String conversationElementJustUsed);
 }
