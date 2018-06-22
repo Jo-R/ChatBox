@@ -24,19 +24,9 @@ public class ChatManager {
         addConversation();
     }
 
-    //TEMP HARD CODED - is next the next item for that user rather than the next item in the
-    // dialgoue since 2x moves shown on screen at same time??
+
     public void addConversation() {
-        List<Sentence> dialogue = new ArrayList<>();
-        dialogue.add(new Sentence("User", "Agent", "Hi there","Greeting", 1,
-                new int[] {3}, false ));
-        dialogue.add(new Sentence("Agent", "User", "Hi","Greeting", 2,
-                new int[] {4}, false ));
-        dialogue.add(new Sentence("User", "Agent", "Can I have some beans",
-                "Request", 3, new int[] {4}, false ));
-        dialogue.add(new Sentence("Agent", "User", "Yes","ConfirmRequest", 4,
-                new int[] {}, false )); //TODO how to handle last move in convo??
-        mConversationLibrary.add(new AskForSomething(dialogue,"test request"));
+       //add a new conversation - create it and add to the library
     }
 
     public Conversation getConversation(String title) {
@@ -47,5 +37,8 @@ public class ChatManager {
         }
         return null;
     }
+
+    //does this need a getNextMove method as well so controller calls this which calls the
+    // conversation or is that daft??
 
 }
