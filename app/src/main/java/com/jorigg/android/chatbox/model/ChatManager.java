@@ -1,4 +1,4 @@
-package com.bignerdranch.android.chatbox.model;
+package com.jorigg.android.chatbox.model;
 
 import android.content.Context;
 

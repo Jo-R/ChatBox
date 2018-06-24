@@ -1,4 +1,4 @@
-package com.bignerdranch.android.chatbox;
+package com.jorigg.android.chatbox;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

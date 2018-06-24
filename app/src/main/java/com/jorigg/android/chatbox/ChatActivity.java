@@ -1,4 +1,4 @@
-package com.bignerdranch.android.chatbox;
+package com.jorigg.android.chatbox;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,10 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.bignerdranch.android.chatbox.model.ChatManager;
-import com.bignerdranch.android.chatbox.model.AskForSomething;
-import com.bignerdranch.android.chatbox.model.Conversation;
-import com.bignerdranch.android.chatbox.model.Sentence;
+import com.jorigg.android.chatbox.model.ChatManager;
+import com.jorigg.android.chatbox.model.Conversation;
+import com.jorigg.android.chatbox.model.Sentence;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,11 +26,11 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(com.jorigg.android.chatbox.R.layout.activity_chat);
 
-        mAgentText = findViewById(R.id.agent_text);
-        mUserText = findViewById(R.id.user_text);
-        mNextBtn = findViewById(R.id.next_button);
+        mAgentText = findViewById(com.jorigg.android.chatbox.R.id.agent_text);
+        mUserText = findViewById(com.jorigg.android.chatbox.R.id.user_text);
+        mNextBtn = findViewById(com.jorigg.android.chatbox.R.id.next_button);
 
         //used in updateUI - wouldn't want to change these if had a savedInstanceState
         if (savedInstanceState == null) {

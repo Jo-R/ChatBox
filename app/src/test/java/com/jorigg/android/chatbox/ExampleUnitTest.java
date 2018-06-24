@@ -1,4 +1,4 @@
-package com.bignerdranch.android.chatbox;
+package com.jorigg.android.chatbox;
 
 import org.junit.Test;
 
