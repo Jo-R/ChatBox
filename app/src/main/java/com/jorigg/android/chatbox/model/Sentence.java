@@ -6,6 +6,7 @@ public class Sentence {
     private String mSender; //?TODO ?is this needed in here - is it not defined by conversation
     private String mContent;
     private boolean mIsThought; //TODO also maybe part of convo as a element??
+    //TODO probably want speech type in here - generic - cf sentence bank?
 
 
     //idea being that construct sentences in conversation but without the content which is added
