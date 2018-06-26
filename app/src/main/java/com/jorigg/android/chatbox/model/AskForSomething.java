@@ -6,7 +6,32 @@ import java.util.List;
 public class AskForSomething implements Conversation {
 
     public enum AskForSomethingElements implements ConversationElementEnum {
-        //elements of this convo, ie each sentence's type
+
+        GREETING("user"),
+        ALT_GREETING("user"),
+        RTN_GREETING("agent"),
+        MAKE_REQUEST("user"),
+        ALT_MAKE_REQUEST("user"),
+        AGREE_REQUEST("agent"),
+        REQ_CLARIFY("agent"),
+        PROVIDE_CLARIFY("user"),
+        REFUSE_REQ("agent"),
+        ACKNOWL_REFUSAL("user"),
+        THANK("user"),
+        ACKNOWL_THANK("agent");
+
+
+        private final String mSpeaker;
+
+        private AskForSomethingElements(final String speaker) {
+            mSpeaker = speaker;
+        }
+
+        @Override
+        public String getSpeaker() {
+            return mSpeaker;
+        }
+
     }
 
     private HashMap<ConversationElementEnum, List<Sentence>> mDialogue;
