@@ -1,6 +1,7 @@
 package com.jorigg.android.chatbox.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -46,18 +47,31 @@ public class AskForSomething implements Conversation {
 
     private Map<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
+    private User.UserType mInitiator;
+    private List<AskForSomethingElements> mInitialMoves;
 
     public AskForSomething(String title) {
         mDialogue = new EnumMap<>(AskForSomethingElements.class);
         mTitle = title;
+        mInitiator = User.UserType.CHILD;
+        mInitialMoves = new ArrayList<>();
+        mInitialMoves.add(AskForSomethingElements.GREETING);
+        mInitialMoves.add(AskForSomethingElements.ALT_GREETING);
     }
 
+    @Override
     public String getTitle() {
         return mTitle;
     }
 
+    @Override
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    @Override
+    public User.UserType getInitiator() {
+        return mInitiator;
     }
 
     @Override
@@ -66,19 +80,38 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public void addToConversation(Enum conversationElement, Sentence sentence, Sentence
-            .SpeechType speechType) {
-        //add the sentence to the arrylist associated with the key
+    public List<Sentence> getElementContent(Enum conversationElement) {
+        return mDialogue.get(conversationElement);
     }
 
     @Override
-    public List<Sentence> getNextMove(Enum conversationElementJustUsed) {
+    public void addToConversation(Enum conversationElement, Sentence sentence) {
+        //add the sentence to the arrylist associated with the key
+        //get the element
+        //if agent add to the list, probably need ot get it to a temp var and then add then re-put
+        //if user/child replace whatever in the list (so just put should do it)
+
+        //TODO implement properly! hard coded for now
+        mDialogue.put(AskForSomethingElements.GREETING, new ArrayList<Sentence>
+                (Arrays.asList(new Sentence("Hi", Sentence.SpeechType.GREETING))));
+        mDialogue.put(AskForSomethingElements.ALT_GREETING, new ArrayList<Sentence>
+                (Arrays.asList(new Sentence("Hi there dude", Sentence.SpeechType.GREETING))));
+        mDialogue.put(AskForSomethingElements.RTN_GREETING, new ArrayList<Sentence>
+                (Arrays.asList(new Sentence("Hi", Sentence.SpeechType.GREETING),
+                        new Sentence("Yo", Sentence.SpeechType.GREETING),
+                        new Sentence("Big up", Sentence.SpeechType.GREETING))));
+    }
+
+    @Override
+    public List<AskForSomethingElements> getInitialElements() {
+        return mInitialMoves;
+    }
+
+    @Override
+    public List<Sentence> getNextElements(Enum conversationElementJustUsed) {
         return null;
         //takes most recent move made by user and works out next conversationElements to display
     }
 
-    @Override
-    public User.UserType getInitiator() {
-        return null;
-    }
+
 }

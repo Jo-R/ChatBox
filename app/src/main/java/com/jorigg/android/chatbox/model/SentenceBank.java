@@ -1,8 +1,6 @@
-package com.jorigg.android.chatbox;
+package com.jorigg.android.chatbox.model;
 
 import android.content.Context;
-
-import com.jorigg.android.chatbox.model.Sentence;
 
 import java.util.ArrayList;
 import java.util.List;
