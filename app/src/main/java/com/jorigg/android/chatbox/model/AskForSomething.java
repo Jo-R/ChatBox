@@ -47,7 +47,7 @@ public class AskForSomething implements Conversation {
 
     private Map<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
-    private User.UserType mInitiator;
+    private User.UserType mInitiator; //TODO is this needed cf get that as part of the element returned in mInitialMoves?
     private List<AskForSomethingElements> mInitialMoves;
 
     public AskForSomething(String title) {
