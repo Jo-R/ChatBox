@@ -7,28 +7,28 @@ public class AskForSomething implements Conversation {
 
     public enum AskForSomethingElements implements ConversationElementEnum {
 
-        GREETING("user"),
-        ALT_GREETING("user"),
-        RTN_GREETING("agent"),
-        MAKE_REQUEST("user"),
-        ALT_MAKE_REQUEST("user"),
-        AGREE_REQUEST("agent"),
-        REQ_CLARIFY("agent"),
-        PROVIDE_CLARIFY("user"),
-        REFUSE_REQ("agent"),
-        ACKNOWL_REFUSAL("user"),
-        THANK("user"),
-        ACKNOWL_THANK("agent");
+        GREETING(User.UserType.CHILD),
+        ALT_GREETING(User.UserType.CHILD),
+        RTN_GREETING(User.UserType.AGENT),
+        MAKE_REQUEST(User.UserType.CHILD),
+        ALT_MAKE_REQUEST(User.UserType.CHILD),
+        AGREE_REQUEST(User.UserType.AGENT),
+        REQ_CLARIFY(User.UserType.AGENT),
+        PROVIDE_CLARIFY(User.UserType.CHILD),
+        REFUSE_REQ(User.UserType.AGENT),
+        ACKNOWL_REFUSAL(User.UserType.CHILD),
+        THANK(User.UserType.CHILD),
+        ACKNOWL_THANK(User.UserType.AGENT);
 
 
-        private final String mSpeaker;
+        private final User.UserType mSpeaker;
 
-        private AskForSomethingElements(final String speaker) {
+        private AskForSomethingElements(final User.UserType speaker) {
             mSpeaker = speaker;
         }
 
         @Override
-        public String getSpeaker() {
+        public User.UserType getSpeaker() {
             return mSpeaker;
         }
 
