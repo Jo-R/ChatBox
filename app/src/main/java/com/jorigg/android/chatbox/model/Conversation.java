@@ -11,4 +11,5 @@ public interface Conversation {
     void addToConversation(ConversationElementEnum conversationElement, Sentence sentence, Sentence.SpeechType
             speechType);
     List<Sentence> getNextMove(ConversationElementEnum conversationElementJustUsed);
+    User.UserType getInitiator();
 }

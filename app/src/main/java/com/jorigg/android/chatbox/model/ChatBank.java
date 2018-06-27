@@ -21,7 +21,7 @@ public class ChatBank {
     private ChatBank(Context context) {
         mContext = context.getApplicationContext();
         mConversationLibrary = new ArrayList<>();
-        addConversation();
+//        addConversation();
     }
 
 

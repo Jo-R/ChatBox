@@ -66,4 +66,9 @@ public class AskForSomething implements Conversation {
         return null;
         //takes most recent move made by user and works out next conversationElements to display
     }
+
+    @Override
+    public User.UserType getInitiator() {
+        return null;
+    }
 }
