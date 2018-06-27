@@ -9,30 +9,38 @@ public class AskForSomething implements Conversation {
 
     public enum AskForSomethingElements implements ConversationElementEnum {
 
-        GREETING(User.UserType.CHILD),
-        ALT_GREETING(User.UserType.CHILD),
-        RTN_GREETING(User.UserType.AGENT),
-        MAKE_REQUEST(User.UserType.CHILD),
-        ALT_MAKE_REQUEST(User.UserType.CHILD),
-        AGREE_REQUEST(User.UserType.AGENT),
-        REQ_CLARIFY(User.UserType.AGENT),
-        PROVIDE_CLARIFY(User.UserType.CHILD),
-        REFUSE_REQ(User.UserType.AGENT),
-        ACKNOWL_REFUSAL(User.UserType.CHILD),
-        THANK(User.UserType.CHILD),
-        ACKNOWL_THANK(User.UserType.AGENT);
+        GREETING(User.UserType.CHILD, Sentence.SpeechType.GREETING),
+        ALT_GREETING(User.UserType.CHILD, Sentence.SpeechType.GREETING),
+        RTN_GREETING(User.UserType.AGENT, Sentence.SpeechType.GREETING),
+        MAKE_REQUEST(User.UserType.CHILD, Sentence.SpeechType.REQUEST),
+        ALT_MAKE_REQUEST(User.UserType.CHILD, Sentence.SpeechType.REQUEST),
+        AGREE_REQUEST(User.UserType.AGENT, Sentence.SpeechType.AGREEMENT),
+        REQ_CLARIFY(User.UserType.AGENT, Sentence.SpeechType.REQUEST),
+        PROVIDE_CLARIFY(User.UserType.CHILD, Sentence.SpeechType.STATEMENT), //or REQUEST??
+        REFUSE_REQ(User.UserType.AGENT, Sentence.SpeechType.REFUSAL),
+        ACKNOWL_REFUSAL(User.UserType.CHILD, Sentence.SpeechType.ACKNOWLEDGEMENT),
+        THANK(User.UserType.CHILD, Sentence.SpeechType.THANKS),
+        ACKNOWL_THANK(User.UserType.AGENT, Sentence.SpeechType.ACKNOWLEDGEMENT);
 
 
         private final User.UserType mSpeaker;
+        private final Sentence.SpeechType mSpeechType;
 
-        private AskForSomethingElements(final User.UserType speaker) {
+        private AskForSomethingElements(final User.UserType speaker, final Sentence.SpeechType speechType) {
             mSpeaker = speaker;
+            mSpeechType = speechType;
         }
 
         @Override
         public User.UserType getSpeaker() {
             return mSpeaker;
         }
+
+        @Override
+        public Sentence.SpeechType getSpeechType(String elementName) {
+            return mSpeechType;
+        }
+
 
     }
 
