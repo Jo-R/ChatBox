@@ -6,8 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.jorigg.android.chatbox.model.ChatManager;
+import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Conversation;
+import com.jorigg.android.chatbox.model.ConversationElementEnum;
 import com.jorigg.android.chatbox.model.Sentence;
 
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class ChatActivity extends AppCompatActivity {
     private TextView mUserText;
     private Button mNextBtn;
 
-    private ChatManager mChatManager;
+    private ChatBank mChatBank;
     private int mCurrAgentMoveId;
     private int mCurrUserMoveId;
 
@@ -49,9 +50,9 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        mChatManager = ChatManager.get(this);
-        Conversation currConvo = mChatManager.getConversation("test request");
-        HashMap<String, List<Sentence>> currDialogue = currConvo.getConversation();
+        mChatBank = ChatBank.get(this);
+        Conversation currConvo = mChatBank.getConversation("test request");
+        HashMap<ConversationElementEnum, List<Sentence>> currDialogue = currConvo.getConversation();
 
 //        //find agent and user IDs for next move
 //        boolean agentMoveSet = false;

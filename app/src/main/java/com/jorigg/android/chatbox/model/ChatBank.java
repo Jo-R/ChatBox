@@ -5,20 +5,20 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatManager {
+public class ChatBank {
 
     private List<Conversation> mConversationLibrary;
     private Context mContext;
-    private static ChatManager sChatManager;
+    private static ChatBank sChatBank;
 
-    public static ChatManager get(Context context) {
-        if (sChatManager == null) {
-            sChatManager = new ChatManager(context);
+    public static ChatBank get(Context context) {
+        if (sChatBank == null) {
+            sChatBank = new ChatBank(context);
         }
-        return sChatManager;
+        return sChatBank;
     }
 
-    private ChatManager(Context context) {
+    private ChatBank(Context context) {
         mContext = context.getApplicationContext();
         mConversationLibrary = new ArrayList<>();
         addConversation();
