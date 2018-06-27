@@ -1,15 +1,17 @@
 package com.jorigg.android.chatbox.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public interface Conversation {
+public interface Conversation<E extends Enum<E>> {
 
     String getTitle();
     void setTitle(String title);
-    HashMap<ConversationElementEnum, List<Sentence>> getConversation();
-    void addToConversation(ConversationElementEnum conversationElement, Sentence sentence, Sentence.SpeechType
+    Map<E, ArrayList<Sentence>> getConversationDetails();
+    void addToConversation(E conversationElement, Sentence sentence, Sentence.SpeechType
             speechType);
-    List<Sentence> getNextMove(ConversationElementEnum conversationElementJustUsed);
+    List<Sentence> getNextMove(E conversationElementJustUsed);
     User.UserType getInitiator();
 }

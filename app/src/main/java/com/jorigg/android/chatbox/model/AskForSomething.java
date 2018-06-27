@@ -1,7 +1,9 @@
 package com.jorigg.android.chatbox.model;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class AskForSomething implements Conversation {
 
@@ -34,11 +36,11 @@ public class AskForSomething implements Conversation {
 
     }
 
-    private HashMap<ConversationElementEnum, List<Sentence>> mDialogue;
+    private Map<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
 
     public AskForSomething(String title) {
-        mDialogue = new HashMap<>();
+        mDialogue = new EnumMap<>(AskForSomethingElements.class);
         mTitle = title;
     }
 
@@ -51,18 +53,18 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public HashMap<ConversationElementEnum, List<Sentence>> getConversation() {
+    public Map<AskForSomethingElements, ArrayList<Sentence>> getConversationDetails() {
         return mDialogue;
     }
 
     @Override
-    public void addToConversation(ConversationElementEnum conversationElement, Sentence sentence, Sentence
+    public void addToConversation(Enum conversationElement, Sentence sentence, Sentence
             .SpeechType speechType) {
         //add the sentence to the arrylist associated with the key
     }
 
     @Override
-    public List<Sentence> getNextMove(ConversationElementEnum conversationElementJustUsed) {
+    public List<Sentence> getNextMove(Enum conversationElementJustUsed) {
         return null;
         //takes most recent move made by user and works out next conversationElements to display
     }
