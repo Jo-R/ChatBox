@@ -30,7 +30,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void updateUI() {
         mChatBank = ChatBank.get(this);
-        Conversation currConvo = mChatBank.getConversation("test request");
+        Conversation currConvo = mChatBank.getConversation("test");
 
     }
 

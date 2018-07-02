@@ -112,6 +112,7 @@ public class AskForSomething implements Conversation {
     public List<Sentence> getNextElements(Enum conversationElementJustUsed) {
         return null;
         //takes most recent move made by user and works out next conversationElements to display
+        //this might need to return both agent and user next responses????
     }
 
 
