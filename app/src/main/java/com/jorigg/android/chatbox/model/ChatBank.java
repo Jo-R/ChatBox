@@ -43,7 +43,7 @@ public class ChatBank {
         mCurrentConversation = getConversation("test");
     }
 
-    public Conversation getConversation(String title) {
+    private Conversation getConversation(String title) {
         for ( Conversation conversation : mConversationLibrary) {
             if (conversation.getTitle().equals(title)) {
                 return conversation;
@@ -58,7 +58,7 @@ public class ChatBank {
 
     //does this need a getNextMove method as well so controller calls this which calls the
     // conversation - yes I think all the getting convo elemtns should happen and just return
-    // data to the Activity?
+    // Sentence data to the Activity?
 
 
 }
