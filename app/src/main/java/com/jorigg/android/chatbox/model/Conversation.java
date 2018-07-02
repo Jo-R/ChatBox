@@ -1,6 +1,7 @@
 package com.jorigg.android.chatbox.model;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +10,10 @@ public interface Conversation<E extends Enum<E>> {
 
     String getTitle();
     void setTitle(String title);
-    Map<E, ArrayList<Sentence>> getConversationDetails();
+    EnumMap<E, ArrayList<Sentence>> getConversationDetails();
     void addToConversation(E conversationElement, Sentence sentence);
-    List<Sentence> getNextElements(E conversationElementJustUsed);
+    ArrayList<Sentence> getNextElements(E conversationElementJustUsed);
     User.UserType getInitiator();
-    List<E> getInitialElements();
-    List<Sentence> getElementContent(E conversationElement);
+    ArrayList<Sentence> getInitialUserResponses();
+    ArrayList<Sentence> getElementContent(E conversationElement);
 }

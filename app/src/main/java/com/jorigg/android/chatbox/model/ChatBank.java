@@ -11,6 +11,7 @@ public class ChatBank {
     private List<Conversation> mConversationLibrary;
     private Context mContext;
     private static ChatBank sChatBank;
+    private Conversation mCurrentConversation;
 
     public static ChatBank get(Context context) {
         if (sChatBank == null) {
@@ -39,6 +40,7 @@ public class ChatBank {
                 Sentence("Big up", Sentence.SpeechType.GREETING));
 
         mConversationLibrary.add(testConvo);
+        mCurrentConversation = getConversation("test");
     }
 
     public Conversation getConversation(String title) {
@@ -50,8 +52,13 @@ public class ChatBank {
         return null;
     }
 
+    public ArrayList<Sentence> getInitialUserResponses() {
+        return mCurrentConversation.getInitialUserResponses();
+    }
+
     //does this need a getNextMove method as well so controller calls this which calls the
-    // conversation or is that daft??
+    // conversation - yes I think all the getting convo elemtns should happen and just return
+    // data to the Activity?
 
 
 }

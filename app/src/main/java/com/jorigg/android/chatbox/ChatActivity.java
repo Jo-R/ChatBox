@@ -3,6 +3,7 @@ package com.jorigg.android.chatbox;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,15 +28,23 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(com.jorigg.android.chatbox.R.layout.activity_chat);
 
-        mResponseSpinner = findViewById(R.id.response_spinner);
-        
+        mResponseSpinner = findViewById(R.id.user_response_spinner);
+
         updateUI();
     }
 
     private void updateUI() {
         mChatBank = ChatBank.get(this);
-        Conversation currConvo = mChatBank.getConversation("test");
+        addItemsToUserResponseSpinner();
 
+    }
+
+    private void addItemsToUserResponseSpinner() {
+        ArrayAdapter<Sentence> adapter = new ArrayAdapter<>(this, android.R.layout
+                .simple_spinner_item, mChatBank.getInitialUserResponses());
+        adapter.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        mResponseSpinner.setAdapter(adapter);
     }
 
 }

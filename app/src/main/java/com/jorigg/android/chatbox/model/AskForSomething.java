@@ -45,7 +45,7 @@ public class AskForSomething implements Conversation {
 
     }
 
-    private Map<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
+    private EnumMap<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
     private User.UserType mInitiator; //TODO is this needed cf get that as part of the element returned in mInitialMoves?
     private List<AskForSomethingElements> mInitialMoves;
@@ -75,12 +75,12 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public Map<AskForSomethingElements, ArrayList<Sentence>> getConversationDetails() {
+    public EnumMap<AskForSomethingElements, ArrayList<Sentence>> getConversationDetails() {
         return mDialogue;
     }
 
     @Override
-    public List<Sentence> getElementContent(Enum conversationElement) {
+    public ArrayList<Sentence> getElementContent(Enum conversationElement) {
         return mDialogue.get(conversationElement);
     }
 
@@ -104,12 +104,18 @@ public class AskForSomething implements Conversation {
 
 
     @Override
-    public List<AskForSomethingElements> getInitialElements() {
-        return mInitialMoves;
+    public ArrayList<Sentence> getInitialUserResponses() {
+        ArrayList<Sentence> initialUserResponses = new ArrayList<>();
+        for (AskForSomethingElements elem : mInitialMoves) {
+            for (Sentence sen : mDialogue.get(elem)) {
+                initialUserResponses.add(sen);
+            }
+        }
+        return initialUserResponses;
     }
 
     @Override
-    public List<Sentence> getNextElements(Enum conversationElementJustUsed) {
+    public ArrayList<Sentence> getNextElements(Enum conversationElementJustUsed) {
         return null;
         //takes most recent move made by user and works out next conversationElements to display
         //this might need to return both agent and user next responses????

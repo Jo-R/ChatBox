@@ -34,4 +34,9 @@ public class Sentence {
     public SpeechType getSpeechType() {
         return mSpeechType;
     }
+
+    @Override
+    public String toString() {
+        return this.mContent;
+    }
 }
