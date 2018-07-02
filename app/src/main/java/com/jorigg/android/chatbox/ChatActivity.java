@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.jorigg.android.chatbox.model.ChatBank;
@@ -19,12 +20,15 @@ public class ChatActivity extends AppCompatActivity {
 
     private ChatBank mChatBank;
 
+    private Spinner mResponseSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.jorigg.android.chatbox.R.layout.activity_chat);
 
-
+        mResponseSpinner = findViewById(R.id.response_spinner);
+        
         updateUI();
     }
 

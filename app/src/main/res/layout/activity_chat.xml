@@ -32,6 +32,12 @@
         android:layout_gravity="bottom"
         android:layout_weight="2">
 
+    
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/response_spinner">
+        </Spinner>
 
     </LinearLayout>
 
