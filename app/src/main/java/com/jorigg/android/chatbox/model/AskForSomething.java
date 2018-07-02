@@ -57,6 +57,7 @@ public class AskForSomething implements Conversation {
         mInitialMoves = new ArrayList<>();
         mInitialMoves.add(AskForSomethingElements.GREETING);
         mInitialMoves.add(AskForSomethingElements.ALT_GREETING);
+        tempAddToConversation();//remove once isn't hard coded!
     }
 
     @Override
@@ -92,6 +93,9 @@ public class AskForSomething implements Conversation {
         //if user/child replace whatever in the list (so just put should do it)
 
         //TODO implement properly! hard coded for now
+
+    }
+    public void tempAddToConversation() {
         mDialogue.put(AskForSomethingElements.GREETING, new ArrayList<Sentence>
                 (Arrays.asList(new Sentence("Hi", Sentence.SpeechType.GREETING))));
         mDialogue.put(AskForSomethingElements.ALT_GREETING, new ArrayList<Sentence>
