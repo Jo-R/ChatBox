@@ -59,6 +59,8 @@ public class ChatBank {
     //does this need a getNextMove method as well so controller calls this which calls the
     // conversation - yes I think all the getting convo elemtns should happen and just return
     // Sentence data to the Activity?
+    //and it should probably replace the getInitialUserResponses above
+    //might need one for agent and one for user
 
 
 }
