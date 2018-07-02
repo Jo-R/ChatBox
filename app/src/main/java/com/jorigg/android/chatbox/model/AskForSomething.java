@@ -57,7 +57,6 @@ public class AskForSomething implements Conversation {
         mInitialMoves = new ArrayList<>();
         mInitialMoves.add(AskForSomethingElements.GREETING);
         mInitialMoves.add(AskForSomethingElements.ALT_GREETING);
-        tempAddToConversation();//remove once isn't hard coded!
     }
 
     @Override
@@ -88,23 +87,21 @@ public class AskForSomething implements Conversation {
     @Override
     public void addToConversation(Enum conversationElement, Sentence sentence) {
         //add the sentence to the arrylist associated with the key
-        //get the element
-        //if agent add to the list, probably need ot get it to a temp var and then add then re-put
-        //if user/child replace whatever in the list (so just put should do it)
-
-        //TODO implement properly! hard coded for now
-
+        //get the list to a temp var and add and reput so don't remove existing
+        if (mDialogue.containsKey(conversationElement)) {
+            ArrayList<Sentence> thisElement = mDialogue.get(conversationElement);
+            thisElement.add(sentence);
+            mDialogue.put((AskForSomethingElements) conversationElement, thisElement);
+            //TODO acceptable cast? Have to leave method sig as Enum cf overriding but then the put
+            // is expecting AskForSomethingElement rather than an Enum (which is what it thinks convo
+            // elements is per method sig)???
+        } else {
+            ArrayList<Sentence> newElement = new ArrayList<>();
+            newElement.add(sentence);
+            mDialogue.put((AskForSomethingElements) conversationElement, newElement);
+        }
     }
-    public void tempAddToConversation() {
-        mDialogue.put(AskForSomethingElements.GREETING, new ArrayList<Sentence>
-                (Arrays.asList(new Sentence("Hi", Sentence.SpeechType.GREETING))));
-        mDialogue.put(AskForSomethingElements.ALT_GREETING, new ArrayList<Sentence>
-                (Arrays.asList(new Sentence("Hi there dude", Sentence.SpeechType.GREETING))));
-        mDialogue.put(AskForSomethingElements.RTN_GREETING, new ArrayList<Sentence>
-                (Arrays.asList(new Sentence("Hi", Sentence.SpeechType.GREETING),
-                        new Sentence("Yo", Sentence.SpeechType.GREETING),
-                        new Sentence("Big up", Sentence.SpeechType.GREETING))));
-    }
+
 
     @Override
     public List<AskForSomethingElements> getInitialElements() {
