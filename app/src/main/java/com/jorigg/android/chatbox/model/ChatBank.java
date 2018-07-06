@@ -11,7 +11,6 @@ public class ChatBank {
     private List<Conversation> mConversationLibrary;
     private Context mContext;
     private static ChatBank sChatBank;
-    private Conversation mCurrentConversation;
 
     public static ChatBank get(Context context) {
         if (sChatBank == null) {
@@ -40,10 +39,10 @@ public class ChatBank {
                 Sentence("Big up", Sentence.SpeechType.GREETING));
 
         mConversationLibrary.add(testConvo);
-        mCurrentConversation = getConversation("test");
+
     }
 
-    private Conversation getConversation(String title) {
+    public Conversation getConversation(String title) {
         for ( Conversation conversation : mConversationLibrary) {
             if (conversation.getTitle().equals(title)) {
                 return conversation;
@@ -52,8 +51,8 @@ public class ChatBank {
         return null;
     }
 
-    public ArrayList<Sentence> getInitialUserResponses() {
-        return mCurrentConversation.getInitialUserResponses();
+    public ArrayList<Sentence> getInitialUserResponses(Conversation conversation) {
+        return conversation.getInitialUserResponses();
     }
 
     //does this need a getNextMove method as well so controller calls this which calls the

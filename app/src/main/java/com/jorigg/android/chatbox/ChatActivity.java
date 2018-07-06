@@ -22,6 +22,7 @@ import java.util.List;
 public class ChatActivity extends AppCompatActivity {
 
     private ChatBank mChatBank;
+    private Conversation mCurrentConversation; //TODO passed in from home activity
 
     private Spinner mResponseSpinner;
     private ImageButton mUserResponseButton;
@@ -40,11 +41,15 @@ public class ChatActivity extends AppCompatActivity {
                 Toast.makeText(ChatActivity.this, response, Toast.LENGTH_LONG).show();
                 //TODO
                 //need to somehow get this string linked to the move it belongs to
-                //display the reponse on the main section
-                //get the agent response
+                //display it on the user icon
+                //display the agent reponse
                 //and put the next set of userResponses in spinner??
             }
         });
+
+        //TODO temp hard coding of current conversaiton to test one
+        mChatBank = ChatBank.get(this);
+        mCurrentConversation = mChatBank.getConversation("test");
 
         updateUI();
     }
@@ -57,7 +62,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void addItemsToUserResponseSpinner() {
         ArrayAdapter<Sentence> adapter = new ArrayAdapter<>(this, android.R.layout
-                .simple_spinner_item, mChatBank.getInitialUserResponses());
+                .simple_spinner_item, mChatBank.getInitialUserResponses(mCurrentConversation));
         adapter.setDropDownViewResource(android.R.layout
                 .simple_spinner_dropdown_item);
         mResponseSpinner.setAdapter(adapter);
