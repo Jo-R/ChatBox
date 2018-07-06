@@ -54,7 +54,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        mChatBank = ChatBank.get(this);
         addItemsToUserResponseSpinner();
 
     }
@@ -66,6 +65,7 @@ public class ChatActivity extends AppCompatActivity {
             mCurrentChildElement = mCurrentConversation.getInitialElements();
         } else {
 //            nextMoves = mCurrentConversation.getNextMove(mCurrentChildElement);
+            //and would need to get the element(s) as well
         }
         ArrayAdapter<Sentence> adapter = new ArrayAdapter<>(this, android.R.layout
                 .simple_spinner_item, nextMoves);

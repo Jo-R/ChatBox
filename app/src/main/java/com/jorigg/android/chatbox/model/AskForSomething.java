@@ -89,10 +89,7 @@ public class AskForSomething implements Conversation {
         if (mDialogue.containsKey(conversationElement)) {
             ArrayList<Sentence> thisElement = mDialogue.get(conversationElement);
             thisElement.add(sentence);
-            mDialogue.put((AskForSomethingElements) conversationElement, thisElement);
-            //TODO acceptable cast? Have to leave method sig as Enum cf overriding but then the put
-            // is expecting AskForSomethingElement rather than an Enum (which is what it thinks convo
-            // elements is per method sig)???
+            mDialogue.put((AskForSomethingElements)conversationElement, thisElement);
         } else {
             ArrayList<Sentence> newElement = new ArrayList<>();
             newElement.add(sentence);
@@ -102,6 +99,7 @@ public class AskForSomething implements Conversation {
 
 
     @Override
+    //this works for this conversation as user = initiator
     public ArrayList<Sentence> getInitialUserResponses() {
         ArrayList<Sentence> initialUserResponses = new ArrayList<>();
         for (AskForSomethingElements elem : mInitialElements) {
