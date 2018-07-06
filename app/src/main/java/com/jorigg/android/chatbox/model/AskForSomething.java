@@ -49,7 +49,7 @@ public class AskForSomething implements Conversation {
 
     private EnumMap<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
-    private User.UserType mInitiator; //TODO is this needed cf get that as part of the element returned in mInitialUserElements?
+    private User.UserType mInitiator;
     private ArrayList<AskForSomethingElements> mInitialUserElements;
 
     public AskForSomething(String title) {
