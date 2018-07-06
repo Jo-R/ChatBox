@@ -72,15 +72,6 @@ public class AskForSomething implements Conversation {
         return mInitiator;
     }
 
-    @Override
-    public EnumMap<AskForSomethingElements, ArrayList<Sentence>> getConversationDetails() {
-        return mDialogue;
-    }
-
-    @Override
-    public ArrayList<Sentence> getElementContent(ConversationElementEnum conversationElement) {
-        return mDialogue.get(conversationElement);
-    }
 
     @Override
     public void addToConversation(ConversationElementEnum conversationElement, Sentence sentence) {

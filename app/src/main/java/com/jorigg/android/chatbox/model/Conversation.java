@@ -10,11 +10,9 @@ public interface Conversation<E extends ConversationElementEnum> {
 
     String getTitle();
     void setTitle(String title);
-    Map<E, ArrayList<Sentence>> getConversationDetails();
     void addToConversation(E conversationElement, Sentence sentence);
     ArrayList<Sentence> getNextMove(E conversationElementJustUsed);
     User.UserType getInitiator();
     ArrayList<Sentence> getInitialUserResponses();
-    ArrayList<Sentence> getElementContent(E conversationElement);
     ArrayList<E> getInitialElements();
 }
