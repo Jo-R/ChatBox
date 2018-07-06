@@ -2,8 +2,10 @@ package com.jorigg.android.chatbox.model;
 
 import android.support.v4.util.Pair;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -137,7 +139,8 @@ public class AskForSomething implements Conversation {
             nextElement = AskForSomethingElements.ACKNOWL_THANK;
         }
 
-        //TODO if nextElement == null throw exception?
+        //TODO if nextElement == null conversation over ie ACKNOWL_REFUSAL
+        //will currently return null for nextElement so this is how we know convo has ended
 
         //choose one from the AList at random - so only ever gives one reponse but there is a choice
         Sentence move = options.get(new Random().nextInt(options.size()));
@@ -147,9 +150,31 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public Map<ConversationElementEnum, Sentence> getNextUserMoves(ConversationElementEnum
-                                                                         lastAgentMove) {
-        return null;
-        //there could be more than one for some but that's fine - hard code this
+    public Map<ConversationElementEnum, ArrayList<Sentence>> getNextUserMoves
+            (ConversationElementEnum lastAgentMove) {
+        //map because there could be >1 entry for next moves
+        HashMap<ConversationElementEnum, ArrayList<Sentence>> nextMoves = new HashMap<>();
+
+        if (lastAgentMove == AskForSomethingElements.RTN_GREETING) {
+            nextMoves.put(AskForSomethingElements.MAKE_REQUEST, mDialogue.get
+                    (AskForSomethingElements.MAKE_REQUEST));
+            nextMoves.put(AskForSomethingElements.ALT_MAKE_REQUEST, mDialogue.get
+                    (AskForSomethingElements.ALT_MAKE_REQUEST));
+        } else if (lastAgentMove == AskForSomethingElements.AGREE_REQUEST) {
+            nextMoves.put(AskForSomethingElements.THANK, mDialogue.get(AskForSomethingElements
+                    .THANK));
+        } else if (lastAgentMove == AskForSomethingElements.REQ_CLARIFY) {
+            nextMoves.put(AskForSomethingElements.PROVIDE_CLARIFY, mDialogue.get
+                    (AskForSomethingElements.PROVIDE_CLARIFY));
+            nextMoves.put(AskForSomethingElements.ALT_PROVIDE_CLARIFY, mDialogue.get
+                    (AskForSomethingElements.ALT_PROVIDE_CLARIFY));
+        } else if (lastAgentMove == AskForSomethingElements.REFUSE_REQ) {
+            nextMoves.put(AskForSomethingElements.ACKNOWL_REFUSAL, mDialogue.get
+                    (AskForSomethingElements.ACKNOWL_REFUSAL));
+        }
+
+        //TODO if hashmap is empty = end of conversation
+
+        return nextMoves;
     }
 }
