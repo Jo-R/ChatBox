@@ -2,11 +2,9 @@ package com.jorigg.android.chatbox.model;
 
 import android.support.v4.util.Pair;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class AskForSomething implements Conversation {
@@ -51,16 +49,16 @@ public class AskForSomething implements Conversation {
 
     private EnumMap<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
-    private User.UserType mInitiator; //TODO is this needed cf get that as part of the element returned in mInitialElements?
-    private ArrayList<AskForSomethingElements> mInitialElements;
+    private User.UserType mInitiator; //TODO is this needed cf get that as part of the element returned in mInitialUserElements?
+    private ArrayList<AskForSomethingElements> mInitialUserElements;
 
     public AskForSomething(String title) {
         mDialogue = new EnumMap<>(AskForSomethingElements.class);
         mTitle = title;
         mInitiator = User.UserType.CHILD;
-        mInitialElements = new ArrayList<>();
-        mInitialElements.add(AskForSomethingElements.GREETING);
-        mInitialElements.add(AskForSomethingElements.ALT_GREETING);
+        mInitialUserElements = new ArrayList<>();
+        mInitialUserElements.add(AskForSomethingElements.GREETING);
+        mInitialUserElements.add(AskForSomethingElements.ALT_GREETING);
     }
 
     @Override
@@ -99,7 +97,7 @@ public class AskForSomething implements Conversation {
     //this works for this conversation as user = initiator
     public ArrayList<Sentence> getInitialUserResponses() {
         ArrayList<Sentence> initialUserResponses = new ArrayList<>();
-        for (AskForSomethingElements elem : mInitialElements) {
+        for (AskForSomethingElements elem : mInitialUserElements) {
             for (Sentence sen : mDialogue.get(elem)) {
                 initialUserResponses.add(sen);
             }
@@ -108,8 +106,8 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public ArrayList<AskForSomethingElements> getInitialElements() {
-        return mInitialElements;
+    public ArrayList<AskForSomethingElements> getInitialUserElements() {
+        return mInitialUserElements;
     }
 
     @Override
@@ -150,7 +148,7 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public Map<ConversationElementEnum, ArrayList<Sentence>> getNextUserMoves
+    public HashMap<ConversationElementEnum, ArrayList<Sentence>> getNextUserMoves
             (ConversationElementEnum lastAgentMove) {
         //map because there could be >1 entry for next moves
         HashMap<ConversationElementEnum, ArrayList<Sentence>> nextMoves = new HashMap<>();

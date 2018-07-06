@@ -12,16 +12,17 @@ import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Conversation;
 import com.jorigg.android.chatbox.model.ConversationElementEnum;
 import com.jorigg.android.chatbox.model.Sentence;
+import com.jorigg.android.chatbox.model.User;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class ChatActivity extends AppCompatActivity {
 
     private ChatBank mChatBank;
     private Conversation mCurrentConversation; //TODO passed in from home activity
     private ConversationElementEnum mCurrentAgentElement;
-    private List<ConversationElementEnum> mCurrentChildElement;
+    private ArrayList<ConversationElementEnum> mCurrentChildElement = new ArrayList<>();
 
     private Spinner mResponseSpinner;
     private ImageButton mUserResponseButton;
@@ -31,17 +32,26 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(com.jorigg.android.chatbox.R.layout.activity_chat);
 
+
         mResponseSpinner = findViewById(R.id.user_response_spinner);
         mUserResponseButton = findViewById(R.id.user_response_button);
         mUserResponseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String response = String.valueOf(mResponseSpinner.getSelectedItem());
                 //TODO
+
                 //display it on the user icon
                 Toast.makeText(ChatActivity.this, response, Toast.LENGTH_LONG).show();
-                //display the agent reponse
-                //and put the next set of userResponses in spinner??
+
+                //establish which element the child response belongs to and update mCurrentChild
+                // Element so its only that one
+
+                //display the agent reponse (pass mCurrentChildElement)
+                showNextAgentMove(mCurrentChildElement);
+
+                //and put the next set of userResponses in spinner
                 addItemsToUserResponseSpinner();
             }
         });
@@ -50,25 +60,37 @@ public class ChatActivity extends AppCompatActivity {
         mChatBank = ChatBank.get(this);
         mCurrentConversation = mChatBank.getConversation("test");
 
-        updateUI();
+        initialiseUI();
     }
 
-    private void updateUI() {
-        addItemsToUserResponseSpinner();
-        //if mCurrentConversation.initiator = child do response spinner
-        //if mCurrentConversation.initiator = agent do agent first move and get child possible
-        // response to response spinner
+    private void initialiseUI() {
+        if (mCurrentConversation.getInitiator() == User.UserType.CHILD && mCurrentChildElement ==
+                null) {
+            addItemsToUserResponseSpinner();
+        } else if (mCurrentConversation.getInitiator() == User.UserType.AGENT ||
+                mCurrentAgentElement == null) {
+            showNextAgentMove(null);
+            addItemsToUserResponseSpinner();
+        }
+    }
 
+    private void showNextAgentMove(ArrayList<ConversationElementEnum> childLastMove) {
+        //TODO
+        //inital omve? - if null - getINitialResponses will rtn ALIst but parse that and also the
+        // elements one to set those vars
+        //subsequent move? will need to know actual child move - get it out of the list
     }
 
     private void addItemsToUserResponseSpinner() {
         ArrayList<Sentence> nextMoves = new ArrayList<>();
-        if (mCurrentChildElement == null) {
+        if (mCurrentChildElement.size() == 0) {
             nextMoves = mCurrentConversation.getInitialUserResponses();
-            mCurrentChildElement = mCurrentConversation.getInitialElements();
+            mCurrentChildElement = mCurrentConversation.getInitialUserElements();
         } else {
-//            nextMoves = mCurrentConversation.getNextMove(mCurrentChildElement);
-            //and would need to get the element(s) as well
+            HashMap<ConversationElementEnum, ArrayList<Sentence>> moves = new HashMap<>();
+            moves = mCurrentConversation.getNextUserMoves(mCurrentAgentElement);
+            //TODO add each key to the currentChildMoves and each Sentence to the nextMoves
+            // arraylist
         }
         ArrayAdapter<Sentence> adapter = new ArrayAdapter<>(this, android.R.layout
                 .simple_spinner_item, nextMoves);
