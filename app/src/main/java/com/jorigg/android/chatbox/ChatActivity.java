@@ -14,13 +14,14 @@ import com.jorigg.android.chatbox.model.ConversationElementEnum;
 import com.jorigg.android.chatbox.model.Sentence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
     private ChatBank mChatBank;
     private Conversation mCurrentConversation; //TODO passed in from home activity
     private ConversationElementEnum mCurrentAgentElement;
-    private ConversationElementEnum mCurrentChildElement;
+    private List<ConversationElementEnum> mCurrentChildElement;
 
     private Spinner mResponseSpinner;
     private ImageButton mUserResponseButton;
@@ -62,6 +63,7 @@ public class ChatActivity extends AppCompatActivity {
         ArrayList<Sentence> nextMoves = new ArrayList<>();
         if (mCurrentChildElement == null) {
             nextMoves = mCurrentConversation.getInitialUserResponses();
+            mCurrentChildElement = mCurrentConversation.getInitialElements();
         } else {
 //            nextMoves = mCurrentConversation.getNextMove(mCurrentChildElement);
         }

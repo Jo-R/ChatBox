@@ -1,10 +1,8 @@
 package com.jorigg.android.chatbox.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public class AskForSomething implements Conversation {
 
@@ -27,7 +25,7 @@ public class AskForSomething implements Conversation {
         private final User.UserType mSpeaker;
         private final Sentence.SpeechType mSpeechType;
 
-        private AskForSomethingElements(final User.UserType speaker, final Sentence.SpeechType speechType) {
+        AskForSomethingElements(final User.UserType speaker, final Sentence.SpeechType speechType) {
             mSpeaker = speaker;
             mSpeechType = speechType;
         }
@@ -47,16 +45,16 @@ public class AskForSomething implements Conversation {
 
     private EnumMap<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
-    private User.UserType mInitiator; //TODO is this needed cf get that as part of the element returned in mInitialMoves?
-    private List<AskForSomethingElements> mInitialMoves;
+    private User.UserType mInitiator; //TODO is this needed cf get that as part of the element returned in mInitialElements?
+    private ArrayList<AskForSomethingElements> mInitialElements;
 
     public AskForSomething(String title) {
         mDialogue = new EnumMap<>(AskForSomethingElements.class);
         mTitle = title;
         mInitiator = User.UserType.CHILD;
-        mInitialMoves = new ArrayList<>();
-        mInitialMoves.add(AskForSomethingElements.GREETING);
-        mInitialMoves.add(AskForSomethingElements.ALT_GREETING);
+        mInitialElements = new ArrayList<>();
+        mInitialElements.add(AskForSomethingElements.GREETING);
+        mInitialElements.add(AskForSomethingElements.ALT_GREETING);
     }
 
     @Override
@@ -80,12 +78,12 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public ArrayList<Sentence> getElementContent(Enum conversationElement) {
+    public ArrayList<Sentence> getElementContent(ConversationElementEnum conversationElement) {
         return mDialogue.get(conversationElement);
     }
 
     @Override
-    public void addToConversation(Enum conversationElement, Sentence sentence) {
+    public void addToConversation(ConversationElementEnum conversationElement, Sentence sentence) {
         //add the sentence to the arrylist associated with the key
         //get the list to a temp var and add and reput so don't remove existing
         if (mDialogue.containsKey(conversationElement)) {
@@ -106,7 +104,7 @@ public class AskForSomething implements Conversation {
     @Override
     public ArrayList<Sentence> getInitialUserResponses() {
         ArrayList<Sentence> initialUserResponses = new ArrayList<>();
-        for (AskForSomethingElements elem : mInitialMoves) {
+        for (AskForSomethingElements elem : mInitialElements) {
             for (Sentence sen : mDialogue.get(elem)) {
                 initialUserResponses.add(sen);
             }
@@ -115,7 +113,12 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public ArrayList<Sentence> getNextMove(Enum conversationElementJustUsed) {
+    public ArrayList<AskForSomethingElements> getInitialElements() {
+        return mInitialElements;
+    }
+
+    @Override
+    public ArrayList<Sentence> getNextMove(ConversationElementEnum conversationElementJustUsed) {
         return null;
         //takes most recent move made by user and works out next conversationElements to display
         //this might need to return both agent and user next responses????
