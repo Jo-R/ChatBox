@@ -51,9 +51,6 @@ public class ChatBank {
         return null;
     }
 
-    public ArrayList<Sentence> getInitialUserResponses(Conversation conversation) {
-        return conversation.getInitialUserResponses();
-    }
 
     //does this need a getNextMove method as well so controller calls this which calls the
     // conversation - yes I think all the getting convo elemtns should happen and just return

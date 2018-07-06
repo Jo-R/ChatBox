@@ -12,7 +12,7 @@ public interface Conversation<E extends Enum<E>> {
     void setTitle(String title);
     EnumMap<E, ArrayList<Sentence>> getConversationDetails();
     void addToConversation(E conversationElement, Sentence sentence);
-    ArrayList<Sentence> getNextElements(E conversationElementJustUsed);
+    ArrayList<Sentence> getNextMove(E conversationElementJustUsed);
     User.UserType getInitiator();
     ArrayList<Sentence> getInitialUserResponses();
     ArrayList<Sentence> getElementContent(E conversationElement);

@@ -115,7 +115,7 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public ArrayList<Sentence> getNextElements(Enum conversationElementJustUsed) {
+    public ArrayList<Sentence> getNextMove(Enum conversationElementJustUsed) {
         return null;
         //takes most recent move made by user and works out next conversationElements to display
         //this might need to return both agent and user next responses????

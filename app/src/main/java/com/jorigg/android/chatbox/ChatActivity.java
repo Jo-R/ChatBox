@@ -4,10 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jorigg.android.chatbox.model.ChatBank;
@@ -15,14 +13,14 @@ import com.jorigg.android.chatbox.model.Conversation;
 import com.jorigg.android.chatbox.model.ConversationElementEnum;
 import com.jorigg.android.chatbox.model.Sentence;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
 
     private ChatBank mChatBank;
     private Conversation mCurrentConversation; //TODO passed in from home activity
+    private ConversationElementEnum mCurrentAgentElement;
+    private ConversationElementEnum mCurrentChildElement;
 
     private Spinner mResponseSpinner;
     private ImageButton mUserResponseButton;
@@ -61,10 +59,15 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void addItemsToUserResponseSpinner() {
+        ArrayList<Sentence> nextMoves = new ArrayList<>();
+        if (mCurrentChildElement == null) {
+            nextMoves = mCurrentConversation.getInitialUserResponses();
+        } else {
+//            nextMoves = mCurrentConversation.getNextMove(mCurrentChildElement);
+        }
         ArrayAdapter<Sentence> adapter = new ArrayAdapter<>(this, android.R.layout
-                .simple_spinner_item, mChatBank.getInitialUserResponses(mCurrentConversation));
-        adapter.setDropDownViewResource(android.R.layout
-                .simple_spinner_dropdown_item);
+                .simple_spinner_item, nextMoves);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mResponseSpinner.setAdapter(adapter);
     }
 
