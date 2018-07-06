@@ -37,12 +37,12 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String response = String.valueOf(mResponseSpinner.getSelectedItem());
-                Toast.makeText(ChatActivity.this, response, Toast.LENGTH_LONG).show();
                 //TODO
-                //need to somehow get this string linked to the move it belongs to
                 //display it on the user icon
+                Toast.makeText(ChatActivity.this, response, Toast.LENGTH_LONG).show();
                 //display the agent reponse
                 //and put the next set of userResponses in spinner??
+                addItemsToUserResponseSpinner();
             }
         });
 
@@ -55,6 +55,9 @@ public class ChatActivity extends AppCompatActivity {
 
     private void updateUI() {
         addItemsToUserResponseSpinner();
+        //if mCurrentConversation.initiator = child do response spinner
+        //if mCurrentConversation.initiator = agent do agent first move and get child possible
+        // response to response spinner
 
     }
 
