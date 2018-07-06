@@ -40,12 +40,12 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String response = String.valueOf(mResponseSpinner.getSelectedItem());
-                //TODO
 
-                //display it on the user icon
+                //TODO display it on the user icon
                 Toast.makeText(ChatActivity.this, response, Toast.LENGTH_LONG).show();
 
-                //establish which element the child response belongs to and update mCurrentChild
+                //TODO establish which element the child response belongs to and update
+                // mCurrentChild
                 // Element so its only that one
 
                 //display the agent reponse (pass mCurrentChildElement)
@@ -64,9 +64,10 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void initialiseUI() {
-        if (mCurrentConversation.getInitiator() == User.UserType.CHILD && mCurrentChildElement ==
-                null) {
+        if (mCurrentConversation.getInitiator() == User.UserType.CHILD && mCurrentChildElement
+                .size() == 0) {
             addItemsToUserResponseSpinner();
+            mCurrentAgentElement = mCurrentConversation.getInitialAgentElement();
         } else if (mCurrentConversation.getInitiator() == User.UserType.AGENT ||
                 mCurrentAgentElement == null) {
             showNextAgentMove(null);
@@ -75,10 +76,20 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void showNextAgentMove(ArrayList<ConversationElementEnum> childLastMove) {
-        //TODO
-        //inital omve? - if null - getINitialResponses will rtn ALIst but parse that and also the
-        // elements one to set those vars
-        //subsequent move? will need to know actual child move - get it out of the list
+        String nextMove = "";
+        if (mCurrentAgentElement == null) {
+            nextMove = mCurrentConversation.getInitialAgentResponse().toString();
+            mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
+                    .getInitialUserElements().get(0);
+        } else {
+            ConversationElementEnum childMove = childLastMove.get(0);
+            nextMove = mCurrentConversation.getNextAgentMove(childMove).second.toString();
+            mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
+                    .getNextAgentMove(childMove).first;
+        }
+        //TODO use toast on temp basis
+        Toast.makeText(ChatActivity.this, nextMove, Toast.LENGTH_LONG).show();
+
     }
 
     private void addItemsToUserResponseSpinner() {

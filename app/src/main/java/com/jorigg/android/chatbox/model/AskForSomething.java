@@ -106,6 +106,16 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
+    public Sentence getInitialAgentResponse() {
+        return null; //not needed for this implementation
+    }
+
+    @Override
+    public ConversationElementEnum getInitialAgentElement() {
+        return AskForSomethingElements.RTN_GREETING;
+    }
+
+    @Override
     public ArrayList<AskForSomethingElements> getInitialUserElements() {
         return mInitialUserElements;
     }

@@ -15,5 +15,7 @@ public interface Conversation<E extends ConversationElementEnum> {
     HashMap<E, ArrayList<Sentence>> getNextUserMoves(E lastAgentMove);
     User.UserType getInitiator();
     ArrayList<Sentence> getInitialUserResponses();
+    Sentence getInitialAgentResponse();
     ArrayList<E> getInitialUserElements();
+    ConversationElementEnum getInitialAgentElement();
 }
