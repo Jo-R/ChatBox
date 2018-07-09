@@ -27,11 +27,9 @@ public class AskForSomething implements Conversation {
 
 
         private final User.UserType mSpeaker;
-        private final Sentence.SpeechType mSpeechType;
 
         AskForSomethingElements(final User.UserType speaker, final Sentence.SpeechType speechType) {
             mSpeaker = speaker;
-            mSpeechType = speechType;
         }
 
         @Override
@@ -39,10 +37,6 @@ public class AskForSomething implements Conversation {
             return mSpeaker;
         }
 
-        @Override
-        public Sentence.SpeechType getSpeechType(String elementName) {
-            return mSpeechType;
-        }
 
 
     }

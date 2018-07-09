@@ -37,6 +37,34 @@ public class ChatBank {
                 Sentence("Yo", Sentence.SpeechType.GREETING));
         testConvo.addToConversation(AskForSomething.AskForSomethingElements.RTN_GREETING, new
                 Sentence("Big up", Sentence.SpeechType.GREETING));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.MAKE_REQUEST, new
+                Sentence("Please can I have a thing?", Sentence.SpeechType.REQUEST));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.ALT_MAKE_REQUEST, new
+                Sentence("Thing", Sentence.SpeechType.REQUEST));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.AGREE_REQUEST, new
+                Sentence("Of course", Sentence.SpeechType.AGREEMENT));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.AGREE_REQUEST, new
+                Sentence("Yes, here you are", Sentence.SpeechType.AGREEMENT));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.REQ_CLARIFY, new
+                Sentence("Sorry, can you just say that again?", Sentence.SpeechType.REQUEST));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.PROVIDE_CLARIFY, new
+                Sentence("Of course, please can I have a thing?", Sentence.SpeechType.REQUEST));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.ALT_PROVIDE_CLARIFY, new
+                Sentence("Thing", Sentence.SpeechType.REQUEST));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.REFUSE_REQ, new
+                Sentence("Sorry, no", Sentence.SpeechType.REFUSAL));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.REFUSE_REQ, new
+                Sentence("No, not now", Sentence.SpeechType.REFUSAL));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.ACKNOWL_REFUSAL, new
+                Sentence("OK, no problem", Sentence.SpeechType.ACKNOWLEDGEMENT));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.ACKNOWL_REFUSAL, new
+                Sentence("Alright then", Sentence.SpeechType.ACKNOWLEDGEMENT));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.THANK, new
+                Sentence("Thanks very much", Sentence.SpeechType.THANKS));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.THANK, new
+                Sentence("Ta", Sentence.SpeechType.THANKS));
+        testConvo.addToConversation(AskForSomething.AskForSomethingElements.ACKNOWL_THANK, new
+                Sentence("No problem", Sentence.SpeechType.ACKNOWLEDGEMENT));
 
         mConversationLibrary.add(testConvo);
 
