@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.jorigg.android.chatbox.model.AskForSomething;
 import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Conversation;
 import com.jorigg.android.chatbox.model.ConversationElementEnum;
@@ -19,6 +20,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
+
+    private static final String CURR_AGENT = "currAgent";
+    private static final String CURR_USER = "currUser";
+    private static final String CURR_CONVO = "currConvo";
 
     private ChatBank mChatBank;
     private Conversation mCurrentConversation;
@@ -35,13 +40,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-
         mResponseSpinner = findViewById(R.id.user_response_spinner);
         mUserResponseButton = findViewById(R.id.user_response_button);
-
-        //todo if onSavedInstanceState != null
-
-
         mUserResponseButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -68,34 +68,47 @@ public class ChatActivity extends AppCompatActivity {
                 showNextAgentMove();
 
                 //and put the next set of userResponses in spinner
-                addNextItemsToUserResponseSpinner();
+                getNextItemsForUserResponseSpinner();
             }
         });
 
-        //TODO temp hard coding of current conversation to test one
         mChatBank = ChatBank.get(this);
-        mCurrentConversation = mChatBank.getConversation("test");
 
-        initialiseUI();
+        //todo if onSavedInstanceState != null
+        if (savedInstanceState != null) {
+            mCurrentConversation = mChatBank.getConversation(savedInstanceState.getCharSequence
+                    (CURR_CONVO).toString());
+            mCurrentChildMoves = (HashMap) savedInstanceState.getSerializable(CURR_USER);
+            addNextItemsToUserResponseSpinner();
+            //todo agent bit see onSaveInstanceState();
+            mCurrentAgentElement = AskForSomething.AskForSomethingElements.RTN_GREETING; //TEMP
+            // TO STOP CRASH
+        } else {
+            mCurrentConversation = mChatBank.getConversation("test"); //todo temp hard code
+            initialiseUI();
+        }
+
+
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        //TODO need to preserve on rotation
-        //need private statis final string keys
-        //put relevant vars
+        //TODO make this parcelable?
+        //outState.put(CURR_AGENT, mCurrentAgentElement);
+        outState.putSerializable(CURR_USER, mCurrentChildMoves);
+        outState.putCharSequence(CURR_CONVO, mCurrentConversation.getTitle());
         super.onSaveInstanceState(outState);
     }
 
     private void initialiseUI() {
         if (mCurrentConversation.getInitiator() == User.UserType.CHILD && mChildMoveElement ==
          null) {
-            addNextItemsToUserResponseSpinner();
+            getNextItemsForUserResponseSpinner();
             mCurrentAgentElement = mCurrentConversation.getInitialAgentElement();
         } else if (mCurrentConversation.getInitiator() == User.UserType.AGENT ||
                 mCurrentAgentElement == null) {
             showNextAgentMove();
-            addNextItemsToUserResponseSpinner();
+            getNextItemsForUserResponseSpinner();
         }
     }
 
@@ -115,16 +128,19 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    private void addNextItemsToUserResponseSpinner() {
-        ArrayList<Sentence> nextMoves = new ArrayList<>();
-
+    private void getNextItemsForUserResponseSpinner() {
         if (mChildMoveElement == null) {
             mCurrentChildMoves = mCurrentConversation.getInitialUserMoves();
         } else {
             mCurrentChildMoves = mCurrentConversation.getNextUserMoves(mCurrentAgentElement);
         }
+        addNextItemsToUserResponseSpinner();
+    }
 
-        for (Map.Entry<ConversationElementEnum, ArrayList<Sentence>> map : mCurrentChildMoves
+    private void addNextItemsToUserResponseSpinner() {
+        ArrayList<Sentence> nextMoves = new ArrayList<>();
+
+                for (Map.Entry<ConversationElementEnum, ArrayList<Sentence>> map : mCurrentChildMoves
                 .entrySet()) {
             ArrayList<Sentence> thisMove = map.getValue();
             nextMoves.addAll(thisMove);
