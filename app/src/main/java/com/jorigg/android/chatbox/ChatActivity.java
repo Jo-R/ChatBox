@@ -80,9 +80,9 @@ public class ChatActivity extends AppCompatActivity {
                     (CURR_CONVO).toString());
             mCurrentChildMoves = (HashMap) savedInstanceState.getSerializable(CURR_USER);
             addNextItemsToUserResponseSpinner();
-            //todo agent bit see onSaveInstanceState();
-            mCurrentAgentElement = AskForSomething.AskForSomethingElements.RTN_GREETING; //TEMP
-            // TO STOP CRASH
+            mCurrentAgentElement = (ConversationElementEnum) savedInstanceState.getSerializable
+                    (CURR_AGENT);
+            //todo will need something here to display agent bit on rotate
         } else {
             mCurrentConversation = mChatBank.getConversation("test"); //todo temp hard code
             initialiseUI();
@@ -93,8 +93,12 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        //TODO make this parcelable?
-        //outState.put(CURR_AGENT, mCurrentAgentElement);
+        //agent element needs casting to Enum so is serializable
+        Enum agentElement = null;
+        if (mCurrentConversation instanceof AskForSomething) {
+            agentElement = (AskForSomething.AskForSomethingElements) mCurrentAgentElement;
+        }
+        outState.putSerializable(CURR_AGENT, agentElement);
         outState.putSerializable(CURR_USER, mCurrentChildMoves);
         outState.putCharSequence(CURR_CONVO, mCurrentConversation.getTitle());
         super.onSaveInstanceState(outState);
