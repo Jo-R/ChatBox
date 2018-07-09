@@ -88,15 +88,14 @@ public class AskForSomething implements Conversation {
 
 
     @Override
-    //this works for this conversation as user = initiator
-    public ArrayList<Sentence> getInitialUserResponses() {
-        ArrayList<Sentence> initialUserResponses = new ArrayList<>();
-        for (AskForSomethingElements elem : mInitialUserElements) {
-            for (Sentence sen : mDialogue.get(elem)) {
-                initialUserResponses.add(sen);
-            }
-        }
-        return initialUserResponses;
+    public HashMap<AskForSomethingElements, ArrayList<Sentence>> getInitialUserMoves() {
+        HashMap<AskForSomethingElements, ArrayList<Sentence>> initMoves = new HashMap<>();
+        initMoves.put(AskForSomethingElements.GREETING, mDialogue.get(AskForSomethingElements
+                .GREETING));
+        initMoves.put(AskForSomethingElements.ALT_GREETING, mDialogue.get(AskForSomethingElements
+                .ALT_GREETING));
+
+        return initMoves;
     }
 
     @Override
@@ -109,10 +108,6 @@ public class AskForSomething implements Conversation {
         return AskForSomethingElements.RTN_GREETING;
     }
 
-    @Override
-    public ArrayList<AskForSomethingElements> getInitialUserElements() {
-        return mInitialUserElements;
-    }
 
     @Override
     public Pair<ConversationElementEnum, Sentence> getNextAgentMove(ConversationElementEnum
