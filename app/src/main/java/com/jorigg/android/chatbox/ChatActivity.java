@@ -25,7 +25,7 @@ public class ChatActivity extends AppCompatActivity {
     private ConversationElementEnum mCurrentAgentElement;
     private HashMap<ConversationElementEnum, ArrayList<Sentence>> mCurrentChildMoves = new
             HashMap<>();
-    private ConversationElementEnum mCurrentChildElement;
+    private ConversationElementEnum mChildMoveElement;
 
     private Spinner mResponseSpinner;
     private ImageButton mUserResponseButton;
@@ -38,6 +38,10 @@ public class ChatActivity extends AppCompatActivity {
 
         mResponseSpinner = findViewById(R.id.user_response_spinner);
         mUserResponseButton = findViewById(R.id.user_response_button);
+
+        //todo if onSavedInstanceState != null
+
+
         mUserResponseButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -55,16 +59,16 @@ public class ChatActivity extends AppCompatActivity {
                     ArrayList<Sentence> thisMove = map.getValue();
                     for (Sentence sentence : thisMove) {
                         if (sentence.getContent().equals(response)) {
-                            mCurrentChildElement = map.getKey();
+                            mChildMoveElement = map.getKey();
                         }
                     }
                 }
 
-                //display the agent reponse (pass mCurrentChildElement)
-                showNextAgentMove(mCurrentChildElement);
+                //display the agent reponse
+                showNextAgentMove();
 
                 //and put the next set of userResponses in spinner
-                addItemsToUserResponseSpinner();
+                addNextItemsToUserResponseSpinner();
             }
         });
 
@@ -75,38 +79,46 @@ public class ChatActivity extends AppCompatActivity {
         initialiseUI();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //TODO need to preserve on rotation
+        //need private statis final string keys
+        //put relevant vars
+        super.onSaveInstanceState(outState);
+    }
+
     private void initialiseUI() {
-        if (mCurrentConversation.getInitiator() == User.UserType.CHILD && mCurrentChildElement ==
+        if (mCurrentConversation.getInitiator() == User.UserType.CHILD && mChildMoveElement ==
          null) {
-            addItemsToUserResponseSpinner();
+            addNextItemsToUserResponseSpinner();
             mCurrentAgentElement = mCurrentConversation.getInitialAgentElement();
         } else if (mCurrentConversation.getInitiator() == User.UserType.AGENT ||
                 mCurrentAgentElement == null) {
-            showNextAgentMove(null);
-            addItemsToUserResponseSpinner();
+            showNextAgentMove();
+            addNextItemsToUserResponseSpinner();
         }
     }
 
-    private void showNextAgentMove(ConversationElementEnum childLastMove) {
+    private void showNextAgentMove() {
         String nextMove = "";
         if (mCurrentAgentElement == null) {
             nextMove = mCurrentConversation.getInitialAgentResponse().toString();
             mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
                     .getInitialUserMoves();
         } else {
-            nextMove = mCurrentConversation.getNextAgentMove(childLastMove).second.toString();
+            nextMove = mCurrentConversation.getNextAgentMove(mChildMoveElement).second.toString();
             mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
-                    .getNextAgentMove(childLastMove).first;
+                    .getNextAgentMove(mChildMoveElement).first;
         }
         //TODO use toast on temp basis
         Toast.makeText(ChatActivity.this, nextMove, Toast.LENGTH_LONG).show();
 
     }
 
-    private void addItemsToUserResponseSpinner() {
+    private void addNextItemsToUserResponseSpinner() {
         ArrayList<Sentence> nextMoves = new ArrayList<>();
 
-        if (mCurrentChildElement == null) {
+        if (mChildMoveElement == null) {
             mCurrentChildMoves = mCurrentConversation.getInitialUserMoves();
         } else {
             mCurrentChildMoves = mCurrentConversation.getNextUserMoves(mCurrentAgentElement);
