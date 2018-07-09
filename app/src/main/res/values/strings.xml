@@ -3,4 +3,5 @@
     <string name="next_button">Next</string>
     <string name="user_prompt">Choose what you\'d like to say</string>
     <string name="home_prompt_choose">Choose a conversation:</string>
+    <string name="home_page_button">Start Chatting</string>
 </resources>

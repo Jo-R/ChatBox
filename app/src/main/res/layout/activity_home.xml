@@ -31,16 +31,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:text="@string/home_prompt_choose"/>
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/choose_conversation_spinner"
-            android:paddingLeft="32dp"
-            android:paddingTop="32dp"
-            android:layout_gravity="center_vertical">
+            android:id="@+id/home_choose_conversation_spinner"
+            android:layout_margin="16dp">
         </Spinner>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_page_button"
+            android:id="@+id/home_start_chatting_btn"/>
 
     </LinearLayout>
 

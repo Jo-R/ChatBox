@@ -19,11 +19,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.jorigg.android.chatbox.HomeActivity.SELECTED_CONVO;
+
 public class ChatActivity extends AppCompatActivity {
 
-    private static final String CURR_AGENT = "currAgent";
-    private static final String CURR_USER = "currUser";
-    private static final String CURR_CONVO = "currConvo";
+    public static final String CURR_AGENT = "currAgent";
+    public static final String CURR_USER = "currUser";
+    public static final String CURR_CONVO = "currConvo";
 
     private ChatBank mChatBank;
     private Conversation mCurrentConversation;
@@ -84,7 +86,8 @@ public class ChatActivity extends AppCompatActivity {
                     (CURR_AGENT);
             //todo will need something here to display agent bit on rotate
         } else {
-            mCurrentConversation = mChatBank.getConversation("test"); //todo temp hard code
+            mCurrentConversation = mChatBank.getConversation(getIntent().getCharSequenceExtra
+                    (SELECTED_CONVO).toString());
             initialiseUI();
         }
 
@@ -146,7 +149,7 @@ public class ChatActivity extends AppCompatActivity {
     private void addNextItemsToUserResponseSpinner() {
         ArrayList<Sentence> nextMoves = new ArrayList<>();
 
-                for (Map.Entry<ConversationElementEnum, ArrayList<Sentence>> map : mCurrentChildMoves
+        for (Map.Entry<ConversationElementEnum, ArrayList<Sentence>> map : mCurrentChildMoves
                 .entrySet()) {
             ArrayList<Sentence> thisMove = map.getValue();
             nextMoves.addAll(thisMove);

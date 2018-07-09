@@ -2,6 +2,7 @@ package com.jorigg.android.chatbox.model;
 
 import android.content.Context;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,14 @@ public class ChatBank {
         mContext = context.getApplicationContext();
         mConversationLibrary = new ArrayList<>();
         addConversation();
+    }
+
+    public ArrayList<String> getChatTitles() {
+        ArrayList<String> titles = new ArrayList<>();
+        for (Conversation convo : mConversationLibrary) {
+            titles.add(convo.getTitle());
+        }
+        return titles;
     }
 
 
@@ -67,6 +76,9 @@ public class ChatBank {
                 Sentence("No problem", Sentence.SpeechType.ACKNOWLEDGEMENT));
 
         mConversationLibrary.add(testConvo);
+
+        Conversation dummy = new AskForSomething("empty convo");
+        mConversationLibrary.add(dummy);
 
     }
 
