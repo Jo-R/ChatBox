@@ -94,6 +94,8 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //agent element needs casting to Enum so is serializable
+        //todo this may not be ideal since need to add cast for each convo type - could make the
+        // interface Parcelable or something
         Enum agentElement = null;
         if (mCurrentConversation instanceof AskForSomething) {
             agentElement = (AskForSomething.AskForSomethingElements) mCurrentAgentElement;
