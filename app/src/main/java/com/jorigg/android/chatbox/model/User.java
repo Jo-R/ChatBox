@@ -20,15 +20,9 @@ public class User {
         return mUserName;
     }
 
-    public void setUserName(String userName) {
-        mUserName = userName;
-    }
 
     public UserType getType() {
         return mType;
     }
 
-    public void setType(UserType type) {
-        mType = type;
-    }
 }

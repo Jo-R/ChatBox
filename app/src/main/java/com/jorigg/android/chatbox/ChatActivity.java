@@ -30,7 +30,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.jorigg.android.chatbox.R.layout.activity_chat);
+        setContentView(R.layout.activity_chat);
 
 
         mResponseSpinner = findViewById(R.id.user_response_spinner);
