@@ -136,7 +136,8 @@ public class AskForSomething implements Conversation {
             nextElement = AskForSomethingElements.ACKNOWL_THANK;
         }
 
-        //TODO if nextElement == null conversation over ie ACKNOWL_REFUSAL
+        //TODO if nextElement == null move was ACKNOWL_REFUSAL, options also empty so app is
+        // crashing in thie scenario
         //will currently return null for nextElement so this is how we know convo has ended
 
         //choose one from the AList at random - so only ever gives one reponse but there is a choice
