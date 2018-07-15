@@ -5,4 +5,8 @@
     <string name="home_prompt_choose">Choose a conversation:</string>
     <string name="home_page_button">Start Chatting</string>
     <string name="parent_mode">Parent Mode</string>
+    <string name="create_new_convo">Create a new conversation</string>
+    <string name="create_button_text">Create</string>
+    <string name="edit_convo">Edit an existing conversation</string>
+    <string name="edit_button_text">Edit</string>
 </resources>
