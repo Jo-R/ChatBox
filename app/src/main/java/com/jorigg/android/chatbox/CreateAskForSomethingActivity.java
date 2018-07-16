@@ -23,8 +23,8 @@ public class CreateAskForSomethingActivity extends AppCompatActivity {
 
         mChatBank = ChatBank.get(this);
 
-        mAddTitleField.findViewById(R.id.editTitle);
-        mAddTitleButton.findViewById(R.id.imageButtonTitle);
+        mAddTitleField = findViewById(R.id.afs_edit_title);
+        mAddTitleButton= findViewById(R.id.afs_edit_title_button);
         mAddTitleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
