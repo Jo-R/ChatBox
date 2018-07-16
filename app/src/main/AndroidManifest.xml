@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".ChatActivity"/>
         <activity android:name=".ParentHomeActivity"/>
+        <activity android:name=".CreateAskForSomethingActivity"/>
     </application>
 
 </manifest>

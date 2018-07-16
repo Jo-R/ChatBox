@@ -9,4 +9,10 @@
     <string name="create_button_text">Create</string>
     <string name="edit_convo">Edit an existing conversation</string>
     <string name="edit_button_text">Edit</string>
+
+    <string name="create_title">Enter conversation title</string>
+
+    <string name="afs_heading">Conversation from template\: Ask for Something</string>
+    <string name="afs_greet_heading">User will greet computer and computer will return
+        greeting</string>
 </resources>
