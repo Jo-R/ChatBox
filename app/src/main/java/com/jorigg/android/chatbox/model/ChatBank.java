@@ -34,6 +34,14 @@ public class ChatBank {
         return titles;
     }
 
+    public void addNewConversation(String title, String type) {
+        Conversation newConvo = null;
+        if (type.equals("Ask for Something")) {
+            newConvo = new AskForSomething(title);
+        }
+        mConversationLibrary.add(newConvo);
+    }
+
 
     public void addConversation() { //TODO HARD CODED FOR NOW
        //add a new conversation - create it and add to the library

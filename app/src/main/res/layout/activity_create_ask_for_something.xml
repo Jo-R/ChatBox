@@ -48,7 +48,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/editTitle"
             app:layout_constraintTop_toBottomOf="@+id/textViewHeading"
-            app:srcCompat="@android:drawable/btn_plus" />
+            android:src="@drawable/add_icon" />
 
 
         <TextView
