@@ -78,18 +78,18 @@ public class AskForSomething implements Conversation {
 
 
     @Override
-    //TODO change this to take a string and just get speech type from enum value to make the
     // Sentence?
-    public void addToConversation(ConversationElementEnum conversationElement, Sentence sentence) {
+    public void addToConversation(ConversationElementEnum conversationElement, String content) {
         //add the sentence to the arrylist associated with the key
         //get the list to a temp var and add and reput so don't remove existing
+        Sentence.SpeechType speechType = conversationElement.getSpeechType();
         if (mDialogue.containsKey(conversationElement)) {
             ArrayList<Sentence> thisElement = mDialogue.get(conversationElement);
-            thisElement.add(sentence);
+            thisElement.add(new Sentence(content, speechType));
             mDialogue.put((AskForSomethingElements)conversationElement, thisElement);
         } else {
             ArrayList<Sentence> newElement = new ArrayList<>();
-            newElement.add(sentence);
+            newElement.add(new Sentence(content, speechType));
             mDialogue.put((AskForSomethingElements) conversationElement, newElement);
         }
     }
