@@ -11,5 +11,8 @@
     <string name="edit_button_text">Edit</string>
 
     <string name="config_title_input">Enter a conversation title</string>
-
+    <string name="config_input_sentence">Input a sentence</string>
+    <string name="config_select_element">Select an element</string>
+    <string name="config_sentence_bank_choose">OR choose from sentence bank</string>
+    <string name="config_edit_existing">OR remove an existing sentence</string>
 </resources>
