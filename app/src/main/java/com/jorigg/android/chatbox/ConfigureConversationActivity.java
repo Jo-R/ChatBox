@@ -11,7 +11,9 @@ import android.widget.Spinner;
 
 import com.jorigg.android.chatbox.model.AskForSomething;
 import com.jorigg.android.chatbox.model.ChatBank;
+import com.jorigg.android.chatbox.model.Conversation;
 import com.jorigg.android.chatbox.model.ConversationElementEnum;
+import com.jorigg.android.chatbox.model.Sentence;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,9 +21,13 @@ import java.util.Arrays;
 public class ConfigureConversationActivity extends AppCompatActivity {
 
     ChatBank mChatBank;
+    Conversation mCurrentConversation;
 
     ImageButton mAddTitleButton;
     EditText mAddTitleField;
+
+    ImageButton mInputSentenceButton;
+    EditText mInputSentenceField;
 
     Spinner mSelectElementSpinner;
 
@@ -31,19 +37,39 @@ public class ConfigureConversationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_configure_conversation);
 
         mChatBank = ChatBank.get(this);
+        //todo if are editing then mCurrentConvo = title passed in from prev screen
 
-        //TODO shuld this show existing if eists and how would that be editable???
         mAddTitleField = findViewById(R.id.config_edit_title);
         mAddTitleButton= findViewById(R.id.config_edit_title_button);
         mAddTitleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mChatBank.addNewConversation(mAddTitleField.getText().toString(), "Ask for Something");
+                //TODO its not obvious you have to click this to create the conversation - might
+                // be better on previous screen?
+                String title = mAddTitleField.getText().toString();
+                mChatBank.addNewConversation(title, "Ask for Something");
+                mCurrentConversation = mChatBank.getConversation(title);
+                //TODO make non editable
             }
         });
 
         mSelectElementSpinner = findViewById(R.id.config_elements_spinner);
         populateElementSpinner();
+
+        mInputSentenceField = findViewById(R.id.config_input_sentence_field);
+        mInputSentenceButton = findViewById(R.id.config_add_input_sentence_button);
+        mInputSentenceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO remove hard code of AFS
+                ConversationElementEnum element = AskForSomething.AskForSomethingElements.valueOf
+                        (mSelectElementSpinner.getSelectedItem().toString());
+
+                mCurrentConversation.addToConversation(element, mInputSentenceField.getText().toString());
+            }
+        });
+
+
     }
 
     private void populateElementSpinner() {
