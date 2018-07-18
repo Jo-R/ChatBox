@@ -65,12 +65,22 @@
 
         <EditText
             android:id="@+id/config_input_sentence_field"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:inputType="text"
             app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/config_elements_spinner" />
+
+        <ImageButton
+            android:id="@+id/config_add_input_sentence_button"
+            android:layout_width="73dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/add_icon"
+            app:layout_constraintStart_toEndOf="@+id/config_input_sentence_field"
             app:layout_constraintTop_toBottomOf="@+id/config_elements_spinner" />
 
         <TextView
