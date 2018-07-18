@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 import com.jorigg.android.chatbox.model.ChatBank;
 
-public class CreateAskForSomethingActivity extends AppCompatActivity {
+public class ConfigureConversationActivity extends AppCompatActivity {
 
     ChatBank mChatBank;
 
@@ -19,12 +19,12 @@ public class CreateAskForSomethingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_ask_for_something);
+        setContentView(R.layout.activity_configure_conversation);
 
         mChatBank = ChatBank.get(this);
 
-        mAddTitleField = findViewById(R.id.afs_edit_title);
-        mAddTitleButton= findViewById(R.id.afs_edit_title_button);
+        mAddTitleField = findViewById(R.id.config_edit_title);
+        mAddTitleButton= findViewById(R.id.config_edit_title_button);
         mAddTitleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

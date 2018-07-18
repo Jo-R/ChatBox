@@ -41,8 +41,10 @@ public class ParentHomeActivity extends AppCompatActivity{
             public void onClick(View view) {
                 String selected = String.valueOf(mCreateSpinner.getSelectedItem());
                 Intent intent = null;
+                //TODO change intent to pass the string and then diff template loaded in next screen
+                //depending on what that is
                 if (selected.equals("Ask for Something")) {
-                    intent = new Intent(ParentHomeActivity.this, CreateAskForSomethingActivity.class);
+                    intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity.class);
                 }
                 startActivity(intent);
             }
