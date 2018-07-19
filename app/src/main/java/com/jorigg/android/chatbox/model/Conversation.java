@@ -18,4 +18,5 @@ public interface Conversation<E extends ConversationElementEnum> {
     ConversationElementEnum getInitialAgentElement();
     HashMap<E, ArrayList<Sentence>> getInitialUserMoves();
     ArrayList<Sentence> getElementOptions(E element);
+    void removeSentenceFromConversation(String sentence, E element);
 }

@@ -31,7 +31,9 @@ public class ConfigureConversationActivity extends AppCompatActivity {
     EditText mInputSentenceField;
 
     Spinner mSelectElementSpinner;
+
     Spinner mSelectExistingSentenceSpinner;
+    ImageButton mRemoveSentenceButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +59,6 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             }
         });
 
-        mSelectExistingSentenceSpinner = findViewById(R.id.config_existing_spinner);
-        populateExistingSentenceSpinner();
-
         mInputSentenceField = findViewById(R.id.config_input_sentence_field);
         mInputSentenceButton = findViewById(R.id.config_add_input_sentence_button);
         mInputSentenceButton.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +69,22 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                 mInputSentenceField.setText("");
             }
         });
+
+        mSelectExistingSentenceSpinner = findViewById(R.id.config_existing_spinner);
+        populateExistingSentenceSpinner();
+        mRemoveSentenceButton = findViewById(R.id.config_remove_existing_button);
+        mRemoveSentenceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //get the slected text and the selected element
+                ConversationElementEnum element = getElementFromString(mSelectElementSpinner.getSelectedItem().toString());
+                String contentToRem = mSelectExistingSentenceSpinner.getSelectedItem().toString();
+                //call method on convo elem
+                mCurrentConversation.removeSentenceFromConversation(contentToRem, element);
+                populateExistingSentenceSpinner();
+            }
+        });
+
 
 
     }

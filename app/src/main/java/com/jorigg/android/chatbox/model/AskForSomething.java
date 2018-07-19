@@ -82,6 +82,17 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
+    public void removeSentenceFromConversation(String sentence, ConversationElementEnum element) {
+        ArrayList<Sentence> options = mDialogue.get(element);
+        for (Sentence sent : options) {
+            if (sent.getContent().equals(sentence)) {
+                options.remove(sent);
+            }
+        }
+        mDialogue.put((AskForSomethingElements) element, options);
+    }
+
+    @Override
     // Sentence?
     public void addToConversation(ConversationElementEnum conversationElement, String content) {
         //add the sentence to the arrylist associated with the key
