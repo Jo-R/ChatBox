@@ -76,6 +76,10 @@ public class AskForSomething implements Conversation {
         return mInitiator;
     }
 
+    @Override
+    public ArrayList<Sentence> getElementOptions(ConversationElementEnum element) {
+        return mDialogue.get(element);
+    }
 
     @Override
     // Sentence?

@@ -17,4 +17,5 @@ public interface Conversation<E extends ConversationElementEnum> {
     Sentence getInitialAgentResponse();
     ConversationElementEnum getInitialAgentElement();
     HashMap<E, ArrayList<Sentence>> getInitialUserMoves();
+    ArrayList<Sentence> getElementOptions(E element);
 }

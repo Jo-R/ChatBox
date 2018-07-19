@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,6 +31,7 @@ public class ConfigureConversationActivity extends AppCompatActivity {
     EditText mInputSentenceField;
 
     Spinner mSelectElementSpinner;
+    Spinner mSelectExistingSentenceSpinner;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,17 +45,29 @@ public class ConfigureConversationActivity extends AppCompatActivity {
 
         mSelectElementSpinner = findViewById(R.id.config_elements_spinner);
         populateElementSpinner();
+        mSelectElementSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                populateExistingSentenceSpinner();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing?
+            }
+        });
+
+        mSelectExistingSentenceSpinner = findViewById(R.id.config_existing_spinner);
+        populateExistingSentenceSpinner();
 
         mInputSentenceField = findViewById(R.id.config_input_sentence_field);
         mInputSentenceButton = findViewById(R.id.config_add_input_sentence_button);
         mInputSentenceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO remove hard code of AFS
-                ConversationElementEnum element = AskForSomething.AskForSomethingElements.valueOf
-                        (mSelectElementSpinner.getSelectedItem().toString());
-
+                ConversationElementEnum element = getElementFromString(mSelectElementSpinner.getSelectedItem().toString());
                 mCurrentConversation.addToConversation(element, mInputSentenceField.getText().toString());
+                mInputSentenceField.setText("");
             }
         });
 
@@ -75,5 +89,29 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                 .simple_spinner_item, elements);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSelectElementSpinner.setAdapter(adapter);
+    }
+
+    private void populateExistingSentenceSpinner() {
+        ConversationElementEnum element = getElementFromString(mSelectElementSpinner
+                .getSelectedItem().toString());
+        ArrayList<Sentence> elements = mCurrentConversation.getElementOptions(element);
+
+        if (elements != null) {
+            ArrayList<String> strings = new ArrayList<>();
+
+            for (Sentence sentence : elements) {
+                strings.add(sentence.getContent());
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
+                    .simple_spinner_item, strings);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            mSelectExistingSentenceSpinner.setAdapter(adapter);
+        }
+    }
+
+    private ConversationElementEnum getElementFromString(String elemName) {
+        //TODO remove hard code AFS
+        return AskForSomething.AskForSomethingElements.valueOf(elemName);
     }
 }
