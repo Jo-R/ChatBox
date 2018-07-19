@@ -40,8 +40,6 @@ public class ParentHomeActivity extends AppCompatActivity{
 
         mNewTitle = findViewById(R.id.create_new_title);
 
-        //TODO edit button listener
-
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,9 +47,20 @@ public class ParentHomeActivity extends AppCompatActivity{
                 String title = mNewTitle.getText().toString();
                 //create conversation which can be accessed in next screen
                 mChatBank.addNewConversation(title, selectedTemplate);
-                Intent intent = null;
-                intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity.class);
+                Intent intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity
+                        .class);
                 intent.putExtra(TITLE_TO_CONFIG, title);
+                startActivity(intent);
+            }
+        });
+
+        mEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String selectedConversation = String.valueOf(mEditSpinner.getSelectedItem());
+                Intent intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity
+                        .class);
+                intent.putExtra(TITLE_TO_CONFIG, selectedConversation);
                 startActivity(intent);
             }
         });
