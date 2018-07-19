@@ -64,9 +64,10 @@ public class ConfigureConversationActivity extends AppCompatActivity {
         mInputSentenceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConversationElementEnum element = getElementFromString(mSelectElementSpinner.getSelectedItem().toString());
+                ConversationElementEnum element = getElementFromString();
                 mCurrentConversation.addToConversation(element, mInputSentenceField.getText().toString());
                 mInputSentenceField.setText("");
+                populateExistingSentenceSpinner();
             }
         });
 
@@ -77,7 +78,7 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //get the slected text and the selected element
-                ConversationElementEnum element = getElementFromString(mSelectElementSpinner.getSelectedItem().toString());
+                ConversationElementEnum element = getElementFromString();
                 String contentToRem = mSelectExistingSentenceSpinner.getSelectedItem().toString();
                 //call method on convo elem
                 mCurrentConversation.removeSentenceFromConversation(contentToRem, element);
@@ -107,8 +108,7 @@ public class ConfigureConversationActivity extends AppCompatActivity {
     }
 
     private void populateExistingSentenceSpinner() {
-        ConversationElementEnum element = getElementFromString(mSelectElementSpinner
-                .getSelectedItem().toString());
+        ConversationElementEnum element = getElementFromString();
         ArrayList<Sentence> elements = mCurrentConversation.getElementOptions(element);
 
         if (elements != null) {
@@ -125,8 +125,9 @@ public class ConfigureConversationActivity extends AppCompatActivity {
         }
     }
 
-    private ConversationElementEnum getElementFromString(String elemName) {
+    private ConversationElementEnum getElementFromString() {
         //TODO remove hard code AFS
-        return AskForSomething.AskForSomethingElements.valueOf(elemName);
+        return AskForSomething.AskForSomethingElements.valueOf(mSelectElementSpinner
+                .getSelectedItem().toString());
     }
 }
