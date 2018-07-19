@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.jorigg.android.chatbox.model.ChatBank;
@@ -15,8 +16,11 @@ import java.util.ArrayList;
 
 public class ParentHomeActivity extends AppCompatActivity{
 
+    public final static String TITLE_TO_CONFIG = "convoTitle";
+
     private Spinner mEditSpinner;
     private Spinner mCreateSpinner;
+    private EditText mNewTitle;
     private ChatBank mChatBank;
     private Button mCreateButton;
     private Button mEditButton;
@@ -34,18 +38,20 @@ public class ParentHomeActivity extends AppCompatActivity{
         mCreateButton = findViewById(R.id.create_new_button);
         mEditButton = findViewById(R.id.edit_button);
 
+        mNewTitle = findViewById(R.id.create_new_title);
+
         //TODO edit button listener
 
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String selected = String.valueOf(mCreateSpinner.getSelectedItem());
+                String selectedTemplate = String.valueOf(mCreateSpinner.getSelectedItem());
+                String title = mNewTitle.getText().toString();
+                //create conversation which can be accessed in next screen
+                mChatBank.addNewConversation(title, selectedTemplate);
                 Intent intent = null;
-                //TODO change intent to pass the string and then diff template loaded in next screen
-                //depending on what that is
-                if (selected.equals("Ask for Something")) {
-                    intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity.class);
-                }
+                intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity.class);
+                intent.putExtra(TITLE_TO_CONFIG, title);
                 startActivity(intent);
             }
         });

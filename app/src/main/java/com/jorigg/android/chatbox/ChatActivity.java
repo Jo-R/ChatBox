@@ -76,7 +76,6 @@ public class ChatActivity extends AppCompatActivity {
 
         mChatBank = ChatBank.get(this);
 
-        //todo if onSavedInstanceState != null
         if (savedInstanceState != null) {
             mCurrentConversation = mChatBank.getConversation(savedInstanceState.getCharSequence
                     (CURR_CONVO).toString());

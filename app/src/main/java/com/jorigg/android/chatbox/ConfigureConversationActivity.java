@@ -1,5 +1,6 @@
 package com.jorigg.android.chatbox;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,13 +19,12 @@ import com.jorigg.android.chatbox.model.Sentence;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static com.jorigg.android.chatbox.ParentHomeActivity.TITLE_TO_CONFIG;
+
 public class ConfigureConversationActivity extends AppCompatActivity {
 
     ChatBank mChatBank;
     Conversation mCurrentConversation;
-
-    ImageButton mAddTitleButton;
-    EditText mAddTitleField;
 
     ImageButton mInputSentenceButton;
     EditText mInputSentenceField;
@@ -37,21 +37,9 @@ public class ConfigureConversationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_configure_conversation);
 
         mChatBank = ChatBank.get(this);
-        //todo if are editing then mCurrentConvo = title passed in from prev screen
 
-        mAddTitleField = findViewById(R.id.config_edit_title);
-        mAddTitleButton= findViewById(R.id.config_edit_title_button);
-        mAddTitleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO its not obvious you have to click this to create the conversation - might
-                // be better on previous screen?
-                String title = mAddTitleField.getText().toString();
-                mChatBank.addNewConversation(title, "Ask for Something");
-                mCurrentConversation = mChatBank.getConversation(title);
-                //TODO make non editable
-            }
-        });
+        String convoTitle = getIntent().getCharSequenceExtra(TITLE_TO_CONFIG).toString();
+        mCurrentConversation = mChatBank.getConversation(convoTitle);
 
         mSelectElementSpinner = findViewById(R.id.config_elements_spinner);
         populateElementSpinner();
@@ -75,11 +63,12 @@ public class ConfigureConversationActivity extends AppCompatActivity {
     private void populateElementSpinner() {
         ArrayList<String> elements = new ArrayList<>();
 
-        //TODO is hard coded for ask for something
-        AskForSomething.AskForSomethingElements[] values = AskForSomething.AskForSomethingElements
-                .values();
-        for (AskForSomething.AskForSomethingElements element : values) {
-            elements.add(element.name());
+        if (mCurrentConversation instanceof AskForSomething) {
+            AskForSomething.AskForSomethingElements[] values = AskForSomething.AskForSomethingElements
+                    .values();
+            for (AskForSomething.AskForSomethingElements element : values) {
+                elements.add(element.name());
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
