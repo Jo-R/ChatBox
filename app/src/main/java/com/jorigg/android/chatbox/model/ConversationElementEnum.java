@@ -5,5 +5,5 @@ public interface ConversationElementEnum {
     String name();
     User.UserType getSpeaker();
     Sentence.SpeechType getSpeechType();
-    //https://stackoverflow.com/questions/3054247/how-to-define-properties-for-enum-items
+    String getElementDescription();
 }

@@ -11,27 +11,41 @@ public class AskForSomething implements Conversation {
 
     public enum AskForSomethingElements implements ConversationElementEnum {
 
-        GREETING(User.UserType.CHILD, Sentence.SpeechType.GREETING),
-        ALT_GREETING(User.UserType.CHILD, Sentence.SpeechType.GREETING),
-        RTN_GREETING(User.UserType.AGENT, Sentence.SpeechType.GREETING),
-        MAKE_REQUEST(User.UserType.CHILD, Sentence.SpeechType.REQUEST),
-        ALT_MAKE_REQUEST(User.UserType.CHILD, Sentence.SpeechType.REQUEST),
-        AGREE_REQUEST(User.UserType.AGENT, Sentence.SpeechType.AGREEMENT),
-        REQ_CLARIFY(User.UserType.AGENT, Sentence.SpeechType.REQUEST),
-        PROVIDE_CLARIFY(User.UserType.CHILD, Sentence.SpeechType.REQUEST),
-        ALT_PROVIDE_CLARIFY(User.UserType.CHILD, Sentence.SpeechType.REQUEST),
-        REFUSE_REQ(User.UserType.AGENT, Sentence.SpeechType.REFUSAL),
-        ACKNOWL_REFUSAL(User.UserType.CHILD, Sentence.SpeechType.ACKNOWLEDGEMENT),
-        THANK(User.UserType.CHILD, Sentence.SpeechType.THANKS),
-        ACKNOWL_THANK(User.UserType.AGENT, Sentence.SpeechType.ACKNOWLEDGEMENT);
+        GREETING(User.UserType.CHILD, Sentence.SpeechType.GREETING, "An appropriate greeting"),
+        ALT_GREETING(User.UserType.CHILD, Sentence.SpeechType.GREETING, "A less appropriate " +
+                "greeting"),
+        RTN_GREETING(User.UserType.AGENT, Sentence.SpeechType.GREETING, "An appropriate greeting"),
+        MAKE_REQUEST(User.UserType.CHILD, Sentence.SpeechType.REQUEST, "An appropriately phrased " +
+                "request"),
+        ALT_MAKE_REQUEST(User.UserType.CHILD, Sentence.SpeechType.REQUEST, "An inappropriately " +
+                "phrased request"),
+        AGREE_REQUEST(User.UserType.AGENT, Sentence.SpeechType.AGREEMENT, "Agree to fulfill the " +
+                "request"),
+        REQ_CLARIFY(User.UserType.AGENT, Sentence.SpeechType.REQUEST, "Request clarification of " +
+                "the request"),
+        PROVIDE_CLARIFY(User.UserType.CHILD, Sentence.SpeechType.REQUEST, "An appropriately " +
+                "phrased clarification"),
+        ALT_PROVIDE_CLARIFY(User.UserType.CHILD, Sentence.SpeechType.REQUEST, "An inapproriately " +
+                "phrased clarification"),
+        REFUSE_REQ(User.UserType.AGENT, Sentence.SpeechType.REFUSAL, "Refuse to fulfil the " +
+                "request"),
+        ACKNOWL_REFUSAL(User.UserType.CHILD, Sentence.SpeechType.ACKNOWLEDGEMENT, "Acknwoledge " +
+                "that the request has been refused"),
+        THANK(User.UserType.CHILD, Sentence.SpeechType.THANKS, "Thank you for fulfilling the " +
+                "request"),
+        ACKNOWL_THANK(User.UserType.AGENT, Sentence.SpeechType.ACKNOWLEDGEMENT, "Acknowledge the " +
+                "thanks");
 
 
         private final User.UserType mSpeaker;
         private final Sentence.SpeechType mSpeechType;
+        private final String mElementDescription;
 
-        AskForSomethingElements(final User.UserType speaker, final Sentence.SpeechType speechType) {
+        AskForSomethingElements(final User.UserType speaker, final Sentence.SpeechType
+                speechType, String elementDescription) {
             mSpeaker = speaker;
             mSpeechType = speechType;
+            mElementDescription = elementDescription;
         }
 
         @Override
@@ -42,6 +56,11 @@ public class AskForSomething implements Conversation {
         @Override
         public Sentence.SpeechType getSpeechType() {
             return mSpeechType;
+        }
+
+        @Override
+        public String getElementDescription() {
+            return mElementDescription;
         }
 
 
