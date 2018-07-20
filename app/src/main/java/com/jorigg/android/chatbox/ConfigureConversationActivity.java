@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.jorigg.android.chatbox.model.AskForSomething;
 import com.jorigg.android.chatbox.model.ChatBank;
@@ -35,6 +36,9 @@ public class ConfigureConversationActivity extends AppCompatActivity {
     Spinner mSelectExistingSentenceSpinner;
     ImageButton mRemoveSentenceButton;
 
+    TextView mDisplayWhoseTurn;
+    TextView mDisplayElementDescription;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +55,7 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 populateExistingSentenceSpinner();
+                displayElementDetails();
             }
 
             @Override
@@ -58,6 +63,11 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                 //do nothing?
             }
         });
+
+
+        mDisplayWhoseTurn = findViewById(R.id.config_whose_turn_display);
+        mDisplayElementDescription = findViewById(R.id.config_element_description);
+        displayElementDetails();
 
         mInputSentenceField = findViewById(R.id.config_input_sentence_field);
         mInputSentenceButton = findViewById(R.id.config_add_input_sentence_button);
@@ -129,5 +139,11 @@ public class ConfigureConversationActivity extends AppCompatActivity {
         //TODO remove hard code AFS
         return AskForSomething.AskForSomethingElements.valueOf(mSelectElementSpinner
                 .getSelectedItem().toString());
+    }
+
+    private void displayElementDetails() {
+        ConversationElementEnum element = getElementFromString();
+        mDisplayWhoseTurn.setText(element.getSpeaker().toString());
+        mDisplayElementDescription.setText(element.getElementDescription());
     }
 }
