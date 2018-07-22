@@ -5,6 +5,7 @@ import android.support.v4.util.Pair;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class AskForSomething implements Conversation {
@@ -66,13 +67,13 @@ public class AskForSomething implements Conversation {
 
     }
 
-    private EnumMap<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
+    private HashMap<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
     private User.UserType mInitiator;
     private ArrayList<AskForSomethingElements> mInitialUserElements;
 
     public AskForSomething(String title) {
-        mDialogue = new EnumMap<>(AskForSomethingElements.class);
+        mDialogue = new HashMap<>();
         mTitle = title;
         mInitiator = User.UserType.CHILD;
         mInitialUserElements = new ArrayList<>();
@@ -88,6 +89,11 @@ public class AskForSomething implements Conversation {
     @Override
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+//    @Override
+    public HashMap<AskForSomethingElements, ArrayList<Sentence>> getDialogue() {
+        return mDialogue;
     }
 
     @Override

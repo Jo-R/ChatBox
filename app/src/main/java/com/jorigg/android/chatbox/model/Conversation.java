@@ -3,6 +3,7 @@ package com.jorigg.android.chatbox.model;
 import android.support.v4.util.Pair;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,4 +20,5 @@ public interface Conversation<E extends ConversationElementEnum> {
     HashMap<E, ArrayList<Sentence>> getInitialUserMoves();
     ArrayList<Sentence> getElementOptions(E element);
     void removeSentenceFromConversation(String sentence, E element);
+    HashMap<E, ArrayList<Sentence>> getDialogue();
 }
