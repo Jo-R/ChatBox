@@ -16,13 +16,10 @@ import java.util.Map;
 
 public class XmlWriteRead {
 
-    //todo will need to call this from an activity class - which is probably fine - do it on
-    // destroying config screen since that is where any changes will be??
-    public static void writeChatToXML(ArrayList<Conversation> chatLibrary, Context context) {
+    //is called when pausing config activity - does it need calling anywhere else?
+    public static void writeChatsToXML(ArrayList<Conversation> chatLibrary, Context context) {
 
         try {
-            //TODO THIS MIGH NOT BE RIGHT - do I want to overwrite whole file each time?? Probably??
-            FileOutputStream fos = new FileOutputStream("chatData.xml");
             FileOutputStream fileos = context.openFileOutput("chatData", Context.MODE_PRIVATE);
 
             XmlSerializer xmlSerializer = Xml.newSerializer();
@@ -34,15 +31,18 @@ public class XmlWriteRead {
             xmlSerializer.startTag(null, "ChatLibrary");
 
            //DATA
-
             for (Conversation convo : chatLibrary) {
                 HashMap<ConversationElementEnum, ArrayList<Sentence>> dialogue =
                      convo.getDialogue();
+
                 xmlSerializer.startTag(null, "Conversation");
+
                 xmlSerializer.startTag(null, "Title");
                 xmlSerializer.text(convo.getTitle());
                 xmlSerializer.endTag(null, "Title");
+
                 writeDialogue(dialogue, xmlSerializer);
+
                 xmlSerializer.endTag(null, "Conversation");
             }
 
@@ -78,10 +78,9 @@ public class XmlWriteRead {
         //iterate of enummap and get each element and sentence
         Iterator<Map.Entry<ConversationElementEnum, ArrayList<Sentence>>> e = convo.entrySet().iterator();
         try {
+            xmlSerializer.startTag(null, "Dialogue");
             while (e.hasNext()) {
                 Map.Entry pair = e.next();
-
-                xmlSerializer.startTag(null, "Dialogue");
 
                 xmlSerializer.startTag(null, "Element");
                 xmlSerializer.text(pair.getKey().toString());
@@ -98,10 +97,8 @@ public class XmlWriteRead {
                     xmlSerializer.endTag(null, "SpeechType");
                 }
                 xmlSerializer.endTag(null, "Sentences");
-
-                xmlSerializer.endTag(null, "Dialogue");
-
             }
+            xmlSerializer.endTag(null, "Dialogue");
         }  catch (IOException e5) {
             // TODO Auto-generated catch block
             e5.printStackTrace();

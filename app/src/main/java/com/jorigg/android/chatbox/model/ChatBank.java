@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ChatBank {
 
-    private List<Conversation> mConversationLibrary;
+    private ArrayList<Conversation> mConversationLibrary;
     private Context mContext;
     private static ChatBank sChatBank;
 
@@ -42,6 +42,9 @@ public class ChatBank {
         mConversationLibrary.add(newConvo);
     }
 
+    public ArrayList<Conversation> getConversationLibrary() {
+        return mConversationLibrary;
+    }
 
     public void addConversation() { //TODO HARD CODED FOR NOW
        //add a new conversation - create it and add to the library

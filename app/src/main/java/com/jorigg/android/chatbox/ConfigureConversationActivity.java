@@ -1,5 +1,6 @@
 package com.jorigg.android.chatbox;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Conversation;
 import com.jorigg.android.chatbox.model.ConversationElementEnum;
 import com.jorigg.android.chatbox.model.Sentence;
+import com.jorigg.android.chatbox.model.XmlWriteRead;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,8 +98,13 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Context ctxt = this.getApplicationContext();
+        XmlWriteRead.writeChatsToXML(mChatBank.getConversationLibrary(), ctxt);
     }
 
     private void populateElementSpinner() {
