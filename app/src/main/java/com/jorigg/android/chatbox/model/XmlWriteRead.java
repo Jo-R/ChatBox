@@ -3,10 +3,15 @@ package com.jorigg.android.chatbox.model;
 import android.content.Context;
 import android.util.Xml;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -20,7 +25,7 @@ public class XmlWriteRead {
     public static void writeChatsToXML(ArrayList<Conversation> chatLibrary, Context context) {
 
         try {
-            FileOutputStream fileos = context.openFileOutput("chatData", Context.MODE_PRIVATE);
+            FileOutputStream fileos = context.openFileOutput("chatData.xml", Context.MODE_PRIVATE);
 
             XmlSerializer xmlSerializer = Xml.newSerializer();
             StringWriter writer = new StringWriter();
@@ -36,6 +41,10 @@ public class XmlWriteRead {
                      convo.getDialogue();
 
                 xmlSerializer.startTag(null, "Conversation");
+
+                xmlSerializer.startTag(null, "Type");
+                xmlSerializer.text(convo.getClass().getSimpleName());
+                xmlSerializer.endTag(null, "Type");
 
                 xmlSerializer.startTag(null, "Title");
                 xmlSerializer.text(convo.getTitle());
@@ -92,9 +101,6 @@ public class XmlWriteRead {
                     xmlSerializer.startTag(null, "Content");
                     xmlSerializer.text(sentence.getContent());
                     xmlSerializer.endTag(null, "Content");
-                    xmlSerializer.startTag(null,"SpeechType");
-                    xmlSerializer.text(sentence.getSpeechType().toString());
-                    xmlSerializer.endTag(null, "SpeechType");
                 }
                 xmlSerializer.endTag(null, "Sentences");
             }
@@ -103,6 +109,95 @@ public class XmlWriteRead {
             // TODO Auto-generated catch block
             e5.printStackTrace();
         }
+    }
+
+    public static void parseChatsFromXml(Context context) {
+        try {
+
+            ChatBank cb = ChatBank.get(context);
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            XmlPullParser xpp = factory.newPullParser();
+
+            File dataFile = new File(context.getFilesDir(), "chatData.xml");
+            xpp.setInput(new FileReader(dataFile));
+
+            int eventType = xpp.getEventType();
+            //declare the type and title here so only get reset when a new conversation tag
+            // is encountered
+            String type = "";
+            Conversation convo = null;
+            ConversationElementEnum element = null;
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                //for all start tags get the name then do somehting with it
+                if (eventType == XmlPullParser.START_TAG) {
+
+                    String tagName = xpp.getName();
+
+                    if (tagName.equals("Conversation")) {
+                        xpp.next(); //gets the type tag
+                        tagName = xpp.getName();
+                        if (tagName.equals("Type")) {
+                            xpp.next(); //gets the type text
+                            type = xpp.getText();
+
+                            xpp.next(); //type end tag
+                            xpp.next(); //title open tag
+                            xpp.next(); //title text
+                            String title = xpp.getText();
+
+                            if (type.equals("AskForSomething")) {
+                                cb.addNewConversation(title, "Ask for Something");
+                                convo = cb.getConversation(title);
+                            }
+                        }
+                    }
+
+
+                    if (tagName.equals("Element")) {
+                        xpp.next();
+                        String elementStr = xpp.getText();
+                        if (type.equals("AskForSomething")) {
+                            element = AskForSomething.AskForSomethingElements.valueOf
+                                    (elementStr);
+                        }
+
+                    }
+
+
+                    if (tagName.equals("Sentences")) {
+                        xpp.next(); //content tag
+                        tagName = xpp.getName();
+                        while (tagName.equals("Content")) {
+                            xpp.next(); //content itself
+                            String content = xpp.getText();
+                            convo.addToConversation(element, content);
+                            xpp.next();
+                            xpp.next();
+                            tagName = xpp.getName();
+                        }
+                    }
+
+
+
+                }
+
+                eventType = xpp.next();
+
+            }
+
+
+        } catch (XmlPullParserException e) {
+            //TODO handle it
+            e.printStackTrace();
+        } catch (FileNotFoundException e2) {
+            //TODO handle it
+        } catch (IOException e) {
+            //TODO handle it
+            e.printStackTrace();
+        }
+
     }
 
 
