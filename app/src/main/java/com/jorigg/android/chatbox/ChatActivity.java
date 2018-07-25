@@ -126,10 +126,12 @@ public class ChatActivity extends AppCompatActivity {
             nextMove = mCurrentConversation.getInitialAgentResponse().toString();
             mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
                     .getInitialUserMoves();
-        } else {
+        } else if (mCurrentConversation.isInProgress()) {
             nextMove = mCurrentConversation.getNextAgentMove(mChildMoveElement).second.toString();
             mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
                     .getNextAgentMove(mChildMoveElement).first;
+        } else {
+            nextMove = "GAME OVER"; //TODO make a better ending
         }
         //TODO use toast on temp basis
         Toast.makeText(ChatActivity.this, nextMove, Toast.LENGTH_LONG).show();
@@ -139,8 +141,10 @@ public class ChatActivity extends AppCompatActivity {
     private void getNextItemsForUserResponseSpinner() {
         if (mChildMoveElement == null) {
             mCurrentChildMoves = mCurrentConversation.getInitialUserMoves();
-        } else {
+        } else if (mCurrentConversation.isInProgress()) {
             mCurrentChildMoves = mCurrentConversation.getNextUserMoves(mCurrentAgentElement);
+        } else { //TODO MAKE A better ending
+            Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
         }
         addNextItemsToUserResponseSpinner();
     }

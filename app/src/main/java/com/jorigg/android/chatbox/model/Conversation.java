@@ -21,4 +21,5 @@ public interface Conversation<E extends ConversationElementEnum> {
     ArrayList<Sentence> getElementOptions(E element);
     void removeSentenceFromConversation(String sentence, E element);
     HashMap<E, ArrayList<Sentence>> getDialogue();
+    boolean isInProgress();
 }

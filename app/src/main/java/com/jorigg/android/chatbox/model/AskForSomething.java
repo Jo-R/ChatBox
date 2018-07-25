@@ -71,6 +71,7 @@ public class AskForSomething implements Conversation {
     private String mTitle; //user generated convo name
     private User.UserType mInitiator;
     private ArrayList<AskForSomethingElements> mInitialUserElements;
+    private boolean mInProgress;
 
     public AskForSomething(String title) {
         mDialogue = new HashMap<>();
@@ -79,6 +80,7 @@ public class AskForSomething implements Conversation {
         mInitialUserElements = new ArrayList<>();
         mInitialUserElements.add(AskForSomethingElements.GREETING);
         mInitialUserElements.add(AskForSomethingElements.ALT_GREETING);
+        mInProgress = true;
     }
 
     @Override
@@ -156,6 +158,10 @@ public class AskForSomething implements Conversation {
         return AskForSomethingElements.RTN_GREETING;
     }
 
+    @Override
+    public boolean isInProgress() {
+        return mInProgress;
+    }
 
     @Override
     public Pair<ConversationElementEnum, Sentence> getNextAgentMove(ConversationElementEnum
@@ -182,11 +188,8 @@ public class AskForSomething implements Conversation {
         } else if (lastUserMove == AskForSomethingElements.THANK) {
             options = mDialogue.get(AskForSomethingElements.ACKNOWL_THANK);
             nextElement = AskForSomethingElements.ACKNOWL_THANK;
+            mInProgress = false;
         }
-
-        //TODO if nextElement == null move was ACKNOWL_REFUSAL, options also empty so app is
-        // crashing in thie scenario
-        //will currently return null for nextElement so this is how we know convo has ended
 
         //choose one from the AList at random - so only ever gives one reponse but there is a choice
         Sentence move = options.get(new Random().nextInt(options.size()));
@@ -217,9 +220,8 @@ public class AskForSomething implements Conversation {
         } else if (lastAgentMove == AskForSomethingElements.REFUSE_REQ) {
             nextMoves.put(AskForSomethingElements.ACKNOWL_REFUSAL, mDialogue.get
                     (AskForSomethingElements.ACKNOWL_REFUSAL));
+            mInProgress = false; //this terminates conversation
         }
-
-        //TODO if hashmap is empty = end of conversation
 
         return nextMoves;
     }
