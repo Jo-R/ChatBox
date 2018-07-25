@@ -66,10 +66,8 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
 
-                //display the agent reponse
                 showNextAgentMove();
 
-                //and put the next set of userResponses in spinner
                 getNextItemsForUserResponseSpinner();
             }
         });
@@ -83,7 +81,6 @@ public class ChatActivity extends AppCompatActivity {
             addNextItemsToUserResponseSpinner();
             mCurrentAgentElement = (ConversationElementEnum) savedInstanceState.getSerializable
                     (CURR_AGENT);
-            //todo will need something here to display agent bit on rotate
         } else {
             mCurrentConversation = mChatBank.getConversation(getIntent().getCharSequenceExtra
                     (SELECTED_CONVO).toString());
