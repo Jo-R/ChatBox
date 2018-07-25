@@ -1,5 +1,6 @@
 package com.jorigg.android.chatbox;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,8 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.jorigg.android.chatbox.model.ChatBank;
+import com.jorigg.android.chatbox.model.XmlWriteRead;
 
 import java.util.ArrayList;
 
@@ -24,6 +27,7 @@ public class ParentHomeActivity extends AppCompatActivity{
     private ChatBank mChatBank;
     private Button mCreateButton;
     private Button mEditButton;
+    private Button mDeleteButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class ParentHomeActivity extends AppCompatActivity{
 
         mCreateButton = findViewById(R.id.create_new_button);
         mEditButton = findViewById(R.id.edit_button);
+        mDeleteButton = findViewById(R.id.delete_button);
 
         mNewTitle = findViewById(R.id.create_new_title);
 
@@ -47,6 +52,8 @@ public class ParentHomeActivity extends AppCompatActivity{
                 String title = mNewTitle.getText().toString();
                 //create conversation which can be accessed in next screen
                 mChatBank.addNewConversation(title, selectedTemplate);
+                mNewTitle.setText("");
+                populateSpinners();
                 Intent intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity
                         .class);
                 intent.putExtra(TITLE_TO_CONFIG, title);
@@ -65,7 +72,25 @@ public class ParentHomeActivity extends AppCompatActivity{
             }
         });
 
+        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String selectedConversation = String.valueOf(mEditSpinner.getSelectedItem());
+                mChatBank.deleteConversation(selectedConversation);
+                Toast.makeText(ParentHomeActivity.this, selectedConversation + "deleted", Toast
+                        .LENGTH_LONG).show();
+                populateSpinners();
+            }
+        });
 
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Context ctxt = this.getApplicationContext();
+        XmlWriteRead.writeChatsToXML(mChatBank.getConversationLibrary(), ctxt);
     }
 
     private void populateSpinners() {

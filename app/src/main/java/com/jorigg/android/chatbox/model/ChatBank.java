@@ -55,6 +55,14 @@ public class ChatBank {
         return null;
     }
 
+    public void deleteConversation(String title) {
+        for ( Conversation conversation : mConversationLibrary) {
+            if (conversation.getTitle().equals(title)) {
+                mConversationLibrary.remove(conversation);
+            }
+        }
+    }
+
 
 
 }

@@ -130,7 +130,7 @@ public class XmlWriteRead {
             ConversationElementEnum element = null;
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
-                //for all start tags get the name then do somehting with it
+
                 if (eventType == XmlPullParser.START_TAG) {
 
                     String tagName = xpp.getName();
