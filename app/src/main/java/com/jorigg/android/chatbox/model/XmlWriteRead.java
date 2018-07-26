@@ -195,5 +195,61 @@ public class XmlWriteRead {
 
     }
 
+    public static void writeSentencesToXml(ArrayList<Sentence> sentenceLibrary, Context context) {
+        try {
+            FileOutputStream fileos = context.openFileOutput("sentenceData.xml", Context
+                    .MODE_PRIVATE);
+
+            XmlSerializer xmlSerializer = Xml.newSerializer();
+            StringWriter writer = new StringWriter();
+            xmlSerializer.setOutput(writer);
+
+            //START DOCUMENT
+            xmlSerializer.startDocument("UTF-8", true);
+            xmlSerializer.startTag(null, "SentenceLibrary");
+
+            //DATA
+            for (Sentence sentence : sentenceLibrary) {
+
+                xmlSerializer.startTag(null, "Sentence");
+
+                xmlSerializer.startTag(null, "Content");
+                xmlSerializer.text(sentence.getContent());
+                xmlSerializer.endTag(null, "Content");
+
+                xmlSerializer.startTag(null, "SpeechType");
+                xmlSerializer.text(sentence.getSpeechType().toString());
+                xmlSerializer.endTag(null, "SpeechType");
+
+                xmlSerializer.endTag(null, "Sentence");
+            }
+
+
+            //END DOCUMENT
+            xmlSerializer.endTag(null, "SentenceLibrary");
+            xmlSerializer.endDocument();
+            xmlSerializer.flush();
+            String dataWrite = writer.toString();
+            fileos.write(dataWrite.getBytes());
+            fileos.close();
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e2) {
+            // TODO Auto-generated catch block
+            e2.printStackTrace();
+        }
+        catch (IllegalStateException e3) {
+            // TODO Auto-generated catch block
+            e3.printStackTrace();
+        }
+        catch (IOException e4) {
+            // TODO Auto-generated catch block
+            e4.printStackTrace();
+        }
+    }
+
 
 }

@@ -24,6 +24,10 @@ public class SentenceBank {
         mSentenceLibrary = new ArrayList<>();
     }
 
+    public ArrayList<Sentence> getSentenceLibrary() {
+        return mSentenceLibrary;
+    }
+
     public void addSentence(Sentence sentence) {
         mSentenceLibrary.add(sentence);
     }
