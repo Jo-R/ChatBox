@@ -140,6 +140,7 @@ public class ConfigureConversationActivity extends AppCompatActivity {
         super.onPause();
         Context ctxt = this.getApplicationContext();
         XmlWriteRead.writeChatsToXML(mChatBank.getConversationLibrary(), ctxt);
+        //todo write sentence bank to xml
     }
 
     private void populateElementSpinner() {
