@@ -5,6 +5,7 @@ import android.support.v4.util.Pair;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -111,9 +112,12 @@ public class AskForSomething implements Conversation {
     @Override
     public void removeSentenceFromConversation(String sentence, ConversationElementEnum element) {
         ArrayList<Sentence> options = mDialogue.get(element);
-        for (Sentence sent : options) {
-            if (sent.getContent().equals(sentence)) {
-                options.remove(sent);
+        Iterator<Sentence> iterator = options.iterator();
+
+        while (iterator.hasNext()) {
+            Sentence sent = iterator.next();
+            if(sent.getContent().equals(sentence)) {
+                iterator.remove();
             }
         }
         mDialogue.put((AskForSomethingElements) element, options);

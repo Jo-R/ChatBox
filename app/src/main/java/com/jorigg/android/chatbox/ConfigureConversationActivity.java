@@ -182,19 +182,17 @@ public class ConfigureConversationActivity extends AppCompatActivity {
     private void populateExistingChatSentenceSpinner() {
         ConversationElementEnum element = getElementFromString();
         ArrayList<Sentence> elements = mCurrentConversation.getElementOptions(element);
+        ArrayList<String> strings = new ArrayList<>();
 
         if (elements != null) {
-            ArrayList<String> strings = new ArrayList<>();
-
             for (Sentence sentence : elements) {
                 strings.add(sentence.getContent());
             }
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
-                    .simple_spinner_item, strings);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            mExistingChatSentenceSpinner.setAdapter(adapter);
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
+                .simple_spinner_item, strings);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mExistingChatSentenceSpinner.setAdapter(adapter);
     }
 
     private ConversationElementEnum getElementFromString() {
