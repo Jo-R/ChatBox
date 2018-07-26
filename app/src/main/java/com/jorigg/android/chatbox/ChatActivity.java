@@ -1,5 +1,6 @@
 package com.jorigg.android.chatbox;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -76,9 +77,16 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
 
-                showNextAgentMove();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showNextAgentMove();
+                        getNextItemsForUserResponseSpinner();
+                    }
+                }, 1500);
 
-                getNextItemsForUserResponseSpinner();
+
             }
         });
 
