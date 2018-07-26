@@ -1,30 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_gravity="top"
         android:layout_weight="1">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/agent_figure_test"
-            android:layout_gravity="start"
-            android:layout_weight="0.25"/>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="93dp"
+            android:src="@drawable/agent_figure_test" />
 
         <ImageView
+            android:id="@+id/left_speech_bubble"
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="140dp"
+            android:src="@drawable/speech_bubble_left" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@drawable/boy_figure_test"
-            android:layout_weight="0.25"/>
+            android:id="@+id/left_speech_bubble_text"
+            android:layout_alignLeft="@id/left_speech_bubble"
+            android:layout_alignTop="@id/left_speech_bubble"
+            android:layout_alignBottom="@id/left_speech_bubble"
+            android:layout_alignRight="@id/left_speech_bubble"/>
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="41dp"
+            android:src="@drawable/boy_figure_test" />
+
+        <ImageView
+            android:id="@+id/right_speech_bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="132dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/speech_bubble_right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rightt_speech_bubble_text"
+            android:layout_alignLeft="@id/right_speech_bubble"
+            android:layout_alignTop="@id/right_speech_bubble"
+            android:layout_alignBottom="@id/right_speech_bubble"
+            android:layout_alignRight="@id/right_speech_bubble"/>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
