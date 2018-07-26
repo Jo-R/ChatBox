@@ -35,10 +35,10 @@ public class XmlWriteRead {
             xmlSerializer.startDocument("UTF-8", true);
             xmlSerializer.startTag(null, "ChatLibrary");
 
-           //DATA
+            //DATA
             for (Conversation convo : chatLibrary) {
                 HashMap<ConversationElementEnum, ArrayList<Sentence>> dialogue =
-                     convo.getDialogue();
+                        convo.getDialogue();
 
                 xmlSerializer.startTag(null, "Conversation");
 
@@ -67,16 +67,13 @@ public class XmlWriteRead {
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        catch (IllegalArgumentException e2) {
+        } catch (IllegalArgumentException e2) {
             // TODO Auto-generated catch block
             e2.printStackTrace();
-        }
-        catch (IllegalStateException e3) {
+        } catch (IllegalStateException e3) {
             // TODO Auto-generated catch block
             e3.printStackTrace();
-        }
-        catch (IOException e4) {
+        } catch (IOException e4) {
             // TODO Auto-generated catch block
             e4.printStackTrace();
         }
@@ -105,7 +102,7 @@ public class XmlWriteRead {
                 xmlSerializer.endTag(null, "Sentences");
             }
             xmlSerializer.endTag(null, "Dialogue");
-        }  catch (IOException e5) {
+        } catch (IOException e5) {
             // TODO Auto-generated catch block
             e5.printStackTrace();
         }
@@ -236,20 +233,60 @@ public class XmlWriteRead {
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        catch (IllegalArgumentException e2) {
+        } catch (IllegalArgumentException e2) {
             // TODO Auto-generated catch block
             e2.printStackTrace();
-        }
-        catch (IllegalStateException e3) {
+        } catch (IllegalStateException e3) {
             // TODO Auto-generated catch block
             e3.printStackTrace();
-        }
-        catch (IOException e4) {
+        } catch (IOException e4) {
             // TODO Auto-generated catch block
             e4.printStackTrace();
         }
     }
 
+    public static void parseSentencesFromXml(Context context) {
+        try {
 
+            SentenceBank sb = SentenceBank.get(context);
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            XmlPullParser xpp = factory.newPullParser();
+
+            File dataFile = new File(context.getFilesDir(), "sentenceData.xml");
+            xpp.setInput(new FileReader(dataFile));
+
+            int eventType = xpp.getEventType();
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+
+                if (eventType == XmlPullParser.START_TAG) {
+
+                    String tagName = xpp.getName();
+
+                    if (tagName.equals("Content")) {
+                        xpp.next(); //content text
+                        String content = xpp.getText();
+                        xpp.next(); //content end
+                        xpp.next(); //SType
+                        xpp.next();
+                        String speechType = xpp.getText();
+                        Sentence.SpeechType st = Sentence.SpeechType.valueOf(speechType);
+                        sb.addSentence(new Sentence(content, st));
+                    }
+                }
+
+                eventType = xpp.next();
+
+            }
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

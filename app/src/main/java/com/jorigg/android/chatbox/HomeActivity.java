@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         mChatBank = ChatBank.get(this);
         mSentenceBank = SentenceBank.get(this);
         XmlWriteRead.parseChatsFromXml(getApplicationContext());
-        //todo read in sentences from xml
+        XmlWriteRead.parseSentencesFromXml(getApplicationContext());
         populateSpinner();
 
     }
