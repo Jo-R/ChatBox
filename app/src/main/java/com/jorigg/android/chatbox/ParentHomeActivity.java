@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,7 +18,8 @@ import com.jorigg.android.chatbox.model.XmlWriteRead;
 
 import java.util.ArrayList;
 
-public class ParentHomeActivity extends AppCompatActivity{
+public class ParentHomeActivity extends AppCompatActivity implements DeleteChatDialogFragment
+        .NoticeDialogListener {
 
     public final static String TITLE_TO_CONFIG = "convoTitle";
 
@@ -28,6 +30,8 @@ public class ParentHomeActivity extends AppCompatActivity{
     private Button mCreateButton;
     private Button mEditButton;
     private Button mDeleteButton;
+
+    private String mSelectedConversation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,10 +72,10 @@ public class ParentHomeActivity extends AppCompatActivity{
         mEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String selectedConversation = String.valueOf(mEditSpinner.getSelectedItem());
+                mSelectedConversation = String.valueOf(mEditSpinner.getSelectedItem());
                 Intent intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity
                         .class);
-                intent.putExtra(TITLE_TO_CONFIG, selectedConversation);
+                intent.putExtra(TITLE_TO_CONFIG, mSelectedConversation);
                 startActivity(intent);
             }
         });
@@ -79,11 +83,10 @@ public class ParentHomeActivity extends AppCompatActivity{
         mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String selectedConversation = String.valueOf(mEditSpinner.getSelectedItem());
-                mChatBank.deleteConversation(selectedConversation);
-                Toast.makeText(ParentHomeActivity.this, selectedConversation + "deleted", Toast
-                        .LENGTH_LONG).show();
-                populateSpinners();
+                mSelectedConversation = String.valueOf(mEditSpinner.getSelectedItem());
+                DialogFragment confirmation = new DeleteChatDialogFragment();
+                confirmation.show(getSupportFragmentManager(), "deleteConfirm");
+
             }
         });
 
@@ -110,5 +113,18 @@ public class ParentHomeActivity extends AppCompatActivity{
                 .simple_spinner_item, templates);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCreateSpinner.setAdapter(adapter2);
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        mChatBank.deleteConversation(mSelectedConversation);
+        Toast.makeText(ParentHomeActivity.this, mSelectedConversation + "deleted", Toast
+                .LENGTH_LONG).show();
+        populateSpinners();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
