@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jorigg.android.chatbox.model.AskForSomething;
@@ -36,11 +38,20 @@ public class ChatActivity extends AppCompatActivity {
 
     private Spinner mResponseSpinner;
     private ImageButton mUserResponseButton;
+    private ImageView mLeftSpeechBubble;
+    private ImageView mRightSpeechBubble;
+    private TextView mLeftSpeechBubbleText;
+    private TextView mRightSpeechBubbleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        mLeftSpeechBubble = findViewById(R.id.left_speech_bubble);
+        mLeftSpeechBubbleText = findViewById(R.id.left_speech_bubble_text);
+        mRightSpeechBubble = findViewById(R.id.right_speech_bubble);
+        mRightSpeechBubbleText = findViewById(R.id.right_speech_bubble_text);
 
         mResponseSpinner = findViewById(R.id.user_response_spinner);
         mUserResponseButton = findViewById(R.id.user_response_button);
@@ -51,8 +62,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 String response = String.valueOf(mResponseSpinner.getSelectedItem());
 
-                //TODO display it on the user icon
-                Toast.makeText(ChatActivity.this, response, Toast.LENGTH_LONG).show();
+                mRightSpeechBubbleText.setText(response);
 
                 //establish which element the child response belongs to and update
                 // mCurrentChildElement
@@ -130,8 +140,7 @@ public class ChatActivity extends AppCompatActivity {
         } else {
             nextMove = "GAME OVER"; //TODO make a better ending
         }
-        //TODO use toast on temp basis
-        Toast.makeText(ChatActivity.this, nextMove, Toast.LENGTH_LONG).show();
+        mLeftSpeechBubbleText.setText(nextMove);
 
     }
 

@@ -35,7 +35,8 @@
             android:layout_alignLeft="@id/left_speech_bubble"
             android:layout_alignTop="@id/left_speech_bubble"
             android:layout_alignBottom="@id/left_speech_bubble"
-            android:layout_alignRight="@id/left_speech_bubble"/>
+            android:layout_alignRight="@id/left_speech_bubble"
+            android:gravity="center"/>
 
         <ImageView
             android:layout_width="84dp"
@@ -58,11 +59,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rightt_speech_bubble_text"
+            android:id="@+id/right_speech_bubble_text"
             android:layout_alignLeft="@id/right_speech_bubble"
             android:layout_alignTop="@id/right_speech_bubble"
             android:layout_alignBottom="@id/right_speech_bubble"
-            android:layout_alignRight="@id/right_speech_bubble"/>
+            android:layout_alignRight="@id/right_speech_bubble"
+            android:gravity="center"/>
 
     </RelativeLayout>
 
