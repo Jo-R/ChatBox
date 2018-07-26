@@ -51,13 +51,17 @@ public class ParentHomeActivity extends AppCompatActivity{
                 String selectedTemplate = String.valueOf(mCreateSpinner.getSelectedItem());
                 String title = mNewTitle.getText().toString();
                 //create conversation which can be accessed in next screen
-                mChatBank.addNewConversation(title, selectedTemplate);
-                mNewTitle.setText("");
-                populateSpinners();
-                Intent intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity
-                        .class);
-                intent.putExtra(TITLE_TO_CONFIG, title);
-                startActivity(intent);
+                if (mChatBank.addNewConversation(title, selectedTemplate)) {
+                    mNewTitle.setText("");
+                    populateSpinners();
+                    Intent intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity
+                            .class);
+                    intent.putExtra(TITLE_TO_CONFIG, title);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(ParentHomeActivity.this, "this title already exists", Toast
+                            .LENGTH_LONG).show();
+                }
             }
         });
 

@@ -34,12 +34,21 @@ public class ChatBank {
         return titles;
     }
 
-    public void addNewConversation(String title, String type) {
+    public boolean addNewConversation(String title, String type) {
         Conversation newConvo = null;
+
+        //check not a duplicate title
+        for (Conversation convo : mConversationLibrary) {
+            if (convo.getTitle().equals(title)) {
+                return false;
+            }
+        }
+
         if (type.equals("Ask for Something")) {
             newConvo = new AskForSomething(title);
         }
         mConversationLibrary.add(newConvo);
+        return true;
     }
 
     public ArrayList<Conversation> getConversationLibrary() {
