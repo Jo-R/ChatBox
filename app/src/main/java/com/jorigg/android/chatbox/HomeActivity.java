@@ -14,6 +14,7 @@ import android.widget.Spinner;
 
 import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Sentence;
+import com.jorigg.android.chatbox.model.SentenceBank;
 import com.jorigg.android.chatbox.model.XmlWriteRead;
 
 public class HomeActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button mStartChattingBtn;
 
     private ChatBank mChatBank;
+    private SentenceBank mSentenceBank;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +46,9 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         mChatBank = ChatBank.get(this);
+        mSentenceBank = SentenceBank.get(this);
         XmlWriteRead.parseChatsFromXml(getApplicationContext());
+        //todo read in sentences from xml
         populateSpinner();
 
     }

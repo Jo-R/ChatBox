@@ -178,16 +178,11 @@ public class XmlWriteRead {
                             tagName = xpp.getName();
                         }
                     }
-
-
-
                 }
 
                 eventType = xpp.next();
 
             }
-
-
         } catch (XmlPullParserException e) {
             //TODO handle it
             e.printStackTrace();

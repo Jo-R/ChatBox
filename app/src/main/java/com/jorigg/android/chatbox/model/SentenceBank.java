@@ -3,24 +3,25 @@ package com.jorigg.android.chatbox.model;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class SentenceBank {
 
-    private List<Sentence> mOpenQuestionSentenceLibrary;
-    private List<Sentence> mClosedQuestionSentenceLibrary;
-    private List<Sentence> mAcknowledgementSentenceLibrary;
-    private List<Sentence> mGreetingSentenceLibrary;
-    private List<Sentence> mClosingSentenceLibrary;
-    private List<Sentence> mRequestSentenceLibrary;
-    private List<Sentence> mStatementSentenceLibrary;
-    private List<Sentence> mAgreementSentenceLibrary;
-    private List<Sentence> mRefusalSentenceLibrary;
-    private List<Sentence> mThanksSentenceLibrary;
+    private ArrayList<Sentence> mOpenQuestionSentenceLibrary;
+    private ArrayList<Sentence> mClosedQuestionSentenceLibrary;
+    private ArrayList<Sentence> mAcknowledgementSentenceLibrary;
+    private ArrayList<Sentence> mGreetingSentenceLibrary;
+    private ArrayList<Sentence> mClosingSentenceLibrary;
+    private ArrayList<Sentence> mRequestSentenceLibrary;
+    private ArrayList<Sentence> mStatementSentenceLibrary;
+    private ArrayList<Sentence> mAgreementSentenceLibrary;
+    private ArrayList<Sentence> mRefusalSentenceLibrary;
+    private ArrayList<Sentence> mThanksSentenceLibrary;
     public static SentenceBank sSentenceBank;
     private Context mContext;
 
-    public SentenceBank get(Context context) {
+    public static SentenceBank get(Context context) {
         if (sSentenceBank == null) {
             sSentenceBank = new SentenceBank(context);
         }
@@ -44,38 +45,59 @@ public class SentenceBank {
     public void addSentence(Sentence sentence) {
         switch (sentence.getSpeechType()) {
             case OPEN_QUESTION:
-                mOpenQuestionSentenceLibrary.add(sentence);
+                if (!mOpenQuestionSentenceLibrary.contains(sentence)) {
+                    mOpenQuestionSentenceLibrary.add(sentence);
+                }
                 break;
             case CLOSED_QUESTION:
-                mClosedQuestionSentenceLibrary.add(sentence);
+                if (!mClosedQuestionSentenceLibrary.contains(sentence)) {
+                    mClosedQuestionSentenceLibrary.add(sentence);
+                }
                 break;
             case ACKNOWLEDGEMENT:
-                mAcknowledgementSentenceLibrary.add(sentence);
+                if (!mAcknowledgementSentenceLibrary.contains(sentence)) {
+                    mAcknowledgementSentenceLibrary.add(sentence);
+                }
                 break;
             case GREETING:
-                mGreetingSentenceLibrary.add(sentence);
+                if (!mGreetingSentenceLibrary.contains(sentence)) {
+                    mGreetingSentenceLibrary.add(sentence);
+                }
                 break;
             case CLOSING:
-                mClosingSentenceLibrary.add(sentence);
+                if (!mClosingSentenceLibrary.contains(sentence)) {
+                    mClosingSentenceLibrary.add(sentence);
+                }
                 break;
             case REQUEST:
-                mRequestSentenceLibrary.add(sentence);
+                if (!mRequestSentenceLibrary.contains(sentence)) {
+                    mRequestSentenceLibrary.add(sentence);
+                }
                 break;
             case STATEMENT:
-                mStatementSentenceLibrary.add(sentence);
+                if (!mStatementSentenceLibrary.contains(sentence)) {
+                    mStatementSentenceLibrary.add(sentence);
+                }
                 break;
             case AGREEMENT:
-                mAgreementSentenceLibrary.add(sentence);
+                if (!mAgreementSentenceLibrary.contains(sentence)) {
+                    mAgreementSentenceLibrary.add(sentence);
+                }
                 break;
             case REFUSAL:
-                mRefusalSentenceLibrary.add(sentence);
+                if (!mRefusalSentenceLibrary.contains(sentence)) {
+                    mRefusalSentenceLibrary.add(sentence);
+                }
                 break;
             case THANKS:
-                mThanksSentenceLibrary.add(sentence);
+                if (!mThanksSentenceLibrary.contains(sentence)) {
+                    mThanksSentenceLibrary.add(sentence);
+                }
+                break;
         }
     }
 
-    public List<Sentence> getSentences(Sentence.SpeechType type) {
+    public ArrayList<Sentence> getSentences(Sentence.SpeechType type) {
         switch (type) {
             case OPEN_QUESTION:
                 return mOpenQuestionSentenceLibrary;
@@ -99,6 +121,52 @@ public class SentenceBank {
                 return mThanksSentenceLibrary;
             default:
                 return null;
+        }
+    }
+
+    public void removeSentence(String content, Sentence.SpeechType speechType) {
+        ArrayList<Sentence> list = null;
+        switch (speechType) {
+            case OPEN_QUESTION:
+                list = mOpenQuestionSentenceLibrary;
+                break;
+            case CLOSED_QUESTION:
+                list = mClosedQuestionSentenceLibrary;
+                break;
+            case ACKNOWLEDGEMENT:
+                list = mAcknowledgementSentenceLibrary;
+                break;
+            case GREETING:
+                list = mGreetingSentenceLibrary;
+                break;
+            case CLOSING:
+               list = mClosingSentenceLibrary;
+                break;
+            case REQUEST:
+               list = mRequestSentenceLibrary;
+                break;
+            case STATEMENT:
+                list = mStatementSentenceLibrary;
+                break;
+            case AGREEMENT:
+                list = mAgreementSentenceLibrary;
+                break;
+            case REFUSAL:
+                list = mRefusalSentenceLibrary;
+                break;
+            case THANKS:
+                list = mThanksSentenceLibrary;
+                break;
+        }
+
+        Iterator<Sentence> iterator = list.iterator();
+
+        while (iterator.hasNext()) {
+            Sentence sen = iterator.next();
+
+            if (sen.getContent().equals(content)) {
+                iterator.remove();
+            }
         }
     }
 }

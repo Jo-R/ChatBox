@@ -5,6 +5,7 @@ import android.content.Context;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class ChatBank {
@@ -56,9 +57,13 @@ public class ChatBank {
     }
 
     public void deleteConversation(String title) {
-        for ( Conversation conversation : mConversationLibrary) {
-            if (conversation.getTitle().equals(title)) {
-                mConversationLibrary.remove(conversation);
+        Iterator<Conversation> iterator = mConversationLibrary.iterator();
+
+        while (iterator.hasNext()) {
+            Conversation convo = iterator.next();
+
+            if (convo.getTitle().equals(title)) {
+                iterator.remove();
             }
         }
     }
