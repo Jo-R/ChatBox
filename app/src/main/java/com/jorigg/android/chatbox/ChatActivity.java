@@ -155,7 +155,8 @@ public class ChatActivity extends AppCompatActivity {
             mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
                     .getNextAgentMove(mChildMoveElement).first;
         } else {
-            nextMove = "GAME OVER"; //TODO make a better ending
+            Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
+            //TODO make a better ending
         }
         mLeftSpeechBubble.setVisibility(View.VISIBLE);
         mLeftSpeechBubbleText.setText(nextMove);

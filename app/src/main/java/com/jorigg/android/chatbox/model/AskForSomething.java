@@ -124,20 +124,28 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    // Sentence?
-    public void addToConversation(ConversationElementEnum conversationElement, String content) {
-        //add the sentence to the arrylist associated with the key
-        //get the list to a temp var and add and reput so don't remove existing
+    public boolean addToConversation(ConversationElementEnum conversationElement, String content) {
+
         Sentence.SpeechType speechType = conversationElement.getSpeechType();
+
         if (mDialogue.containsKey(conversationElement)) {
             ArrayList<Sentence> thisElement = mDialogue.get(conversationElement);
+
+            for (Sentence sentence : thisElement) {
+                if (sentence.getContent().equals(content)) {
+                    return false;
+                }
+            }
+
             thisElement.add(new Sentence(content, speechType));
-            mDialogue.put((AskForSomethingElements)conversationElement, thisElement);
+            mDialogue.put((AskForSomethingElements) conversationElement, thisElement);
+
         } else {
             ArrayList<Sentence> newElement = new ArrayList<>();
             newElement.add(new Sentence(content, speechType));
             mDialogue.put((AskForSomethingElements) conversationElement, newElement);
         }
+        return true;
     }
 
 

@@ -11,7 +11,7 @@ public interface Conversation<E extends ConversationElementEnum> {
 
     String getTitle();
     void setTitle(String title);
-    void addToConversation(E conversationElement, String content);
+    boolean addToConversation(E conversationElement, String content);
     Pair<E, Sentence> getNextAgentMove(E lastUserMove);
     HashMap<E, ArrayList<Sentence>> getNextUserMoves(E lastAgentMove);
     User.UserType getInitiator();

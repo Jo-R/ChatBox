@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jorigg.android.chatbox.model.AskForSomething;
 import com.jorigg.android.chatbox.model.ChatBank;
@@ -84,12 +85,17 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ConversationElementEnum element = getElementFromString();
-                mCurrentConversation.addToConversation(element, mInputSentenceField.getText().toString());
-                mSentenceBank.addSentence(new Sentence(mInputSentenceField.getText().toString(),
-                        element.getSpeechType()));
-                mInputSentenceField.setText("");
-                populateExistingChatSentenceSpinner();
-                populateSentenceBankSpinner();
+                if (mCurrentConversation.addToConversation(element, mInputSentenceField.getText()
+                        .toString())) {
+                    mSentenceBank.addSentence(new Sentence(mInputSentenceField.getText().toString(),
+                            element.getSpeechType()));
+                    mInputSentenceField.setText("");
+                    populateExistingChatSentenceSpinner();
+                    populateSentenceBankSpinner();
+                } else {
+                    Toast.makeText(ConfigureConversationActivity.this, "This sentence is " +
+                            "already in the chat", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -101,11 +107,16 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ConversationElementEnum element = getElementFromString();
-                mCurrentConversation.addToConversation(element, mSentenceBankSpinner
-                        .getSelectedItem().toString());
-                populateExistingChatSentenceSpinner();
+                if (mCurrentConversation.addToConversation(element, mSentenceBankSpinner
+                        .getSelectedItem().toString())) {
+                    populateExistingChatSentenceSpinner();
+                } else {
+                    Toast.makeText(ConfigureConversationActivity.this, "This sentence is " +
+                            "already in the chat", Toast.LENGTH_LONG).show();
+                }
             }
         });
+
         mRemoveFromSentenceBankButton = findViewById(R.id.config_remove_sentence_bank_button);
         mRemoveFromSentenceBankButton.setOnClickListener(new View.OnClickListener() {
             @Override
