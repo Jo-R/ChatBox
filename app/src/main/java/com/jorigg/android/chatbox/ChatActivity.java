@@ -50,8 +50,10 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         mLeftSpeechBubble = findViewById(R.id.left_speech_bubble);
+        mLeftSpeechBubble.setVisibility(View.INVISIBLE);
         mLeftSpeechBubbleText = findViewById(R.id.left_speech_bubble_text);
         mRightSpeechBubble = findViewById(R.id.right_speech_bubble);
+        mRightSpeechBubble.setVisibility(View.INVISIBLE);
         mRightSpeechBubbleText = findViewById(R.id.right_speech_bubble_text);
 
         mResponseSpinner = findViewById(R.id.user_response_spinner);
@@ -63,7 +65,12 @@ public class ChatActivity extends AppCompatActivity {
 
                 String response = String.valueOf(mResponseSpinner.getSelectedItem());
 
+                mLeftSpeechBubble.setVisibility(View.INVISIBLE);
+                mLeftSpeechBubbleText.setText("");
+
+                mRightSpeechBubble.setVisibility(View.VISIBLE);
                 mRightSpeechBubbleText.setText(response);
+
 
                 //establish which element the child response belongs to and update
                 // mCurrentChildElement
@@ -83,6 +90,8 @@ public class ChatActivity extends AppCompatActivity {
                     public void run() {
                         showNextAgentMove();
                         getNextItemsForUserResponseSpinner();
+                        mRightSpeechBubble.setVisibility(View.INVISIBLE);
+                        mRightSpeechBubbleText.setText("");
                     }
                 }, 1500);
 
@@ -148,6 +157,7 @@ public class ChatActivity extends AppCompatActivity {
         } else {
             nextMove = "GAME OVER"; //TODO make a better ending
         }
+        mLeftSpeechBubble.setVisibility(View.VISIBLE);
         mLeftSpeechBubbleText.setText(nextMove);
 
     }
