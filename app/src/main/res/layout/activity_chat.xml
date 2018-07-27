@@ -44,7 +44,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="41dp"
-            android:src="@drawable/boy_figure_test" />
+            android:src="@drawable/girl_figure" />
 
         <ImageView
             android:id="@+id/right_speech_bubble"

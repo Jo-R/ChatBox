@@ -26,4 +26,7 @@
     <string name="dialog_delete_chat">Are you sure you want to delete this chat?</string>
     <string name="dialog_positive_btn">Yes</string>
     <string name="dialog_negative_btn">No</string>
+
+    <string name="user_config_name_input">Enter your child\'s name:</string>
+    <string name="user_config_img_select_prompt">Select an avatar:</string>
 </resources>
