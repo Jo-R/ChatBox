@@ -22,4 +22,5 @@ public interface Conversation<E extends ConversationElementEnum> {
     void removeSentenceFromConversation(String sentence, E element);
     HashMap<E, ArrayList<Sentence>> getDialogue();
     boolean isInProgress();
+    boolean hasAKeyPerElement();
 }

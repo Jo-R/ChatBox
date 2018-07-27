@@ -176,6 +176,11 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
+    public boolean hasAKeyPerElement() {
+        return AskForSomethingElements.values().length == mDialogue.size();
+    }
+
+    @Override
     public Pair<ConversationElementEnum, Sentence> getNextAgentMove(ConversationElementEnum
                                                            lastUserMove) {
         ArrayList<Sentence> options = new ArrayList<>();
