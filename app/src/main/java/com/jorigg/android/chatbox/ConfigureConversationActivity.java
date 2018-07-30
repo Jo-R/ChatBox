@@ -150,6 +150,10 @@ public class ConfigureConversationActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        if (!mCurrentConversation.hasAnEntryPerElement()) {
+            Toast.makeText(ConfigureConversationActivity.this, "Conversation not complete. " +
+                    "Saving for later", Toast.LENGTH_LONG).show();
+        }
         Context ctxt = this.getApplicationContext();
         XmlWriteRead.writeChatsToXML(mChatBank.getConversationLibrary(), ctxt);
         XmlWriteRead.writeSentencesToXml(mSentenceBank.getSentenceLibrary(), ctxt);
