@@ -124,7 +124,7 @@ public class AskForSomething implements Conversation {
         //if no entries left then remove the key form hashMap so that check complete will
         // evaluate correctly
         if (options.isEmpty()) {
-
+            mDialogue.remove(element);
         } else {
             mDialogue.put((AskForSomethingElements) element, options);
 
