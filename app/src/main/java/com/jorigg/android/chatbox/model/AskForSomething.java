@@ -120,7 +120,15 @@ public class AskForSomething implements Conversation {
                 iterator.remove();
             }
         }
-        mDialogue.put((AskForSomethingElements) element, options);
+
+        //if no entries left then remove the key form hashMap so that check complete will
+        // evaluate correctly
+        if (options.isEmpty()) {
+
+        } else {
+            mDialogue.put((AskForSomethingElements) element, options);
+
+        }
     }
 
     @Override
@@ -176,7 +184,7 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public boolean hasAKeyPerElement() {
+    public boolean hasAnEntryPerElement() {
         return AskForSomethingElements.values().length == mDialogue.size();
     }
 

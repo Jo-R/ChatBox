@@ -17,6 +17,9 @@ import com.jorigg.android.chatbox.model.Sentence;
 import com.jorigg.android.chatbox.model.SentenceBank;
 import com.jorigg.android.chatbox.model.XmlWriteRead;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class HomeActivity extends AppCompatActivity {
 
     public static final String SELECTED_CONVO = "selectedConvo";
@@ -75,8 +78,19 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void populateSpinner() {
+        //only want to display the fully complete ones
+        ArrayList<String> chatTitles = mChatBank.getChatTitles();
+        Iterator<String> iterator = chatTitles.iterator();
+
+        while (iterator.hasNext()) {
+            String title = iterator.next();
+            if (!mChatBank.getConversation(title).hasAnEntryPerElement()) {
+                iterator.remove();
+            }
+        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
-                .simple_spinner_item, mChatBank.getChatTitles());
+                .simple_spinner_item, chatTitles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mChooseConvoSpinner.setAdapter(adapter);
     }
