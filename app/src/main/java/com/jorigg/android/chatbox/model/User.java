@@ -1,6 +1,5 @@
 package com.jorigg.android.chatbox.model;
 
-import android.graphics.drawable.Drawable;
 
 public class User {
 
@@ -10,7 +9,7 @@ public class User {
 
     private String mUserName;
     private UserType mType;
-    private Drawable mUserChatAvatar;
+    private int mUserChatAvatar; //will hold the id of the drawable
     //todo also be able to upload a homepage image
 
     public User(String userName, UserType type) {
@@ -27,11 +26,11 @@ public class User {
         return mType;
     }
 
-    public Drawable getUserChatAvatar() {
+    public int getUserChatAvatar() {
         return mUserChatAvatar;
     }
 
-    public void setUserChatAvatar(Drawable userChatAvatar) {
+    public void setUserChatAvatar(int userChatAvatar) {
         mUserChatAvatar = userChatAvatar;
     }
 }
