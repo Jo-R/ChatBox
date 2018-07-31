@@ -11,10 +11,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Sentence;
 import com.jorigg.android.chatbox.model.SentenceBank;
+import com.jorigg.android.chatbox.model.UserPreferences;
 import com.jorigg.android.chatbox.model.XmlWriteRead;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private Spinner mChooseConvoSpinner;
     private Button mStartChattingBtn;
+    private TextView mWelcomeText;
 
     private ChatBank mChatBank;
     private SentenceBank mSentenceBank;
@@ -34,6 +37,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        mWelcomeText = findViewById(R.id.welcome_text);
+        mWelcomeText.setText("Hi " + UserPreferences.getUserName(getApplicationContext()));
 
         mChooseConvoSpinner = findViewById(R.id.home_choose_conversation_spinner);
         mStartChattingBtn = findViewById(R.id.home_start_chatting_btn);

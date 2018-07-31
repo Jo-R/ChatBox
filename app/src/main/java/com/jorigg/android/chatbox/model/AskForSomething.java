@@ -3,47 +3,45 @@ package com.jorigg.android.chatbox.model;
 import android.support.v4.util.Pair;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 
 public class AskForSomething implements Conversation {
 
     public enum AskForSomethingElements implements ConversationElementEnum {
 
-        GREETING(User.UserType.CHILD, Sentence.SpeechType.GREETING, "An appropriate greeting"),
-        ALT_GREETING(User.UserType.CHILD, Sentence.SpeechType.GREETING, "A less appropriate " +
+        GREETING(UserPreferences.UserType.CHILD, Sentence.SpeechType.GREETING, "An appropriate greeting"),
+        ALT_GREETING(UserPreferences.UserType.CHILD, Sentence.SpeechType.GREETING, "A less appropriate " +
                 "greeting"),
-        RTN_GREETING(User.UserType.AGENT, Sentence.SpeechType.GREETING, "An appropriate greeting"),
-        MAKE_REQUEST(User.UserType.CHILD, Sentence.SpeechType.REQUEST, "An appropriately phrased " +
+        RTN_GREETING(UserPreferences.UserType.AGENT, Sentence.SpeechType.GREETING, "An appropriate greeting"),
+        MAKE_REQUEST(UserPreferences.UserType.CHILD, Sentence.SpeechType.REQUEST, "An appropriately phrased " +
                 "request"),
-        ALT_MAKE_REQUEST(User.UserType.CHILD, Sentence.SpeechType.REQUEST, "An inappropriately " +
+        ALT_MAKE_REQUEST(UserPreferences.UserType.CHILD, Sentence.SpeechType.REQUEST, "An inappropriately " +
                 "phrased request"),
-        AGREE_REQUEST(User.UserType.AGENT, Sentence.SpeechType.AGREEMENT, "Agree to fulfill the " +
+        AGREE_REQUEST(UserPreferences.UserType.AGENT, Sentence.SpeechType.AGREEMENT, "Agree to fulfill the " +
                 "request"),
-        REQ_CLARIFY(User.UserType.AGENT, Sentence.SpeechType.REQUEST, "Request clarification of " +
+        REQ_CLARIFY(UserPreferences.UserType.AGENT, Sentence.SpeechType.REQUEST, "Request clarification of " +
                 "the request"),
-        PROVIDE_CLARIFY(User.UserType.CHILD, Sentence.SpeechType.REQUEST, "An appropriately " +
+        PROVIDE_CLARIFY(UserPreferences.UserType.CHILD, Sentence.SpeechType.REQUEST, "An appropriately " +
                 "phrased clarification"),
-        ALT_PROVIDE_CLARIFY(User.UserType.CHILD, Sentence.SpeechType.REQUEST, "An inapproriately " +
+        ALT_PROVIDE_CLARIFY(UserPreferences.UserType.CHILD, Sentence.SpeechType.REQUEST, "An inapproriately " +
                 "phrased clarification"),
-        REFUSE_REQ(User.UserType.AGENT, Sentence.SpeechType.REFUSAL, "Refuse to fulfil the " +
+        REFUSE_REQ(UserPreferences.UserType.AGENT, Sentence.SpeechType.REFUSAL, "Refuse to fulfil the " +
                 "request"),
-        ACKNOWL_REFUSAL(User.UserType.CHILD, Sentence.SpeechType.ACKNOWLEDGEMENT, "Acknwoledge " +
+        ACKNOWL_REFUSAL(UserPreferences.UserType.CHILD, Sentence.SpeechType.ACKNOWLEDGEMENT, "Acknwoledge " +
                 "that the request has been refused"),
-        THANK(User.UserType.CHILD, Sentence.SpeechType.THANKS, "Thank you for fulfilling the " +
+        THANK(UserPreferences.UserType.CHILD, Sentence.SpeechType.THANKS, "Thank you for fulfilling the " +
                 "request"),
-        ACKNOWL_THANK(User.UserType.AGENT, Sentence.SpeechType.ACKNOWLEDGEMENT, "Acknowledge the " +
+        ACKNOWL_THANK(UserPreferences.UserType.AGENT, Sentence.SpeechType.ACKNOWLEDGEMENT, "Acknowledge the " +
                 "thanks");
 
 
-        private final User.UserType mSpeaker;
+        private final UserPreferences.UserType mSpeaker;
         private final Sentence.SpeechType mSpeechType;
         private final String mElementDescription;
 
-        AskForSomethingElements(final User.UserType speaker, final Sentence.SpeechType
+        AskForSomethingElements(final UserPreferences.UserType speaker, final Sentence.SpeechType
                 speechType, String elementDescription) {
             mSpeaker = speaker;
             mSpeechType = speechType;
@@ -51,7 +49,7 @@ public class AskForSomething implements Conversation {
         }
 
         @Override
-        public User.UserType getSpeaker() {
+        public UserPreferences.UserType getSpeaker() {
             return mSpeaker;
         }
 
@@ -70,14 +68,14 @@ public class AskForSomething implements Conversation {
 
     private HashMap<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
-    private User.UserType mInitiator;
+    private UserPreferences.UserType mInitiator;
     private ArrayList<AskForSomethingElements> mInitialUserElements;
     private boolean mInProgress;
 
     public AskForSomething(String title) {
         mDialogue = new HashMap<>();
         mTitle = title;
-        mInitiator = User.UserType.CHILD;
+        mInitiator = UserPreferences.UserType.CHILD;
         mInitialUserElements = new ArrayList<>();
         mInitialUserElements.add(AskForSomethingElements.GREETING);
         mInitialUserElements.add(AskForSomethingElements.ALT_GREETING);
@@ -100,7 +98,7 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
-    public User.UserType getInitiator() {
+    public UserPreferences.UserType getInitiator() {
         return mInitiator;
     }
 

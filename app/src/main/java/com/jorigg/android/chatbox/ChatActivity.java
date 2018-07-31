@@ -16,7 +16,7 @@ import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Conversation;
 import com.jorigg.android.chatbox.model.ConversationElementEnum;
 import com.jorigg.android.chatbox.model.Sentence;
-import com.jorigg.android.chatbox.model.User;
+import com.jorigg.android.chatbox.model.UserPreferences;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -133,11 +133,11 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void initialiseUI() {
-        if (mCurrentConversation.getInitiator() == User.UserType.CHILD && mChildMoveElement ==
+        if (mCurrentConversation.getInitiator() == UserPreferences.UserType.CHILD && mChildMoveElement ==
          null) {
             getNextItemsForUserResponseSpinner();
             mCurrentAgentElement = mCurrentConversation.getInitialAgentElement();
-        } else if (mCurrentConversation.getInitiator() == User.UserType.AGENT ||
+        } else if (mCurrentConversation.getInitiator() == UserPreferences.UserType.AGENT ||
                 mCurrentAgentElement == null) {
             showNextAgentMove();
             getNextItemsForUserResponseSpinner();
