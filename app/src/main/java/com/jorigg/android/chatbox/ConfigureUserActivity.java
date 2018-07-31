@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.jorigg.android.chatbox.model.UserPreferences;
 
@@ -30,6 +31,7 @@ public class ConfigureUserActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 UserPreferences.setUserName(getApplicationContext(), mEditName.getText().toString());
+                Toast.makeText(ConfigureUserActivity.this, "Name updated", Toast.LENGTH_SHORT).show();
             }
 
             @Override

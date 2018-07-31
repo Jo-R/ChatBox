@@ -39,6 +39,7 @@
             android:gravity="center"/>
 
         <ImageView
+            android:id="@+id/user_avatar"
             android:layout_width="84dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

@@ -1,5 +1,6 @@
 package com.jorigg.android.chatbox;
 
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,11 +44,23 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView mRightSpeechBubble;
     private TextView mLeftSpeechBubbleText;
     private TextView mRightSpeechBubbleText;
+    private ImageView mUserAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        mUserAvatar = findViewById(R.id.user_avatar);
+        if (UserPreferences.getUserAvatar(getApplicationContext()) == R.drawable.boy_figure_test) {
+           Drawable avatar = getResources().getDrawable(R.drawable.boy_figure_test);
+            mUserAvatar.setImageDrawable(avatar);
+        } else if (UserPreferences.getUserAvatar(getApplicationContext()) == R.drawable
+                .girl_figure) {
+            Drawable avatar = getResources().getDrawable(R.drawable.girl_figure);
+            mUserAvatar.setImageDrawable(avatar);
+        }
+
 
         mLeftSpeechBubble = findViewById(R.id.left_speech_bubble);
         mLeftSpeechBubble.setVisibility(View.INVISIBLE);
