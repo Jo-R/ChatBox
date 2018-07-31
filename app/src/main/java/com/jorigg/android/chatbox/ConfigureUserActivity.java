@@ -5,7 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.jorigg.android.chatbox.model.UserPreferences;
@@ -13,6 +15,8 @@ import com.jorigg.android.chatbox.model.UserPreferences;
 public class ConfigureUserActivity extends AppCompatActivity {
 
     private EditText mEditName;
+    private ImageView mSelectGirl;
+    private ImageView mSelectBoy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +44,29 @@ public class ConfigureUserActivity extends AppCompatActivity {
             }
         });
 
+        mSelectBoy = findViewById(R.id.select_boy_figure);
+        mSelectGirl = findViewById(R.id.select_girl_figure);
+
+        mSelectGirl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.girl_figure);
+                Toast.makeText(ConfigureUserActivity.this, "Icon selected", Toast.LENGTH_SHORT).show();
+                //todo improve how selected is shown and make so shows selected when go in
+                mSelectGirl.setBackgroundColor(getResources().getColor(R.color
+                        .colorBackgroundLight));
+            }
+        });
+
+        mSelectBoy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.boy_figure_test);
+                Toast.makeText(ConfigureUserActivity.this, "Icon selected", Toast.LENGTH_SHORT).show();
+                mSelectBoy.setBackgroundColor(getResources().getColor(R.color
+                        .colorBackgroundLight));
+            }
+        });
 
 
     }
