@@ -58,8 +58,8 @@ public interface Conversation<E extends ConversationElementEnum> {
     ConversationElementEnum getInitialAgentElement();
 
     /**
-     * Implement this if the user makes the first move
-     * @return each of the initial elements and their associated options
+     * This is always needed
+     * @return each of the initial user elements and their associated options
      */
     HashMap<E, ArrayList<Sentence>> getInitialUserMoves();
 

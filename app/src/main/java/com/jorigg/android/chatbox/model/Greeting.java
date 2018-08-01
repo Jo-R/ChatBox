@@ -22,7 +22,7 @@ public class Greeting implements Conversation {
                 "responses to the question", false),
         INAPT_RESPONSE(UserPreferences.UserType.CHILD, Sentence.SpeechType.STATEMENT,
                 "Inappropriate reponses to the question", false),
-        HINT1(UserPreferences.UserType.AGENT, null, "A hint about the appropriate response to the" +
+        HINT1(UserPreferences.UserType.AGENT, Sentence.SpeechType.STATEMENT, "A hint about the appropriate response to the" +
                 " open question will be presented as a thought bubble from the computer avatar", true),
         INAPT_RESPONSE2(UserPreferences.UserType.CHILD, Sentence.SpeechType.STATEMENT,
                 "Inappropriate reponses to the question to be displayed after hint", false),
@@ -64,22 +64,22 @@ public class Greeting implements Conversation {
 
         @Override
         public UserPreferences.UserType getSpeaker() {
-            return null;
+            return mSpeaker;
         }
 
         @Override
         public Sentence.SpeechType getSpeechType() {
-            return null;
+            return mSpeechType;
         }
 
         @Override
         public String getElementDescription() {
-            return null;
+            return mElementDescription;
         }
 
         @Override
         public boolean isThought() {
-            return false;
+            return mIsThought;
         }
     }
 
@@ -227,7 +227,9 @@ public class Greeting implements Conversation {
 
     @Override
     public HashMap getInitialUserMoves() {
-        return null; //not needed in this implementation
+        HashMap<GreetingElements, ArrayList<Sentence>> moves = new HashMap<>();
+        moves.put(GreetingElements.RTN_GREETING, mDialogue.get(GreetingElements.RTN_GREETING));
+        return moves;
     }
 
     @Override

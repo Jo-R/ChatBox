@@ -164,8 +164,7 @@ public class ChatActivity extends AppCompatActivity {
         String nextMove = "";
         if (mCurrentAgentElement == null) {
             nextMove = mCurrentConversation.getInitialAgentResponse().toString();
-            mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
-                    .getInitialUserMoves();
+            mCurrentAgentElement = mCurrentConversation.getInitialAgentElement();
         } else if (mCurrentConversation.isInProgress()) {
             nextMove = mCurrentConversation.getNextAgentMove(mChildMoveElement).second.toString();
             mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation

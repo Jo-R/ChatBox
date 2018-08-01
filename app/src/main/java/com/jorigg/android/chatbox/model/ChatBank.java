@@ -46,6 +46,8 @@ public class ChatBank {
 
         if (type.equals("Ask for Something")) {
             newConvo = new AskForSomething(title);
+        } else if (type.equals("Greeting")) {
+            newConvo = new Greeting(title);
         }
         mConversationLibrary.add(newConvo);
         return true;
