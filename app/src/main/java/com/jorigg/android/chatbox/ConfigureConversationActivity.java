@@ -17,6 +17,7 @@ import com.jorigg.android.chatbox.model.AskForSomething;
 import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Conversation;
 import com.jorigg.android.chatbox.model.ConversationElementEnum;
+import com.jorigg.android.chatbox.model.Greeting;
 import com.jorigg.android.chatbox.model.Sentence;
 import com.jorigg.android.chatbox.model.SentenceBank;
 import com.jorigg.android.chatbox.model.XmlWriteRead;
@@ -168,6 +169,12 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             for (AskForSomething.AskForSomethingElements element : values) {
                 elements.add(element.name());
             }
+        } else if (mCurrentConversation instanceof Greeting) {
+            Greeting.GreetingElements[] values = Greeting.GreetingElements
+                    .values();
+            for (Greeting.GreetingElements element : values) {
+                elements.add(element.name());
+            }
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
@@ -211,9 +218,15 @@ public class ConfigureConversationActivity extends AppCompatActivity {
     }
 
     private ConversationElementEnum getElementFromString() {
-        //TODO remove hard code AFS
-        return AskForSomething.AskForSomethingElements.valueOf(mSelectElementSpinner
-                .getSelectedItem().toString());
+        ConversationElementEnum element = null;
+        if (mCurrentConversation instanceof AskForSomething) {
+            element = AskForSomething.AskForSomethingElements.valueOf(mSelectElementSpinner
+                    .getSelectedItem().toString());
+        } else if (mCurrentConversation instanceof Greeting) {
+            element = Greeting.GreetingElements.valueOf(mSelectElementSpinner.getSelectedItem()
+                    .toString());
+        }
+        return element;
     }
 
     private void displayElementDetails() {

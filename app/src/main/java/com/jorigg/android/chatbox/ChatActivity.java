@@ -16,6 +16,7 @@ import com.jorigg.android.chatbox.model.AskForSomething;
 import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Conversation;
 import com.jorigg.android.chatbox.model.ConversationElementEnum;
+import com.jorigg.android.chatbox.model.Greeting;
 import com.jorigg.android.chatbox.model.Sentence;
 import com.jorigg.android.chatbox.model.UserPreferences;
 
@@ -138,6 +139,8 @@ public class ChatActivity extends AppCompatActivity {
         Enum agentElement = null;
         if (mCurrentConversation instanceof AskForSomething) {
             agentElement = (AskForSomething.AskForSomethingElements) mCurrentAgentElement;
+        } else if (mCurrentConversation instanceof Greeting) {
+            agentElement = (Greeting.GreetingElements) mCurrentAgentElement;
         }
         outState.putSerializable(CURR_AGENT, agentElement);
         outState.putSerializable(CURR_USER, mCurrentChildMoves);
