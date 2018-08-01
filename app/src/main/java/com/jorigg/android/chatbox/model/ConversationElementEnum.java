@@ -6,4 +6,5 @@ public interface ConversationElementEnum {
     UserPreferences.UserType getSpeaker();
     Sentence.SpeechType getSpeechType();
     String getElementDescription();
+    boolean isThought();
 }

@@ -9,16 +9,88 @@ public interface Conversation<E extends ConversationElementEnum> {
 
     String getTitle();
     void setTitle(String title);
+
+    /**
+     * Adds the content to the dialog for the specified element
+     * @param conversationElement
+     * @param content
+     * @return
+     */
     boolean addToConversation(E conversationElement, String content);
+
+    /**
+     * Processes move made by the user to generate the next agent move
+     * For agent responses need to choose one sentence from the ArrayList for the element chosen
+     * at random.
+     * @param lastUserMove
+     * @return details of the next agent move
+     */
     Pair<E, Sentence> getNextAgentMove(E lastUserMove);
+
+    /**
+     * Processes move made by the agent to generate the next user move
+     * @param lastAgentMove
+     * @return each element and associated options that the user could go to next
+     */
     HashMap<E, ArrayList<Sentence>> getNextUserMoves(E lastAgentMove);
+
+    /**
+     * To check who initiates the conversation
+     * @return the initiator of the conversation
+     */
     UserPreferences.UserType getInitiator();
+
+    /**
+     * Implement this if the agent makes the initial move.
+     * For agent responses need to choose one sentence from the ArrayList for the element chosen
+     * at random.
+     * @return the sentence associated with the first agent element
+     */
     Sentence getInitialAgentResponse();
+
+    /**
+     *
+     * @return the first element the agent owns
+     */
     ConversationElementEnum getInitialAgentElement();
+
+    /**
+     * Implement this if the user makes the first move
+     * @return each of the initial elements and their associated options
+     */
     HashMap<E, ArrayList<Sentence>> getInitialUserMoves();
+
+    /**
+     *
+     * @param element
+     * @return the sentences associated with a particular element
+     */
     ArrayList<Sentence> getElementOptions(E element);
+
+    /**
+     * Removes the sentence that has the specified String content from the dialogue. Needs to
+     * remove the key as well if there are no sentences left for that element cf implementing a
+     * check in hasEntryPerElement
+     * @param sentence
+     * @param element
+     */
     void removeSentenceFromConversation(String sentence, E element);
+
+    /**
+     *
+     * @return the whole dialogue
+     */
     HashMap<E, ArrayList<Sentence>> getDialogue();
+
+    /**
+     *
+     * @return true if in progress or false if conversation has tereminated
+     */
     boolean isInProgress();
+
+    /**
+     *
+     * @return true if dialogue has an entry for each of the associated conversation elements
+     */
     boolean hasAnEntryPerElement();
 }
