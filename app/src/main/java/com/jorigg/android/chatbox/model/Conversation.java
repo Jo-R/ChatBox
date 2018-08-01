@@ -9,6 +9,7 @@ public interface Conversation<E extends ConversationElementEnum> {
 
     String getTitle();
     void setTitle(String title);
+    void setInProgress();
 
     /**
      * Adds the content to the dialog for the specified element

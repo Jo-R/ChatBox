@@ -98,6 +98,11 @@ public class AskForSomething implements Conversation {
     }
 
     @Override
+    public void setInProgress() {
+        mInProgress = true;
+    }
+
+    @Override
     public HashMap<AskForSomethingElements, ArrayList<Sentence>> getDialogue() {
         return mDialogue;
     }

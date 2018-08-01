@@ -106,6 +106,11 @@ public class Greeting implements Conversation {
     }
 
     @Override
+    public void setInProgress() {
+        mInProgress = true;
+    }
+
+    @Override
     public boolean addToConversation(ConversationElementEnum conversationElement, String content) {
         Sentence.SpeechType speechType = conversationElement.getSpeechType();
 

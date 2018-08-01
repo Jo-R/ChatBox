@@ -125,6 +125,7 @@ public class ChatActivity extends AppCompatActivity {
         } else {
             mCurrentConversation = mChatBank.getConversation(getIntent().getCharSequenceExtra
                     (SELECTED_CONVO).toString());
+            mCurrentConversation.setInProgress();
             initialiseUI();
         }
 
