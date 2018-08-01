@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+
 public class Greeting implements Conversation {
 
     public enum GreetingElements implements ConversationElementEnum {
@@ -23,6 +24,10 @@ public class Greeting implements Conversation {
                 "Inappropriate reponses to the question", false),
         HINT1(UserPreferences.UserType.AGENT, null, "A hint about the appropriate response to the" +
                 " open question will be presented as a thought bubble from the computer avatar", true),
+        INAPT_RESPONSE2(UserPreferences.UserType.CHILD, Sentence.SpeechType.STATEMENT,
+                "Inappropriate reponses to the question to be displayed after hint", false),
+        TERM_CONVO1(UserPreferences.UserType.AGENT, Sentence.SpeechType.CLOSING, "Computer " +
+                "terminates conversation after a second inapt response or acknowledgement", false),
         ACKNOWL_APT_REPSONSE(UserPreferences.UserType.AGENT, Sentence.SpeechType.ACKNOWLEDGEMENT,
                 "The computer acknowledges the answer", false),
         FOLLOW_UP_QUESTION(UserPreferences.UserType.CHILD, Sentence.SpeechType.CLOSED_QUESTION,
@@ -36,6 +41,9 @@ public class Greeting implements Conversation {
         HINT2(UserPreferences.UserType.AGENT, Sentence.SpeechType.STATEMENT, "A hint about " +
                 "appropriate ways to acknowledge the response. Is presented as a tough bubble",
                 true),
+        INAPT_ACKNOWL2(UserPreferences.UserType.CHILD, Sentence.SpeechType.ACKNOWLEDGEMENT,
+                "Inappropriate repsonses for the child to make to acknowledge the response, to be" +
+                        " displayed after hint", false),
         GOODBYE(UserPreferences.UserType.AGENT, Sentence.SpeechType.CLOSING, "Computer terminates" +
                 " the conversation politely", false),
         RTN_GOODBYE(UserPreferences.UserType.CHILD, Sentence.SpeechType.CLOSING, "Child returns " +
@@ -123,12 +131,81 @@ public class Greeting implements Conversation {
 
     @Override
     public Pair getNextAgentMove(ConversationElementEnum lastUserMove) {
-        return null; //todo
+        ArrayList<Sentence> options = new ArrayList<>();
+        GreetingElements nextElement = null;
+
+        if (lastUserMove == GreetingElements.RTN_GREETING) {
+            options = mDialogue.get(GreetingElements.OPEN_QUESTION);
+            nextElement = GreetingElements.OPEN_QUESTION;
+        } else if (lastUserMove == GreetingElements.APT_RESPONSE) {
+            options = mDialogue.get(GreetingElements.ACKNOWL_APT_REPSONSE);
+            nextElement = GreetingElements.ACKNOWL_APT_REPSONSE;
+        } else if (lastUserMove == GreetingElements.INAPT_RESPONSE) {
+            options = mDialogue.get(GreetingElements.HINT1);
+            nextElement = GreetingElements.HINT1;
+        } else if (lastUserMove == GreetingElements.INAPT_RESPONSE2) {
+            options = mDialogue.get(GreetingElements.TERM_CONVO1);
+            nextElement = GreetingElements.TERM_CONVO1;
+            mInProgress = false;
+        } else if (lastUserMove == GreetingElements.FOLLOW_UP_QUESTION) {
+            options = mDialogue.get(GreetingElements.AGENT_APT_RESPONSE);
+            nextElement = GreetingElements.AGENT_APT_RESPONSE;
+        } else if (lastUserMove == GreetingElements.APT_ACKNOWL) {
+            options = mDialogue.get(GreetingElements.GOODBYE);
+            nextElement = GreetingElements.GOODBYE;
+            mInProgress = false;
+        } else if (lastUserMove == GreetingElements.INAPT_ACKNOWL) {
+            options = mDialogue.get(GreetingElements.HINT2);
+            nextElement = GreetingElements.HINT2;
+        } else if (lastUserMove == GreetingElements.INAPT_ACKNOWL2) {
+            options = mDialogue.get(GreetingElements.TERM_CONVO1);
+            nextElement = GreetingElements.TERM_CONVO1;
+            mInProgress = false;
+        }
+
+        //choose one from the AList at random - so only ever gives one reponse but there is a choice
+        Sentence move = options.get(new Random().nextInt(options.size()));
+        return new Pair(nextElement, move);
     }
 
     @Override
     public HashMap getNextUserMoves(ConversationElementEnum lastAgentMove) {
-        return null; //todo
+        //map because there could be >1 entry for next moves
+        HashMap<ConversationElementEnum, ArrayList<Sentence>> nextMoves = new HashMap<>();
+
+        if (lastAgentMove == GreetingElements.GREETING) {
+            nextMoves.put(GreetingElements.RTN_GREETING, mDialogue.get
+                    (GreetingElements.RTN_GREETING));
+        } else if (lastAgentMove == GreetingElements.OPEN_QUESTION) {
+            nextMoves.put(GreetingElements.APT_RESPONSE, mDialogue.get(GreetingElements
+                    .APT_RESPONSE));
+            nextMoves.put(GreetingElements.INAPT_RESPONSE, mDialogue.get(GreetingElements
+                    .INAPT_RESPONSE));
+        } else if (lastAgentMove == GreetingElements.HINT1) {
+            nextMoves.put(GreetingElements.APT_RESPONSE, mDialogue.get(GreetingElements
+                    .APT_RESPONSE));
+            nextMoves.put(GreetingElements.INAPT_RESPONSE2, mDialogue.get(GreetingElements
+                    .INAPT_RESPONSE2));
+        } else if (lastAgentMove == GreetingElements.ACKNOWL_APT_REPSONSE) {
+            nextMoves.put(GreetingElements.FOLLOW_UP_QUESTION, mDialogue.get(GreetingElements
+                    .FOLLOW_UP_QUESTION));
+        } else if (lastAgentMove == GreetingElements.AGENT_APT_RESPONSE) {
+            nextMoves.put(GreetingElements.APT_ACKNOWL, mDialogue.get(GreetingElements
+                    .APT_ACKNOWL));
+            nextMoves.put(GreetingElements.INAPT_ACKNOWL, mDialogue.get(GreetingElements
+                    .INAPT_ACKNOWL));
+        } else if (lastAgentMove == GreetingElements.HINT2) {
+            nextMoves.put(GreetingElements.APT_ACKNOWL, mDialogue.get(GreetingElements
+                    .APT_ACKNOWL));
+            nextMoves.put(GreetingElements.INAPT_ACKNOWL2, mDialogue.get(GreetingElements
+                    .INAPT_ACKNOWL2));
+        } else if (lastAgentMove == GreetingElements.GOODBYE) {
+            nextMoves.put(GreetingElements.RTN_GOODBYE, mDialogue.get(GreetingElements
+                    .RTN_GOODBYE));
+            mInProgress = false;
+        }
+
+        return nextMoves;
     }
 
     @Override

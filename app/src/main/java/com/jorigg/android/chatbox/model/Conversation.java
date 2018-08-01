@@ -22,13 +22,16 @@ public interface Conversation<E extends ConversationElementEnum> {
      * Processes move made by the user to generate the next agent move
      * For agent responses need to choose one sentence from the ArrayList for the element chosen
      * at random.
+     * Update isInPrgress for all temrminating moves
      * @param lastUserMove
-     * @return details of the next agent move
+     * @return details of the next agent move: a pair consisting of the sentence to be displayed
+     * and the element it belongs to
      */
     Pair<E, Sentence> getNextAgentMove(E lastUserMove);
 
     /**
      * Processes move made by the agent to generate the next user move
+     * Update isInProgress for all terminating moves
      * @param lastAgentMove
      * @return each element and associated options that the user could go to next
      */
