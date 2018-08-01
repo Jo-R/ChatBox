@@ -45,6 +45,7 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView mRightSpeechBubble;
     private TextView mLeftSpeechBubbleText;
     private TextView mRightSpeechBubbleText;
+    private ImageView mThoughtBubble;
     private ImageView mUserAvatar;
 
     @Override
@@ -69,6 +70,8 @@ public class ChatActivity extends AppCompatActivity {
         mRightSpeechBubble = findViewById(R.id.right_speech_bubble);
         mRightSpeechBubble.setVisibility(View.INVISIBLE);
         mRightSpeechBubbleText = findViewById(R.id.right_speech_bubble_text);
+        mThoughtBubble = findViewById(R.id.thought_bubble);
+        mThoughtBubble.setVisibility(View.INVISIBLE);
 
         mResponseSpinner = findViewById(R.id.user_response_spinner);
         mUserResponseButton = findViewById(R.id.user_response_button);
@@ -80,6 +83,7 @@ public class ChatActivity extends AppCompatActivity {
                 String response = String.valueOf(mResponseSpinner.getSelectedItem());
 
                 mLeftSpeechBubble.setVisibility(View.INVISIBLE);
+                mThoughtBubble.setVisibility(View.INVISIBLE);
                 mLeftSpeechBubbleText.setText("");
 
                 mRightSpeechBubble.setVisibility(View.VISIBLE);
@@ -174,7 +178,11 @@ public class ChatActivity extends AppCompatActivity {
             Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
             //TODO make a better ending
         }
-        mLeftSpeechBubble.setVisibility(View.VISIBLE);
+        if (mCurrentAgentElement.isThought()) {
+            mThoughtBubble.setVisibility(View.VISIBLE);
+        } else {
+            mLeftSpeechBubble.setVisibility(View.VISIBLE);
+        }
         mLeftSpeechBubbleText.setText(nextMove);
 
     }

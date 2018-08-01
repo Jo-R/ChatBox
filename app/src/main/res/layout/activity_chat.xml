@@ -28,6 +28,15 @@
             android:layout_marginStart="140dp"
             android:src="@drawable/speech_bubble_left" />
 
+        <ImageView
+            android:id="@+id/thought_bubble"
+            android:layout_width="164dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="129dp"
+            android:src="@drawable/thought_bubble" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
