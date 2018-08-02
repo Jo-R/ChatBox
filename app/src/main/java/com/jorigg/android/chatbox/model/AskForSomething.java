@@ -11,41 +11,45 @@ public class AskForSomething implements Conversation {
 
     public enum AskForSomethingElements implements ConversationElementEnum {
 
-        GREETING(UserPreferences.UserType.CHILD, Sentence.SpeechType.GREETING, "An appropriate greeting"),
+        GREETING(UserPreferences.UserType.CHILD, Sentence.SpeechType.GREETING, "An appropriate " +
+                "greeting", false),
         ALT_GREETING(UserPreferences.UserType.CHILD, Sentence.SpeechType.GREETING, "A less appropriate " +
-                "greeting"),
-        RTN_GREETING(UserPreferences.UserType.AGENT, Sentence.SpeechType.GREETING, "An appropriate greeting"),
+                "greeting", false),
+        RTN_GREETING(UserPreferences.UserType.AGENT, Sentence.SpeechType.GREETING, "An " +
+                "appropriate greeting", false),
         MAKE_REQUEST(UserPreferences.UserType.CHILD, Sentence.SpeechType.REQUEST, "An appropriately phrased " +
-                "request"),
+                "request", false),
         ALT_MAKE_REQUEST(UserPreferences.UserType.CHILD, Sentence.SpeechType.REQUEST, "An inappropriately " +
-                "phrased request"),
+                "phrased request", false),
         AGREE_REQUEST(UserPreferences.UserType.AGENT, Sentence.SpeechType.AGREEMENT, "Agree to fulfill the " +
-                "request"),
+                "request", false),
         REQ_CLARIFY(UserPreferences.UserType.AGENT, Sentence.SpeechType.REQUEST, "Request clarification of " +
-                "the request"),
+                "the request", false),
         PROVIDE_CLARIFY(UserPreferences.UserType.CHILD, Sentence.SpeechType.REQUEST, "An appropriately " +
-                "phrased clarification"),
+                "phrased clarification", false),
         ALT_PROVIDE_CLARIFY(UserPreferences.UserType.CHILD, Sentence.SpeechType.REQUEST, "An inapproriately " +
-                "phrased clarification"),
+                "phrased clarification", false),
         REFUSE_REQ(UserPreferences.UserType.AGENT, Sentence.SpeechType.REFUSAL, "Refuse to fulfil the " +
-                "request"),
+                "request", false),
         ACKNOWL_REFUSAL(UserPreferences.UserType.CHILD, Sentence.SpeechType.ACKNOWLEDGEMENT, "Acknwoledge " +
-                "that the request has been refused"),
+                "that the request has been refused", false),
         THANK(UserPreferences.UserType.CHILD, Sentence.SpeechType.THANKS, "Thank you for fulfilling the " +
-                "request"),
+                "request", false),
         ACKNOWL_THANK(UserPreferences.UserType.AGENT, Sentence.SpeechType.ACKNOWLEDGEMENT, "Acknowledge the " +
-                "thanks");
+                "thanks", false);
 
 
         private final UserPreferences.UserType mSpeaker;
         private final Sentence.SpeechType mSpeechType;
         private final String mElementDescription;
+        private final boolean mIsThought;
 
         AskForSomethingElements(final UserPreferences.UserType speaker, final Sentence.SpeechType
-                speechType, String elementDescription) {
+                speechType, String elementDescription, boolean isThought) {
             mSpeaker = speaker;
             mSpeechType = speechType;
             mElementDescription = elementDescription;
+            mIsThought = isThought;
         }
 
         @Override
@@ -63,22 +67,23 @@ public class AskForSomething implements Conversation {
             return mElementDescription;
         }
 
+        @Override
+        public boolean isThought() {
+            return mIsThought;
+        }
+
 
     }
 
     private HashMap<AskForSomethingElements, ArrayList<Sentence>> mDialogue;
     private String mTitle; //user generated convo name
     private UserPreferences.UserType mInitiator;
-    private ArrayList<AskForSomethingElements> mInitialUserElements;
     private boolean mInProgress;
 
     public AskForSomething(String title) {
         mDialogue = new HashMap<>();
         mTitle = title;
         mInitiator = UserPreferences.UserType.CHILD;
-        mInitialUserElements = new ArrayList<>();
-        mInitialUserElements.add(AskForSomethingElements.GREETING);
-        mInitialUserElements.add(AskForSomethingElements.ALT_GREETING);
         mInProgress = true;
     }
 
@@ -92,7 +97,12 @@ public class AskForSomething implements Conversation {
         mTitle = title;
     }
 
-//    @Override
+    @Override
+    public void setInProgress() {
+        mInProgress = true;
+    }
+
+    @Override
     public HashMap<AskForSomethingElements, ArrayList<Sentence>> getDialogue() {
         return mDialogue;
     }

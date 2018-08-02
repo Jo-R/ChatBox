@@ -133,6 +133,7 @@ public class ParentHomeActivity extends AppCompatActivity implements DeleteChatD
 
         ArrayList<String> templates = new ArrayList<>();
         templates.add("Ask for Something");
+        templates.add("Greeting");
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout
                 .simple_spinner_item, templates);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

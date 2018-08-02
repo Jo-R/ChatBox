@@ -147,6 +147,9 @@ public class XmlWriteRead {
                             if (type.equals("AskForSomething")) {
                                 cb.addNewConversation(title, "Ask for Something");
                                 convo = cb.getConversation(title);
+                            } else if (type.equals("Greeting")) {
+                                cb.addNewConversation(title, "Greeting");
+                                convo = cb.getConversation(title);
                             }
                         }
                     }
@@ -158,6 +161,8 @@ public class XmlWriteRead {
                         if (type.equals("AskForSomething")) {
                             element = AskForSomething.AskForSomethingElements.valueOf
                                     (elementStr);
+                        } else if (type.equals("Greeting")) {
+                            element = Greeting.GreetingElements.valueOf(elementStr);
                         }
 
                     }

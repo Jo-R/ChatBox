@@ -29,7 +29,17 @@ public class SentenceBank {
     }
 
     public void addSentence(Sentence sentence) {
-        mSentenceLibrary.add(sentence);
+        boolean exists = false;
+
+        for (Sentence sent : mSentenceLibrary) {
+            if (sent.getContent().equals(sentence.getContent())) {
+                exists = true;
+            }
+        }
+
+        if (!exists) {
+            mSentenceLibrary.add(sentence);
+        }
     }
 
     public ArrayList<Sentence> getSentences(Sentence.SpeechType type) {

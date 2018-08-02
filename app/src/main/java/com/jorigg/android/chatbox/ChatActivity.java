@@ -16,6 +16,7 @@ import com.jorigg.android.chatbox.model.AskForSomething;
 import com.jorigg.android.chatbox.model.ChatBank;
 import com.jorigg.android.chatbox.model.Conversation;
 import com.jorigg.android.chatbox.model.ConversationElementEnum;
+import com.jorigg.android.chatbox.model.Greeting;
 import com.jorigg.android.chatbox.model.Sentence;
 import com.jorigg.android.chatbox.model.UserPreferences;
 
@@ -44,6 +45,7 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView mRightSpeechBubble;
     private TextView mLeftSpeechBubbleText;
     private TextView mRightSpeechBubbleText;
+    private ImageView mThoughtBubble;
     private ImageView mUserAvatar;
 
     @Override
@@ -68,6 +70,8 @@ public class ChatActivity extends AppCompatActivity {
         mRightSpeechBubble = findViewById(R.id.right_speech_bubble);
         mRightSpeechBubble.setVisibility(View.INVISIBLE);
         mRightSpeechBubbleText = findViewById(R.id.right_speech_bubble_text);
+        mThoughtBubble = findViewById(R.id.thought_bubble);
+        mThoughtBubble.setVisibility(View.INVISIBLE);
 
         mResponseSpinner = findViewById(R.id.user_response_spinner);
         mUserResponseButton = findViewById(R.id.user_response_button);
@@ -79,6 +83,7 @@ public class ChatActivity extends AppCompatActivity {
                 String response = String.valueOf(mResponseSpinner.getSelectedItem());
 
                 mLeftSpeechBubble.setVisibility(View.INVISIBLE);
+                mThoughtBubble.setVisibility(View.INVISIBLE);
                 mLeftSpeechBubbleText.setText("");
 
                 mRightSpeechBubble.setVisibility(View.VISIBLE);
@@ -124,6 +129,7 @@ public class ChatActivity extends AppCompatActivity {
         } else {
             mCurrentConversation = mChatBank.getConversation(getIntent().getCharSequenceExtra
                     (SELECTED_CONVO).toString());
+            mCurrentConversation.setInProgress();
             initialiseUI();
         }
 
@@ -138,6 +144,8 @@ public class ChatActivity extends AppCompatActivity {
         Enum agentElement = null;
         if (mCurrentConversation instanceof AskForSomething) {
             agentElement = (AskForSomething.AskForSomethingElements) mCurrentAgentElement;
+        } else if (mCurrentConversation instanceof Greeting) {
+            agentElement = (Greeting.GreetingElements) mCurrentAgentElement;
         }
         outState.putSerializable(CURR_AGENT, agentElement);
         outState.putSerializable(CURR_USER, mCurrentChildMoves);
@@ -161,8 +169,7 @@ public class ChatActivity extends AppCompatActivity {
         String nextMove = "";
         if (mCurrentAgentElement == null) {
             nextMove = mCurrentConversation.getInitialAgentResponse().toString();
-            mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
-                    .getInitialUserMoves();
+            mCurrentAgentElement = mCurrentConversation.getInitialAgentElement();
         } else if (mCurrentConversation.isInProgress()) {
             nextMove = mCurrentConversation.getNextAgentMove(mChildMoveElement).second.toString();
             mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
@@ -171,7 +178,11 @@ public class ChatActivity extends AppCompatActivity {
             Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
             //TODO make a better ending
         }
-        mLeftSpeechBubble.setVisibility(View.VISIBLE);
+        if (mCurrentAgentElement.isThought()) {
+            mThoughtBubble.setVisibility(View.VISIBLE);
+        } else {
+            mLeftSpeechBubble.setVisibility(View.VISIBLE);
+        }
         mLeftSpeechBubbleText.setText(nextMove);
 
     }
