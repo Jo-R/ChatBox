@@ -23,7 +23,6 @@ import com.jorigg.android.chatbox.model.SentenceBank;
 import com.jorigg.android.chatbox.model.XmlWriteRead;
 
 import java.util.ArrayList;
-import java.util.logging.XMLFormatter;
 
 import static com.jorigg.android.chatbox.ParentHomeActivity.TITLE_TO_CONFIG;
 
@@ -185,7 +184,7 @@ public class ConfigureConversationActivity extends AppCompatActivity {
 
     private void populateSentenceBankSpinner() {
         ConversationElementEnum element = getElementFromString();
-        ArrayList<Sentence> sentences = mSentenceBank.getSentences(element.getSpeechType());
+        ArrayList<Sentence> sentences = mSentenceBank.getSentencesForSpeechType(element.getSpeechType());
 
         if (sentences != null) {
             ArrayList<String> strings = new ArrayList<>();

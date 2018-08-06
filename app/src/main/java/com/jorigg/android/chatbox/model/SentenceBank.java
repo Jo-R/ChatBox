@@ -31,9 +31,11 @@ public class SentenceBank {
     public void addSentence(Sentence sentence) {
         boolean exists = false;
 
-        for (Sentence sent : mSentenceLibrary) {
-            if (sent.getContent().equals(sentence.getContent())) {
-                exists = true;
+        if (!mSentenceLibrary.isEmpty()) {
+            for (Sentence sent : mSentenceLibrary) {
+                if (sent.getContent().equals(sentence.getContent())) {
+                    exists = true;
+                }
             }
         }
 
@@ -42,7 +44,7 @@ public class SentenceBank {
         }
     }
 
-    public ArrayList<Sentence> getSentences(Sentence.SpeechType type) {
+    public ArrayList<Sentence> getSentencesForSpeechType(Sentence.SpeechType type) {
        ArrayList<Sentence> sentenceThisType = new ArrayList<>();
 
        for (Sentence sentence : mSentenceLibrary) {
