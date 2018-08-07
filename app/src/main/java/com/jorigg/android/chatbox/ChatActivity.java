@@ -224,7 +224,10 @@ public class ChatActivity extends AppCompatActivity {
 
     private void endGame() {
         if (mIsPerfectConversation) {
-            Toast.makeText(ChatActivity.this, "PERFECT", Toast.LENGTH_LONG).show();
+            int existingScore = UserPreferences.getUserScore(getApplicationContext());
+            existingScore++;
+            UserPreferences.setUserScore(getApplicationContext(), existingScore);
+            Toast.makeText(ChatActivity.this, "PERFECT " + existingScore, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
         }
