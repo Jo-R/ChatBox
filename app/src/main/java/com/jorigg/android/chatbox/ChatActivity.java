@@ -1,7 +1,9 @@
 package com.jorigg.android.chatbox;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +28,8 @@ import java.util.Map;
 
 import static com.jorigg.android.chatbox.HomeActivity.SELECTED_CONVO;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements GameOverPerfectDialogFragment
+        .NoticeDialogListener {
 
     public static final String CURR_AGENT = "currAgent";
     public static final String CURR_USER = "currUser";
@@ -227,11 +230,29 @@ public class ChatActivity extends AppCompatActivity {
             int existingScore = UserPreferences.getUserScore(getApplicationContext());
             existingScore++;
             UserPreferences.setUserScore(getApplicationContext(), existingScore);
-            Toast.makeText(ChatActivity.this, "PERFECT " + existingScore, Toast.LENGTH_LONG).show();
+            DialogFragment gameOverPerfectDialog = new GameOverPerfectDialogFragment();
+            gameOverPerfectDialog.show(getSupportFragmentManager(), "gameOverPerf");
         } else {
             Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
         }
 
     }
 
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        //Play again
+        finish();
+        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+        intent.putExtra(SELECTED_CONVO, mCurrentConversation.getTitle());
+        startActivity(intent);
+    }
+
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        //go home
+        finish();
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(intent);
+    }
 }
