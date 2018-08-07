@@ -31,6 +31,7 @@ public class ChatActivity extends AppCompatActivity {
     public static final String CURR_AGENT = "currAgent";
     public static final String CURR_USER = "currUser";
     public static final String CURR_CONVO = "currConvo";
+    public static final String CURR_IS_PERFECT = "isPerfect";
 
     private ChatBank mChatBank;
     private Conversation mCurrentConversation;
@@ -38,6 +39,7 @@ public class ChatActivity extends AppCompatActivity {
     private HashMap<ConversationElementEnum, ArrayList<Sentence>> mCurrentChildMoves = new
             HashMap<>();
     private ConversationElementEnum mChildMoveElement;
+    private boolean mIsPerfectConversation;
 
     private Spinner mResponseSpinner;
     private ImageButton mUserResponseButton;
@@ -102,6 +104,11 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
 
+                //check if last move was a bad one and change status if is
+                if (mCurrentConversation.isNegativeMove(mChildMoveElement)) {
+                    mIsPerfectConversation = false;
+                }
+
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -122,6 +129,7 @@ public class ChatActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             mCurrentConversation = mChatBank.getConversation(savedInstanceState.getCharSequence
                     (CURR_CONVO).toString());
+            mIsPerfectConversation = savedInstanceState.getBoolean(CURR_IS_PERFECT);
             mCurrentChildMoves = (HashMap) savedInstanceState.getSerializable(CURR_USER);
             addNextItemsToUserResponseSpinner();
             mCurrentAgentElement = (ConversationElementEnum) savedInstanceState.getSerializable
@@ -130,6 +138,7 @@ public class ChatActivity extends AppCompatActivity {
             mCurrentConversation = mChatBank.getConversation(getIntent().getCharSequenceExtra
                     (SELECTED_CONVO).toString());
             mCurrentConversation.setInProgress();
+            mIsPerfectConversation = true;
             initialiseUI();
         }
 
@@ -150,6 +159,7 @@ public class ChatActivity extends AppCompatActivity {
         outState.putSerializable(CURR_AGENT, agentElement);
         outState.putSerializable(CURR_USER, mCurrentChildMoves);
         outState.putCharSequence(CURR_CONVO, mCurrentConversation.getTitle());
+        outState.putBoolean(CURR_IS_PERFECT, mIsPerfectConversation);
         super.onSaveInstanceState(outState);
     }
 
@@ -175,8 +185,7 @@ public class ChatActivity extends AppCompatActivity {
             mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
                     .getNextAgentMove(mChildMoveElement).first;
         } else {
-            Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
-            //TODO make a better ending
+            endGame();
         }
         if (mCurrentAgentElement.isThought()) {
             mThoughtBubble.setVisibility(View.VISIBLE);
@@ -192,8 +201,8 @@ public class ChatActivity extends AppCompatActivity {
             mCurrentChildMoves = mCurrentConversation.getInitialUserMoves();
         } else if (mCurrentConversation.isInProgress()) {
             mCurrentChildMoves = mCurrentConversation.getNextUserMoves(mCurrentAgentElement);
-        } else { //TODO MAKE A better ending
-            Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
+        } else {
+            endGame();
         }
         addNextItemsToUserResponseSpinner();
     }
@@ -211,6 +220,15 @@ public class ChatActivity extends AppCompatActivity {
                 .simple_spinner_item, nextMoves);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mResponseSpinner.setAdapter(adapter);
+    }
+
+    private void endGame() {
+        if (mIsPerfectConversation) {
+            Toast.makeText(ChatActivity.this, "PERFECT", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
+        }
+
     }
 
 }

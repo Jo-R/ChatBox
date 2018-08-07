@@ -97,4 +97,11 @@ public interface Conversation<E extends ConversationElementEnum> {
      * @return true if dialogue has an entry for each of the associated conversation elements
      */
     boolean hasAnEntryPerElement();
+
+    /**
+     * checks whether the element is to be regarded as a negative (i.e. not good) move
+     * @param element
+     * @return true if is a negative move
+     */
+    boolean isNegativeMove(E element);
 }

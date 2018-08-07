@@ -258,4 +258,13 @@ public class AskForSomething implements Conversation {
 
         return nextMoves;
     }
+
+    @Override
+    public boolean isNegativeMove(ConversationElementEnum element) {
+        if (element == AskForSomethingElements.ALT_GREETING || element == AskForSomethingElements
+                .ALT_MAKE_REQUEST || element == AskForSomethingElements.ALT_PROVIDE_CLARIFY) {
+            return true;
+        }
+        return false;
+    }
 }

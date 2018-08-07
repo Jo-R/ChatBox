@@ -278,4 +278,14 @@ public class Greeting implements Conversation {
     public boolean hasAnEntryPerElement() {
         return GreetingElements.values().length == mDialogue.size();
     }
+
+    @Override
+    public boolean isNegativeMove(ConversationElementEnum element) {
+        if (element == GreetingElements.INAPT_ACKNOWL || element == GreetingElements
+                .INAPT_ACKNOWL2 || element == GreetingElements.INAPT_RESPONSE || element ==
+                GreetingElements.INAPT_RESPONSE2) {
+            return true;
+        }
+        return false;
+    }
 }
