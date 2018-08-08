@@ -104,4 +104,11 @@ public interface Conversation<E extends ConversationElementEnum> {
      * @return true if is a negative move
      */
     boolean isNegativeMove(E element);
+
+    /**
+     * For negative moves provides a sentence of feedback relating to the move
+     * @param element
+     * @return String - feedback sentence
+     */
+    String getFeedback(E element);
 }

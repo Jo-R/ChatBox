@@ -267,4 +267,17 @@ public class AskForSomething implements Conversation {
         }
         return false;
     }
+
+    @Override
+    public String getFeedback(ConversationElementEnum element) {
+        if (element == AskForSomethingElements.ALT_GREETING) {
+            return "Next time try to think more about how to greet somebody";
+        } else if (element == AskForSomethingElements.ALT_MAKE_REQUEST) {
+            return "Next time try to think about a better way to ask for what you want";
+        } else if (element == AskForSomethingElements.ALT_PROVIDE_CLARIFY) {
+            return "Next time think about what you should do when someone asks you to clarify";
+        } else {
+            return "";
+        }
+    }
 }

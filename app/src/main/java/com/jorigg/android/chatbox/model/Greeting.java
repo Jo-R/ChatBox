@@ -288,4 +288,18 @@ public class Greeting implements Conversation {
         }
         return false;
     }
+
+    @Override
+    public String getFeedback(ConversationElementEnum element) {
+        if (element == GreetingElements.INAPT_ACKNOWL2 || element == GreetingElements
+                .INAPT_ACKNOWL2) {
+            return "Next time think about a better way to respond when someone answers a question" +
+                    " you have asked";
+        } else if (element == GreetingElements.INAPT_RESPONSE || element == GreetingElements
+                .INAPT_RESPONSE2) {
+            return "Next time think more about how you might answer a question";
+        } else {
+            return "";
+        }
+    }
 }

@@ -35,6 +35,8 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
     public static final String CURR_USER = "currUser";
     public static final String CURR_CONVO = "currConvo";
     public static final String CURR_IS_PERFECT = "isPerfect";
+    public static final String CURR_FEEDBACK = "currFeedback";
+    public static final String FINAL_FEEDBACK = "finalFeedback";
 
     private ChatBank mChatBank;
     private Conversation mCurrentConversation;
@@ -43,6 +45,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
             HashMap<>();
     private ConversationElementEnum mChildMoveElement;
     private boolean mIsPerfectConversation;
+    private ArrayList<String> mFeedback;
 
     private Spinner mResponseSpinner;
     private ImageButton mUserResponseButton;
@@ -110,6 +113,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
                 //check if last move was a bad one and change status if is
                 if (mCurrentConversation.isNegativeMove(mChildMoveElement)) {
                     mIsPerfectConversation = false;
+                    mFeedback.add(mCurrentConversation.getFeedback(mChildMoveElement));
                 }
 
                 final Handler handler = new Handler();
@@ -133,6 +137,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
             mCurrentConversation = mChatBank.getConversation(savedInstanceState.getCharSequence
                     (CURR_CONVO).toString());
             mIsPerfectConversation = savedInstanceState.getBoolean(CURR_IS_PERFECT);
+            mFeedback = savedInstanceState.getStringArrayList(CURR_FEEDBACK);
             mCurrentChildMoves = (HashMap) savedInstanceState.getSerializable(CURR_USER);
             addNextItemsToUserResponseSpinner();
             mCurrentAgentElement = (ConversationElementEnum) savedInstanceState.getSerializable
@@ -142,6 +147,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
                     (SELECTED_CONVO).toString());
             mCurrentConversation.setInProgress();
             mIsPerfectConversation = true;
+            mFeedback = new ArrayList<>();
             initialiseUI();
         }
 
@@ -163,6 +169,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
         outState.putSerializable(CURR_USER, mCurrentChildMoves);
         outState.putCharSequence(CURR_CONVO, mCurrentConversation.getTitle());
         outState.putBoolean(CURR_IS_PERFECT, mIsPerfectConversation);
+        outState.putStringArrayList(CURR_FEEDBACK, mFeedback);
         super.onSaveInstanceState(outState);
     }
 
@@ -233,7 +240,9 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
             DialogFragment gameOverPerfectDialog = new GameOverPerfectDialogFragment();
             gameOverPerfectDialog.show(getSupportFragmentManager(), "gameOverPerf");
         } else {
-            Toast.makeText(ChatActivity.this, "GAME OVER", Toast.LENGTH_LONG).show();
+            GameOverFeedbackDialogFragment gameOverFeedbackDialog = GameOverFeedbackDialogFragment.newInstance
+                    (mFeedback.get(0)); //just provide one piece of feedback per dialog
+            gameOverFeedbackDialog.show(getSupportFragmentManager(), "gameOverFeedback");
         }
 
     }
@@ -250,9 +259,9 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-        //go home
+        //go home - which is on backstack so don't need ot start it again
         finish();
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+//        startActivity(intent);
     }
 }
