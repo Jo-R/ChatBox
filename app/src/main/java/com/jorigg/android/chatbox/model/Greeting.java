@@ -158,7 +158,6 @@ public class Greeting implements Conversation {
         } else if (lastUserMove == GreetingElements.APT_ACKNOWL) {
             options = mDialogue.get(GreetingElements.GOODBYE);
             nextElement = GreetingElements.GOODBYE;
-            mInProgress = false;
         } else if (lastUserMove == GreetingElements.INAPT_ACKNOWL) {
             options = mDialogue.get(GreetingElements.HINT2);
             nextElement = GreetingElements.HINT2;
