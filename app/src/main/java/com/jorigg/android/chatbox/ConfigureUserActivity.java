@@ -46,15 +46,19 @@ public class ConfigureUserActivity extends AppCompatActivity {
 
         mSelectBoy = findViewById(R.id.select_boy_figure);
         mSelectGirl = findViewById(R.id.select_girl_figure);
+        if (UserPreferences.getUserAvatar(getApplicationContext()) == R.drawable.boy_figure_test) {
+            mSelectBoy.setBackground(getResources().getDrawable(R.drawable.highlight));
+        } else {
+            mSelectGirl.setBackground(getResources().getDrawable(R.drawable.highlight));
+        }
+
 
         mSelectGirl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.girl_figure);
-                Toast.makeText(ConfigureUserActivity.this, "Icon selected", Toast.LENGTH_SHORT).show();
-                //todo improve how selected is shown and make so shows selected when go in
-                mSelectGirl.setBackgroundColor(getResources().getColor(R.color
-                        .colorBackgroundLight));
+                mSelectGirl.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
             }
         });
 
@@ -62,9 +66,8 @@ public class ConfigureUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.boy_figure_test);
-                Toast.makeText(ConfigureUserActivity.this, "Icon selected", Toast.LENGTH_SHORT).show();
-                mSelectBoy.setBackgroundColor(getResources().getColor(R.color
-                        .colorBackgroundLight));
+                mSelectBoy.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
             }
         });
 

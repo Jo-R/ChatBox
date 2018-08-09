@@ -53,13 +53,15 @@
                 android:id="@+id/select_girl_figure"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/girl_figure" />
+                android:src="@drawable/girl_figure"
+                android:padding="3dp"/>
 
             <ImageView
                 android:id="@+id/select_boy_figure"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/boy_figure_test" />
+                android:src="@drawable/boy_figure_test"
+                android:padding="3dp"/>
 
         </LinearLayout>
     </HorizontalScrollView>

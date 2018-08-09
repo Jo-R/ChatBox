@@ -261,6 +261,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         //go home - which is on backstack so don't need ot start it again
+        //todo has to reload cf badges moght have been updated.
         finish();
 //        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
 //        startActivity(intent);
