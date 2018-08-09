@@ -290,7 +290,7 @@ public class Greeting implements Conversation {
 
     @Override
     public String getFeedback(ConversationElementEnum element) {
-        if (element == GreetingElements.INAPT_ACKNOWL2 || element == GreetingElements
+        if (element == GreetingElements.INAPT_ACKNOWL || element == GreetingElements
                 .INAPT_ACKNOWL2) {
             return "Next time think about a better way to respond when someone answers a question" +
                     " you have asked";
