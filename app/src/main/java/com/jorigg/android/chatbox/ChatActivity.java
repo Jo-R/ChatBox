@@ -2,7 +2,6 @@ package com.jorigg.android.chatbox;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jorigg.android.chatbox.model.AskForSomething;
 import com.jorigg.android.chatbox.model.ChatBank;
@@ -121,7 +119,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        showNextAgentMove();
+                        getAgentMove();
                         getNextItemsForUserResponseSpinner();
                         mRightSpeechBubble.setVisibility(View.INVISIBLE);
                         mRightSpeechBubbleText.setText("");
@@ -181,41 +179,60 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
             mCurrentAgentElement = mCurrentConversation.getInitialAgentElement();
         } else if (mCurrentConversation.getInitiator() == UserPreferences.UserType.AGENT ||
                 mCurrentAgentElement == null) {
-            showNextAgentMove();
+            getAgentMove();
             getNextItemsForUserResponseSpinner();
         }
     }
 
-    private void showNextAgentMove() {
+    private void getAgentMove() {
         String nextMove = "";
         if (mCurrentAgentElement == null) {
             nextMove = mCurrentConversation.getInitialAgentResponse().toString();
             mCurrentAgentElement = mCurrentConversation.getInitialAgentElement();
+            showAgentMove(nextMove);
         } else if (mCurrentConversation.isInProgress()) {
             nextMove = mCurrentConversation.getNextAgentMove(mChildMoveElement).second.toString();
             mCurrentAgentElement = (ConversationElementEnum) mCurrentConversation
                     .getNextAgentMove(mChildMoveElement).first;
+            showAgentMove(nextMove);
         } else {
-            endGame();
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    endGame();
+                }
+            }, 1500);
         }
+
+
+    }
+
+    private void showAgentMove(String nextMove) {
         if (mCurrentAgentElement.isThought()) {
             mThoughtBubble.setVisibility(View.VISIBLE);
         } else {
             mLeftSpeechBubble.setVisibility(View.VISIBLE);
         }
         mLeftSpeechBubbleText.setText(nextMove);
-
     }
 
     private void getNextItemsForUserResponseSpinner() {
         if (mChildMoveElement == null) {
             mCurrentChildMoves = mCurrentConversation.getInitialUserMoves();
+            addNextItemsToUserResponseSpinner();
         } else if (mCurrentConversation.isInProgress()) {
             mCurrentChildMoves = mCurrentConversation.getNextUserMoves(mCurrentAgentElement);
+            addNextItemsToUserResponseSpinner();
         } else {
-            endGame();
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    endGame();
+                }
+            }, 1500);
         }
-        addNextItemsToUserResponseSpinner();
     }
 
     private void addNextItemsToUserResponseSpinner() {
