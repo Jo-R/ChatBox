@@ -67,7 +67,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/user_prompt"/>
+                android:text="@string/user_prompt"
+                android:textSize="15sp"/>
 
         </LinearLayout>
     
