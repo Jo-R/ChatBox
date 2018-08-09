@@ -48,11 +48,8 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
 
     private Spinner mResponseSpinner;
     private ImageButton mUserResponseButton;
-    private ImageView mLeftSpeechBubble;
-    private ImageView mRightSpeechBubble;
     private TextView mLeftSpeechBubbleText;
     private TextView mRightSpeechBubbleText;
-    private ImageView mThoughtBubble;
     private ImageView mUserAvatar;
 
     @Override
@@ -71,14 +68,10 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
         }
 
 
-        mLeftSpeechBubble = findViewById(R.id.left_speech_bubble);
-        mLeftSpeechBubble.setVisibility(View.INVISIBLE);
         mLeftSpeechBubbleText = findViewById(R.id.left_speech_bubble_text);
-        mRightSpeechBubble = findViewById(R.id.right_speech_bubble);
-        mRightSpeechBubble.setVisibility(View.INVISIBLE);
+        mLeftSpeechBubbleText.setVisibility(View.INVISIBLE);
         mRightSpeechBubbleText = findViewById(R.id.right_speech_bubble_text);
-        mThoughtBubble = findViewById(R.id.thought_bubble);
-        mThoughtBubble.setVisibility(View.INVISIBLE);
+        mRightSpeechBubbleText.setVisibility(View.INVISIBLE);
 
         mResponseSpinner = findViewById(R.id.user_response_spinner);
         mUserResponseButton = findViewById(R.id.user_response_button);
@@ -89,12 +82,11 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
 
                 String response = String.valueOf(mResponseSpinner.getSelectedItem());
 
-                mLeftSpeechBubble.setVisibility(View.INVISIBLE);
-                mThoughtBubble.setVisibility(View.INVISIBLE);
                 mLeftSpeechBubbleText.setText("");
+                mLeftSpeechBubbleText.setVisibility(View.INVISIBLE);
 
-                mRightSpeechBubble.setVisibility(View.VISIBLE);
                 mRightSpeechBubbleText.setText(response);
+                mRightSpeechBubbleText.setVisibility(View.VISIBLE);
 
 
                 //establish which element the child response belongs to and update
@@ -121,8 +113,8 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
                     public void run() {
                         getAgentMove();
                         getNextItemsForUserResponseSpinner();
-                        mRightSpeechBubble.setVisibility(View.INVISIBLE);
                         mRightSpeechBubbleText.setText("");
+                        mRightSpeechBubbleText.setVisibility(View.INVISIBLE);
                     }
                 }, 1500);
 
@@ -210,11 +202,13 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
 
     private void showAgentMove(String nextMove) {
         if (mCurrentAgentElement.isThought()) {
-            mThoughtBubble.setVisibility(View.VISIBLE);
+            mLeftSpeechBubbleText.setBackground(getResources().getDrawable(R.drawable
+                    .thought_bubble));
         } else {
-            mLeftSpeechBubble.setVisibility(View.VISIBLE);
+            mLeftSpeechBubbleText.setBackground(getResources().getDrawable(R.drawable.speech_bubble_left));
         }
         mLeftSpeechBubbleText.setText(nextMove);
+        mLeftSpeechBubbleText.setVisibility(View.VISIBLE);
     }
 
     private void getNextItemsForUserResponseSpinner() {

@@ -14,38 +14,21 @@
         <ImageView
             android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="93dp"
+            android:layout_marginEnd="-166dp"
+            android:layout_toStartOf="@+id/left_speech_bubble_text"
             android:src="@drawable/agent_figure_test" />
 
-        <ImageView
-            android:id="@+id/left_speech_bubble"
-            android:layout_width="154dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="140dp"
-            android:src="@drawable/speech_bubble_left" />
-
-        <ImageView
-            android:id="@+id/thought_bubble"
-            android:layout_width="164dp"
-            android:layout_height="100dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="129dp"
-            android:src="@drawable/thought_bubble" />
-
         <TextView
+            android:id="@+id/left_speech_bubble_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/left_speech_bubble_text"
-            android:layout_alignLeft="@id/left_speech_bubble"
-            android:layout_alignTop="@id/left_speech_bubble"
-            android:layout_alignBottom="@id/left_speech_bubble"
-            android:layout_alignRight="@id/left_speech_bubble"
-            android:gravity="center"/>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="166dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/speech_bubble_left"
+            android:gravity="center" />
 
         <ImageView
             android:id="@+id/user_avatar"
@@ -56,25 +39,15 @@
             android:layout_marginEnd="41dp"
             android:src="@drawable/girl_figure" />
 
-        <ImageView
-            android:id="@+id/right_speech_bubble"
-            android:layout_width="154dp"
-            android:layout_height="100dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="132dp"
-            android:layout_marginTop="16dp"
-            app:srcCompat="@drawable/speech_bubble_right" />
-
         <TextView
+            android:id="@+id/right_speech_bubble_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/right_speech_bubble_text"
-            android:layout_alignLeft="@id/right_speech_bubble"
-            android:layout_alignTop="@id/right_speech_bubble"
-            android:layout_alignBottom="@id/right_speech_bubble"
-            android:layout_alignRight="@id/right_speech_bubble"
-            android:gravity="center"/>
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/left_speech_bubble_text"
+            android:layout_marginEnd="136dp"
+            android:background="@drawable/speech_bubble_right"
+            android:gravity="center" />
 
     </RelativeLayout>
 
