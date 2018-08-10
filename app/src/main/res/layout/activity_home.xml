@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="35dp"
         android:text="@string/home_prompt_choose"
         app:layout_constraintEnd_toStartOf="@+id/home_choose_conversation_spinner"
         app:layout_constraintHorizontal_bias="0.0"
@@ -66,6 +66,17 @@
         android:text="@string/home_page_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/displayScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="100dp"
+        android:text="TextView"
+        android:background="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintStart_toEndOf="@+id/welcome_text"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
     private Spinner mChooseConvoSpinner;
     private Button mStartChattingBtn;
     private TextView mWelcomeText;
+    private TextView mUserScore;
 
     private ChatBank mChatBank;
     private SentenceBank mSentenceBank;
@@ -40,6 +41,10 @@ public class HomeActivity extends AppCompatActivity {
 
         mWelcomeText = findViewById(R.id.welcome_text);
         mWelcomeText.setText("Hi " + UserPreferences.getUserName(getApplicationContext()));
+
+        mUserScore = findViewById(R.id.displayScore);
+        mUserScore.setText(Integer.toString(UserPreferences.getUserScore(getApplicationContext())));
+
 
         mChooseConvoSpinner = findViewById(R.id.home_choose_conversation_spinner);
         mStartChattingBtn = findViewById(R.id.home_start_chatting_btn);
