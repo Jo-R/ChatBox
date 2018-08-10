@@ -58,12 +58,27 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
         setContentView(R.layout.activity_chat);
 
         mUserAvatar = findViewById(R.id.user_avatar);
-        if (UserPreferences.getUserAvatar(getApplicationContext()) == R.drawable.boy_figure_test) {
+        int userAvatar = UserPreferences.getUserAvatar(getApplicationContext());
+        if (userAvatar == R.drawable.boy_figure_test) {
            Drawable avatar = getResources().getDrawable(R.drawable.boy_figure_test);
             mUserAvatar.setImageDrawable(avatar);
-        } else if (UserPreferences.getUserAvatar(getApplicationContext()) == R.drawable
-                .girl_figure) {
+        } else if (userAvatar == R.drawable.girl_figure) {
             Drawable avatar = getResources().getDrawable(R.drawable.girl_figure);
+            mUserAvatar.setImageDrawable(avatar);
+        } else if (userAvatar == R.drawable.boy_red) {
+            Drawable avatar = getResources().getDrawable(R.drawable.boy_red);
+            mUserAvatar.setImageDrawable(avatar);
+        } else if (userAvatar == R.drawable.boy_toy) {
+            Drawable avatar = getResources().getDrawable(R.drawable.boy_toy);
+            mUserAvatar.setImageDrawable(avatar);
+        } else if (userAvatar == R.drawable.girl_blue) {
+            Drawable avatar = getResources().getDrawable(R.drawable.girl_blue);
+            mUserAvatar.setImageDrawable(avatar);
+        } else if (userAvatar == R.drawable.girl_pink) {
+            Drawable avatar = getResources().getDrawable(R.drawable.girl_pink);
+            mUserAvatar.setImageDrawable(avatar);
+        } else if (userAvatar == R.drawable.police) {
+            Drawable avatar = getResources().getDrawable(R.drawable.police);
             mUserAvatar.setImageDrawable(avatar);
         }
 

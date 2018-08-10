@@ -17,6 +17,11 @@ public class ConfigureUserActivity extends AppCompatActivity {
     private EditText mEditName;
     private ImageView mSelectGirl;
     private ImageView mSelectBoy;
+    private ImageView mSelectBoyRed;
+    private ImageView mSelectBoyToy;
+    private ImageView mSelectGirlBlue;
+    private ImageView mSelectGirlPink;
+    private ImageView mSelectPolice;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,10 +51,28 @@ public class ConfigureUserActivity extends AppCompatActivity {
 
         mSelectBoy = findViewById(R.id.select_boy_figure);
         mSelectGirl = findViewById(R.id.select_girl_figure);
-        if (UserPreferences.getUserAvatar(getApplicationContext()) == R.drawable.boy_figure_test) {
+        mSelectBoyRed = findViewById(R.id.select_boy_red);
+        mSelectBoyToy = findViewById(R.id.select_boy_toy);
+        mSelectGirlBlue = findViewById(R.id.select_girl_blue);
+        mSelectGirlPink = findViewById(R.id.select_girl_pink);
+        mSelectPolice = findViewById(R.id.select_police);
+
+        int selectedAvatar = UserPreferences.getUserAvatar(getApplicationContext());
+
+        if (selectedAvatar == R.drawable.boy_figure_test) {
             mSelectBoy.setBackground(getResources().getDrawable(R.drawable.highlight));
-        } else {
+        } else if (selectedAvatar == R.drawable.girl_figure) {
             mSelectGirl.setBackground(getResources().getDrawable(R.drawable.highlight));
+        } else if (selectedAvatar == R.drawable.boy_red) {
+            mSelectBoyRed.setBackground(getResources().getDrawable(R.drawable.highlight));
+        } else if (selectedAvatar == R.drawable.boy_toy) {
+            mSelectBoyToy.setBackground(getResources().getDrawable(R.drawable.highlight));
+        } else if (selectedAvatar == R.drawable.girl_blue) {
+            mSelectGirlBlue.setBackground(getResources().getDrawable(R.drawable.highlight));
+        } else if (selectedAvatar == R.drawable.girl_pink) {
+            mSelectGirlPink.setBackground(getResources().getDrawable(R.drawable.highlight));
+        } else if (selectedAvatar == R.drawable.police) {
+            mSelectPolice.setBackground(getResources().getDrawable(R.drawable.highlight));
         }
 
 
@@ -59,6 +82,11 @@ public class ConfigureUserActivity extends AppCompatActivity {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.girl_figure);
                 mSelectGirl.setBackground(getResources().getDrawable(R.drawable.highlight));
                 mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
             }
         });
 
@@ -68,9 +96,83 @@ public class ConfigureUserActivity extends AppCompatActivity {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.boy_figure_test);
                 mSelectBoy.setBackground(getResources().getDrawable(R.drawable.highlight));
                 mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
             }
         });
 
+        mSelectBoyRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.boy_red);
+                mSelectBoyRed.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+        });
+
+        mSelectBoyToy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.boy_toy);
+                mSelectBoyToy.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+        });
+
+        mSelectGirlBlue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.girl_blue);
+                mSelectGirlBlue.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+        });
+
+        mSelectGirlPink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.girl_pink);
+                mSelectGirlPink.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+        });
+
+        mSelectPolice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.police);
+                mSelectPolice.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
+                mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+        });
 
     }
 }

@@ -63,6 +63,41 @@
                 android:src="@drawable/boy_figure_test"
                 android:padding="3dp"/>
 
+            <ImageView
+                android:id="@+id/select_boy_red"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/boy_red"
+                android:padding="3dp"/>
+
+            <ImageView
+                android:id="@+id/select_boy_toy"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/boy_toy"
+                android:padding="3dp"/>
+
+            <ImageView
+                android:id="@+id/select_girl_blue"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/girl_blue"
+                android:padding="3dp"/>
+
+            <ImageView
+                android:id="@+id/select_girl_pink"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/girl_pink"
+                android:padding="3dp"/>
+
+            <ImageView
+                android:id="@+id/select_police"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/police"
+                android:padding="3dp"/>
+
         </LinearLayout>
     </HorizontalScrollView>
 </android.support.constraint.ConstraintLayout>
