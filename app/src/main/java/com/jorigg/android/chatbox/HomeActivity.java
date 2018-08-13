@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -73,7 +75,6 @@ public class HomeActivity extends AppCompatActivity {
         if (userScore >= 150) {
             mBadgeFive.setBackground(getResources().getDrawable(R.drawable.badge2b));
         }
-
 
         mChooseConvoSpinner = findViewById(R.id.home_choose_conversation_spinner);
         mStartChattingBtn = findViewById(R.id.home_start_chatting_btn);
