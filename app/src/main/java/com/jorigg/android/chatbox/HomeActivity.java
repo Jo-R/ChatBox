@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,7 +31,11 @@ public class HomeActivity extends AppCompatActivity {
     private Spinner mChooseConvoSpinner;
     private Button mStartChattingBtn;
     private TextView mWelcomeText;
-    private TextView mUserScore;
+    private TextView mBadgeOne;
+    private TextView mBadgeTwo;
+    private TextView mBadgeThree;
+    private TextView mBadgeFour;
+    private TextView mBadgeFive;
 
     private ChatBank mChatBank;
     private SentenceBank mSentenceBank;
@@ -42,8 +48,31 @@ public class HomeActivity extends AppCompatActivity {
         mWelcomeText = findViewById(R.id.welcome_text);
         mWelcomeText.setText("Hi " + UserPreferences.getUserName(getApplicationContext()));
 
-        mUserScore = findViewById(R.id.displayScore);
-        mUserScore.setText(Integer.toString(UserPreferences.getUserScore(getApplicationContext())));
+//        mUserScore = findViewById(R.id.displayScore);
+//        mUserScore.setText(Integer.toString(UserPreferences.getUserScore(getApplicationContext())));
+        int userScore = UserPreferences.getUserScore(getApplicationContext());
+
+        mBadgeOne = findViewById(R.id.badge1);
+        mBadgeTwo = findViewById(R.id.badge2);
+        mBadgeThree = findViewById(R.id.badge3);
+        mBadgeFour = findViewById(R.id.badge4);
+        mBadgeFive = findViewById(R.id.badge5);
+
+        if (userScore >= 1) {
+            mBadgeOne.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
+        if (userScore >= 10) {
+            mBadgeTwo.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
+        if (userScore >= 50) {
+            mBadgeThree.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
+        if (userScore >= 100) {
+            mBadgeFour.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
+        if (userScore >= 150) {
+            mBadgeFive.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
 
 
         mChooseConvoSpinner = findViewById(R.id.home_choose_conversation_spinner);
@@ -60,6 +89,11 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         mChatBank = ChatBank.get(this);
+
+//        if (mChatBank.getConversationLibrary().size() == 0) {
+//            mStartChattingBtn.setEnabled(false);
+//        }
+
         mSentenceBank = SentenceBank.get(this);
         XmlWriteRead.parseChatsFromXml(getApplicationContext());
         XmlWriteRead.parseSentencesFromXml(getApplicationContext());
