@@ -50,8 +50,6 @@ public class HomeActivity extends AppCompatActivity {
         mWelcomeText = findViewById(R.id.welcome_text);
         mWelcomeText.setText("Hi " + UserPreferences.getUserName(getApplicationContext()));
 
-//        mUserScore = findViewById(R.id.displayScore);
-//        mUserScore.setText(Integer.toString(UserPreferences.getUserScore(getApplicationContext())));
         int userScore = UserPreferences.getUserScore(getApplicationContext());
 
         mBadgeOne = findViewById(R.id.badge1);
@@ -91,13 +89,15 @@ public class HomeActivity extends AppCompatActivity {
 
         mChatBank = ChatBank.get(this);
 
-//        if (mChatBank.getConversationLibrary().size() == 0) {
-//            mStartChattingBtn.setEnabled(false);
-//        }
+//
 
         mSentenceBank = SentenceBank.get(this);
         XmlWriteRead.parseChatsFromXml(getApplicationContext());
         XmlWriteRead.parseSentencesFromXml(getApplicationContext());
+
+        if (mChatBank.getConversationLibrary().isEmpty()) {
+            mStartChattingBtn.setEnabled(false);
+        }
         populateSpinner();
 
     }
