@@ -106,13 +106,15 @@ public class ConfigureConversationActivity extends AppCompatActivity {
         mAddFromSentenceBankButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConversationElementEnum element = getElementFromString();
-                if (mCurrentConversation.addToConversation(element, mSentenceBankSpinner
-                        .getSelectedItem().toString())) {
-                    populateExistingChatSentenceSpinner();
-                } else {
-                    Toast.makeText(ConfigureConversationActivity.this, "This sentence is " +
-                            "already in the chat", Toast.LENGTH_LONG).show();
+                if (mSentenceBankSpinner.getSelectedItem() != null) {
+                    ConversationElementEnum element = getElementFromString();
+                    if (mCurrentConversation.addToConversation(element, mSentenceBankSpinner
+                            .getSelectedItem().toString())) {
+                        populateExistingChatSentenceSpinner();
+                    } else {
+                        Toast.makeText(ConfigureConversationActivity.this, "This sentence is " +
+                                "already in the chat", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -121,10 +123,12 @@ public class ConfigureConversationActivity extends AppCompatActivity {
         mRemoveFromSentenceBankButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConversationElementEnum element = getElementFromString();
-                mSentenceBank.removeSentence(mSentenceBankSpinner
-                        .getSelectedItem().toString(), element.getSpeechType());
-                populateSentenceBankSpinner();
+                if (mSentenceBankSpinner.getSelectedItem() != null) {
+                    ConversationElementEnum element = getElementFromString();
+                    mSentenceBank.removeSentence(mSentenceBankSpinner
+                            .getSelectedItem().toString(), element.getSpeechType());
+                    populateSentenceBankSpinner();
+                }
             }
         });
 
@@ -138,10 +142,12 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //get the slected text and the selected element
                 ConversationElementEnum element = getElementFromString();
-                String contentToRem = mExistingChatSentenceSpinner.getSelectedItem().toString();
-                //call method on convo elem
-                mCurrentConversation.removeSentenceFromConversation(contentToRem, element);
-                populateExistingChatSentenceSpinner();
+                if (mExistingChatSentenceSpinner.getSelectedItem() != null) {
+                    String contentToRem = mExistingChatSentenceSpinner.getSelectedItem().toString();
+                    //call method on convo elem
+                    mCurrentConversation.removeSentenceFromConversation(contentToRem, element);
+                    populateExistingChatSentenceSpinner();
+                }
             }
         });
 

@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
         mWelcomeText = findViewById(R.id.welcome_text);
         mWelcomeText.setText("Hi " + UserPreferences.getUserName(getApplicationContext()));
 
-        int userScore = UserPreferences.getUserScore(getApplicationContext());
 
         mBadgeOne = findViewById(R.id.badge1);
         mBadgeTwo = findViewById(R.id.badge2);
@@ -58,21 +57,7 @@ public class HomeActivity extends AppCompatActivity {
         mBadgeFour = findViewById(R.id.badge4);
         mBadgeFive = findViewById(R.id.badge5);
 
-        if (userScore >= 1) {
-            mBadgeOne.setBackground(getResources().getDrawable(R.drawable.badge2b));
-        }
-        if (userScore >= 10) {
-            mBadgeTwo.setBackground(getResources().getDrawable(R.drawable.badge2b));
-        }
-        if (userScore >= 50) {
-            mBadgeThree.setBackground(getResources().getDrawable(R.drawable.badge2b));
-        }
-        if (userScore >= 100) {
-            mBadgeFour.setBackground(getResources().getDrawable(R.drawable.badge2b));
-        }
-        if (userScore >= 150) {
-            mBadgeFive.setBackground(getResources().getDrawable(R.drawable.badge2b));
-        }
+       showBadges();
 
         mChooseConvoSpinner = findViewById(R.id.home_choose_conversation_spinner);
         mStartChattingBtn = findViewById(R.id.home_start_chatting_btn);
@@ -123,6 +108,17 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        populateSpinner();
+        if (!mChatBank.getConversationLibrary().isEmpty()) {
+            mStartChattingBtn.setEnabled(true);
+        }
+        mWelcomeText.setText("Hi " + UserPreferences.getUserName(getApplicationContext()));
+        showBadges();
+    }
+
     private void populateSpinner() {
         //only want to display the fully complete ones
         ArrayList<String> chatTitles = mChatBank.getChatTitles();
@@ -139,5 +135,25 @@ public class HomeActivity extends AppCompatActivity {
                 .simple_spinner_item, chatTitles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mChooseConvoSpinner.setAdapter(adapter);
+    }
+
+    private void showBadges() {
+        int userScore = UserPreferences.getUserScore(getApplicationContext());
+
+        if (userScore >= 1) {
+            mBadgeOne.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
+        if (userScore >= 10) {
+            mBadgeTwo.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
+        if (userScore >= 50) {
+            mBadgeThree.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
+        if (userScore >= 100) {
+            mBadgeFour.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
+        if (userScore >= 150) {
+            mBadgeFive.setBackground(getResources().getDrawable(R.drawable.badge2b));
+        }
     }
 }
