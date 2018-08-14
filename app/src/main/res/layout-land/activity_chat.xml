@@ -9,7 +9,8 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_gravity="top"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:clipChildren="false">
 
         <ImageView
             android:layout_width="65dp"
@@ -68,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="@string/user_prompt"
-                android:textSize="15sp" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         </LinearLayout>
 
@@ -91,7 +92,6 @@
                 android:layout_marginLeft="8dp"
                 android:layout_weight="0.3"
                 android:background="@color/colorBackgroundLight"
-                android:padding="4dp"
                 android:src="@drawable/ic_choose_user_response" />
 
         </LinearLayout>
