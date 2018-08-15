@@ -20,11 +20,13 @@
     <string name="config_sentence_bank_choose">OR choose from sentence bank</string>
     <string name="config_edit_existing">OR remove an existing sentence from chat</string>
     <string name="config_whose_turn">Whose turn is it?</string>
-    <string name="config_input_sentence_description">Each conversation is made up of elements.
-        \n Add one or more sentences for each element. For Child turns they will be able to
-        choose from a list of these and for the Agent turns one will be chosen at random. \nAll
-        sentences are added to the sentence bank as well as the conversation if they don\'t already exist. You can
-        remove from the sentence bank or just the chat using the - buttons.</string>
+    <string name="config_input_sentence_description">Each chat is made up of elements.
+        \n Select each element in turn from the drop down and add one or more sentences/phrases for
+        it. \nFor Child turns they will be able to choose from a list of these and for the Agent turns
+        one will be chosen at random. \nAll sentences are added to the sentence bank (making them
+        available to choose for similar elements in future) as well as the chat if they don\'t
+        already exist. You can remove from the sentence bank or just the chat using the -
+        buttons.</string>
 
     <string name="dialog_delete_chat">Are you sure you want to delete this chat?</string>
     <string name="dialog_positive_btn">Yes</string>
