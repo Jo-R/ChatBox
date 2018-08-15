@@ -27,6 +27,7 @@
         available to choose for similar elements in future) as well as the chat if they don\'t
         already exist. You can remove from the sentence bank or just the chat using the -
         buttons.</string>
+    <string name="config_guide_head">Show/Hide Guidance</string>
 
     <string name="dialog_delete_chat">Are you sure you want to delete this chat?</string>
     <string name="dialog_positive_btn">Yes</string>

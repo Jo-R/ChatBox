@@ -42,6 +42,8 @@ public class ConfigureConversationActivity extends AppCompatActivity {
 
     TextView mDisplayWhoseTurn;
     TextView mDisplayElementDescription;
+    TextView mShowHideGuidance;
+    TextView mGuidance;
 
     Spinner mSentenceBankSpinner;
     ImageButton mAddFromSentenceBankButton;
@@ -57,6 +59,17 @@ public class ConfigureConversationActivity extends AppCompatActivity {
 
         String convoTitle = getIntent().getCharSequenceExtra(TITLE_TO_CONFIG).toString();
         mCurrentConversation = mChatBank.getConversation(convoTitle);
+
+        mShowHideGuidance = findViewById(R.id.textViewGuidanceHead);
+        mGuidance = findViewById(R.id.textViewGuidance);
+
+        mGuidance.setVisibility(View.GONE);
+        mShowHideGuidance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGuidance.setVisibility(mGuidance.isShown() ? View.GONE : View.VISIBLE);
+            }
+        });
 
         mSelectElementSpinner = findViewById(R.id.config_elements_spinner);
         populateElementSpinner();
