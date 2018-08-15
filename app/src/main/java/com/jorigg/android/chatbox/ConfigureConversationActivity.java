@@ -92,6 +92,8 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                     mInputSentenceField.setText("");
                     populateExistingChatSentenceSpinner();
                     populateSentenceBankSpinner();
+                    Toast.makeText(ConfigureConversationActivity.this, "Added", Toast.LENGTH_LONG)
+                            .show();
                 } else {
                     Toast.makeText(ConfigureConversationActivity.this, "This sentence is " +
                             "already in the chat", Toast.LENGTH_LONG).show();
@@ -111,6 +113,8 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                     if (mCurrentConversation.addToConversation(element, mSentenceBankSpinner
                             .getSelectedItem().toString())) {
                         populateExistingChatSentenceSpinner();
+                        Toast.makeText(ConfigureConversationActivity.this, "Added", Toast.LENGTH_LONG)
+                                .show();
                     } else {
                         Toast.makeText(ConfigureConversationActivity.this, "This sentence is " +
                                 "already in the chat", Toast.LENGTH_LONG).show();
@@ -128,6 +132,9 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                     mSentenceBank.removeSentence(mSentenceBankSpinner
                             .getSelectedItem().toString(), element.getSpeechType());
                     populateSentenceBankSpinner();
+                    Toast.makeText(ConfigureConversationActivity.this, "Removed from sentence " +
+                            "bank", Toast.LENGTH_LONG)
+                            .show();
                 }
             }
         });
@@ -147,6 +154,9 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                     //call method on convo elem
                     mCurrentConversation.removeSentenceFromConversation(contentToRem, element);
                     populateExistingChatSentenceSpinner();
+                    Toast.makeText(ConfigureConversationActivity.this, "Removed from chat", Toast
+                            .LENGTH_LONG)
+                            .show();
                 }
             }
         });
