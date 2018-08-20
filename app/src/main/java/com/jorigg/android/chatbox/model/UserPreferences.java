@@ -15,9 +15,27 @@ public class UserPreferences {
     private static final String PREF_USER_NAME = "userName";
     private static final String PREF_USER_AVATAR = "userAvatar";
     private static final String PREF_USER_SCORE = "userScore";
+    private static final String PREF_ADULT_NAME = "adultName";
+    private static final String PREF_PRAISE = "praisePhrase";
+    private static final String PREF_REWARD = "prefReward";
 
     public static String getUserName(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getString(PREF_USER_NAME,
+                "");
+    }
+
+    public static String getAdultName(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(PREF_ADULT_NAME,
+                "");
+    }
+
+    public static String getPraise(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(PREF_PRAISE,
+                "");
+    }
+
+    public static String getReward(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(PREF_REWARD,
                 "");
     }
 
@@ -34,6 +52,21 @@ public class UserPreferences {
     public static void setUserName(Context context, String userName) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString(PREF_USER_NAME,
                 userName).apply();
+    }
+
+    public static void setAdultName(Context context, String adultName) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(PREF_ADULT_NAME,
+                adultName).apply();
+    }
+
+    public static void setPraise(Context context, String praise) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(PREF_PRAISE,
+                praise).apply();
+    }
+
+    public static void setReward(Context context, String reward) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(PREF_REWARD,
+                reward).apply();
     }
 
     public static void setUserAvatar(Context context, int avatarId) {
