@@ -38,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView mBadgeThree;
     private TextView mBadgeFour;
     private TextView mBadgeFive;
+    private TextView mRewardLabel;
 
     private ChatBank mChatBank;
     private SentenceBank mSentenceBank;
@@ -58,6 +59,10 @@ public class HomeActivity extends AppCompatActivity {
         mBadgeFive = findViewById(R.id.badge5);
 
        showBadges();
+
+       mRewardLabel = findViewById(R.id.rewards_label);
+       setRewardMessage();
+
 
         mChooseConvoSpinner = findViewById(R.id.home_choose_conversation_spinner);
         mStartChattingBtn = findViewById(R.id.home_start_chatting_btn);
@@ -117,6 +122,7 @@ public class HomeActivity extends AppCompatActivity {
         }
         mWelcomeText.setText("Hi " + UserPreferences.getUserName(getApplicationContext()));
         showBadges();
+        setRewardMessage();
     }
 
     private void populateSpinner() {
@@ -155,5 +161,19 @@ public class HomeActivity extends AppCompatActivity {
         if (userScore >= 150) {
             mBadgeFive.setBackground(getResources().getDrawable(R.drawable.badge2b));
         }
+    }
+
+    private void setRewardMessage() {
+        int needThisManyMore = 75 - UserPreferences.getUserScore(getApplicationContext());
+        String message = "";
+
+        if (needThisManyMore > 0) {
+            message = "You need " + needThisManyMore + " more perfect conversations to get " +
+                    "your reward: " + UserPreferences.getReward(getApplicationContext());
+        } else if (needThisManyMore == 0) {
+            message = "CONGRATULATIONS you have won your reward: " + UserPreferences
+                    .getReward(getApplicationContext());
+        }
+        mRewardLabel.setText(message);
     }
 }
