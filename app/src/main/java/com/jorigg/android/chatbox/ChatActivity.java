@@ -268,7 +268,10 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
             gameOverPerfectDialog.show(getSupportFragmentManager(), "gameOverPerf");
         } else {
             GameOverFeedbackDialogFragment gameOverFeedbackDialog = GameOverFeedbackDialogFragment.newInstance
-                    (mFeedback.get(0)); //just provide one piece of feedback per dialog
+                    (mFeedback.get(0) + ". You could go and talk to " + UserPreferences
+                            .getAdultName(getApplicationContext()) + " about what to do"); //just
+            // provide one
+            // piece of feedback per dialog
             gameOverFeedbackDialog.show(getSupportFragmentManager(), "gameOverFeedback");
         }
 
