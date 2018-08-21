@@ -24,6 +24,7 @@ import com.jorigg.android.chatbox.model.XmlWriteRead;
 
 import java.util.ArrayList;
 
+import static com.jorigg.android.chatbox.ConversationListActivity.ELEMENT_TO_CONFIG;
 import static com.jorigg.android.chatbox.ParentHomeActivity.TITLE_TO_CONFIG;
 
 public class ConfigureConversationActivity extends AppCompatActivity {
@@ -42,8 +43,7 @@ public class ConfigureConversationActivity extends AppCompatActivity {
 
     TextView mDisplayWhoseTurn;
     TextView mDisplayElementDescription;
-    TextView mShowHideGuidance;
-    TextView mGuidance;
+
 
     Spinner mSentenceBankSpinner;
     ImageButton mAddFromSentenceBankButton;
@@ -60,19 +60,10 @@ public class ConfigureConversationActivity extends AppCompatActivity {
         String convoTitle = getIntent().getCharSequenceExtra(TITLE_TO_CONFIG).toString();
         mCurrentConversation = mChatBank.getConversation(convoTitle);
 
-        mShowHideGuidance = findViewById(R.id.textViewGuidanceHead);
-        mGuidance = findViewById(R.id.textViewGuidance);
-
-        mGuidance.setVisibility(View.GONE);
-        mShowHideGuidance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGuidance.setVisibility(mGuidance.isShown() ? View.GONE : View.VISIBLE);
-            }
-        });
 
         mSelectElementSpinner = findViewById(R.id.config_elements_spinner);
         populateElementSpinner();
+
         mSelectElementSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -190,6 +181,10 @@ public class ConfigureConversationActivity extends AppCompatActivity {
 
     private void populateElementSpinner() {
         ArrayList<String> elements = new ArrayList<>();
+        String selectedElementStr = getIntent().getCharSequenceExtra(ELEMENT_TO_CONFIG).toString();
+        AskForSomething.AskForSomethingElements selectedElementAsk = null;
+        Greeting.GreetingElements selectedElementGreet = null;
+        int selectElementPosition = 0;
 
         if (mCurrentConversation instanceof AskForSomething) {
             AskForSomething.AskForSomethingElements[] values = AskForSomething.AskForSomethingElements
@@ -197,18 +192,25 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             for (AskForSomething.AskForSomethingElements element : values) {
                 elements.add(element.name());
             }
+            selectedElementAsk = AskForSomething.AskForSomethingElements.valueOf
+                    (selectedElementStr);
+            selectElementPosition = selectedElementAsk.ordinal();
         } else if (mCurrentConversation instanceof Greeting) {
             Greeting.GreetingElements[] values = Greeting.GreetingElements
                     .values();
             for (Greeting.GreetingElements element : values) {
                 elements.add(element.name());
             }
+            selectedElementGreet = Greeting.GreetingElements.valueOf(selectedElementStr);
+            selectElementPosition = selectedElementGreet.ordinal();
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
                 .simple_spinner_item, elements);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSelectElementSpinner.setAdapter(adapter);
+
+        mSelectElementSpinner.setSelection(selectElementPosition);
     }
 
     private void populateSentenceBankSpinner() {

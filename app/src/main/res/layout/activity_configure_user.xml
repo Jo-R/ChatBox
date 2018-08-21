@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:text="@string/user_config_img_select_prompt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_input_prompt" />
@@ -38,6 +38,7 @@
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/scroll_avatars"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,4 +100,68 @@
 
         </LinearLayout>
     </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/adult_name_input_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/adult_config_name_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scroll_avatars" />
+
+    <EditText
+        android:id="@+id/edit_adult_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/adult_name_input_prompt"
+        app:layout_constraintTop_toBottomOf="@+id/scroll_avatars" />
+
+    <TextView
+        android:id="@+id/praise_input_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/praise_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adult_name_input_prompt" />
+
+    <EditText
+        android:id="@+id/edit_praise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/praise_input_prompt"
+        app:layout_constraintTop_toBottomOf="@+id/adult_name_input_prompt" />
+
+    <TextView
+        android:id="@+id/reward_input_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/reward_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/praise_input_prompt" />
+
+    <EditText
+        android:id="@+id/edit_reward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/reward_input_prompt"
+        app:layout_constraintTop_toBottomOf="@+id/praise_input_prompt" />
+
 </android.support.constraint.ConstraintLayout>

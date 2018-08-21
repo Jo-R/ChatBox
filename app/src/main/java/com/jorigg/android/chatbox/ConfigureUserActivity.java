@@ -15,6 +15,9 @@ import com.jorigg.android.chatbox.model.UserPreferences;
 public class ConfigureUserActivity extends AppCompatActivity {
 
     private EditText mEditName;
+    private EditText mEditAdultName;
+    private EditText mEditPraise;
+    private EditText mEditReward;
     private ImageView mSelectGirl;
     private ImageView mSelectBoy;
     private ImageView mSelectBoyRed;
@@ -30,7 +33,6 @@ public class ConfigureUserActivity extends AppCompatActivity {
 
         mEditName = findViewById(R.id.edit_name);
         mEditName.setText(UserPreferences.getUserName(getApplicationContext()));
-
         mEditName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -41,6 +43,72 @@ public class ConfigureUserActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 UserPreferences.setUserName(getApplicationContext(), mEditName.getText().toString());
                 Toast.makeText(ConfigureUserActivity.this, "Name updated", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        mEditAdultName = findViewById(R.id.edit_adult_name);
+        mEditAdultName.setText(UserPreferences.getAdultName(getApplicationContext()));
+        mEditAdultName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                UserPreferences.setAdultName(getApplicationContext(), mEditAdultName.getText().toString
+                        ());
+                Toast.makeText(ConfigureUserActivity.this, "Adult's Name updated", Toast
+                        .LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        mEditPraise = findViewById(R.id.edit_praise);
+        mEditPraise.setText(UserPreferences.getPraise(getApplicationContext()));
+        mEditPraise.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                UserPreferences.setPraise(getApplicationContext(), mEditPraise.getText().toString());
+                Toast.makeText(ConfigureUserActivity.this, "Praise updated", Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        mEditReward = findViewById(R.id.edit_reward);
+        mEditReward.setText(UserPreferences.getReward(getApplicationContext()));
+        mEditReward.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                UserPreferences.setReward(getApplicationContext(), mEditReward.getText().toString
+                        ());
+                Toast.makeText(ConfigureUserActivity.this, "Reward updated", Toast.LENGTH_SHORT)
+                        .show();
             }
 
             @Override

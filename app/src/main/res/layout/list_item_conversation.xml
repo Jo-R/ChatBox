@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_margin="8dp"
+    android:padding="4dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/highlight">
+
+    <TextView
+        android:id="@+id/list_item_element"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="element"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_item_whose_turn"
+        android:text="turn"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_item_description"
+        android:text="description"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_existing_items"/>
+
+</LinearLayout>

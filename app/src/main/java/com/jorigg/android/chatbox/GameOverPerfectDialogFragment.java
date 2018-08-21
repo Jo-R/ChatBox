@@ -25,8 +25,8 @@ public class GameOverPerfectDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setTitle("CHAT OVER").setMessage("Perfect. You now have " + UserPreferences
-                .getUserScore(getContext()) + " perfect conversations")
+        builder.setTitle("CHAT OVER").setMessage(UserPreferences.getPraise(getContext()) + " You " +
+                        "now have " + UserPreferences.getUserScore(getContext()) + " perfect conversations")
                 .setPositiveButton
                 ("Play again", new
                 DialogInterface.OnClickListener() {

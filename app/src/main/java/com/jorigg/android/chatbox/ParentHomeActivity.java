@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jorigg.android.chatbox.model.ChatBank;
@@ -33,6 +34,9 @@ public class ParentHomeActivity extends AppCompatActivity implements DeleteChatD
     private Button mCreateButton;
     private Button mEditButton;
     private Button mDeleteButton;
+
+    TextView mShowHideGuidance;
+    TextView mGuidance;
 
     private String mSelectedConversation;
 
@@ -61,7 +65,7 @@ public class ParentHomeActivity extends AppCompatActivity implements DeleteChatD
                 if (mChatBank.addNewConversation(title, selectedTemplate)) {
                     mNewTitle.setText("");
                     populateSpinners();
-                    Intent intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity
+                    Intent intent = new Intent(ParentHomeActivity.this, ConversationListActivity
                             .class);
                     intent.putExtra(TITLE_TO_CONFIG, title);
                     startActivity(intent);
@@ -76,7 +80,7 @@ public class ParentHomeActivity extends AppCompatActivity implements DeleteChatD
             @Override
             public void onClick(View view) {
                 mSelectedConversation = String.valueOf(mEditSpinner.getSelectedItem());
-                Intent intent = new Intent(ParentHomeActivity.this, ConfigureConversationActivity
+                Intent intent = new Intent(ParentHomeActivity.this, ConversationListActivity
                         .class);
                 intent.putExtra(TITLE_TO_CONFIG, mSelectedConversation);
                 startActivity(intent);
@@ -90,6 +94,17 @@ public class ParentHomeActivity extends AppCompatActivity implements DeleteChatD
                 DialogFragment confirmation = new DeleteChatDialogFragment();
                 confirmation.show(getSupportFragmentManager(), "deleteConfirm");
 
+            }
+        });
+
+        mShowHideGuidance = findViewById(R.id.textViewGuidanceHead);
+        mGuidance = findViewById(R.id.textViewGuidance);
+
+        mGuidance.setVisibility(View.GONE);
+        mShowHideGuidance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGuidance.setVisibility(mGuidance.isShown() ? View.GONE : View.VISIBLE);
             }
         });
 

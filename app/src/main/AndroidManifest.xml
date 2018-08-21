@@ -20,6 +20,7 @@
         <activity android:name=".ParentHomeActivity"/>
         <activity android:name=".ConfigureConversationActivity"/>
         <activity android:name=".ConfigureUserActivity"/>
+        <activity android:name=".ConversationListActivity"/>
     </application>
 
 </manifest>
