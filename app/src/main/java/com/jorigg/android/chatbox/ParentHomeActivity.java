@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jorigg.android.chatbox.model.ChatBank;
@@ -33,6 +34,9 @@ public class ParentHomeActivity extends AppCompatActivity implements DeleteChatD
     private Button mCreateButton;
     private Button mEditButton;
     private Button mDeleteButton;
+
+    TextView mShowHideGuidance;
+    TextView mGuidance;
 
     private String mSelectedConversation;
 
@@ -90,6 +94,17 @@ public class ParentHomeActivity extends AppCompatActivity implements DeleteChatD
                 DialogFragment confirmation = new DeleteChatDialogFragment();
                 confirmation.show(getSupportFragmentManager(), "deleteConfirm");
 
+            }
+        });
+
+        mShowHideGuidance = findViewById(R.id.textViewGuidanceHead);
+        mGuidance = findViewById(R.id.textViewGuidance);
+
+        mGuidance.setVisibility(View.GONE);
+        mShowHideGuidance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGuidance.setVisibility(mGuidance.isShown() ? View.GONE : View.VISIBLE);
             }
         });
 
