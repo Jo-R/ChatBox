@@ -90,14 +90,16 @@ public class ConversationListActivity extends AppCompatActivity {
 
             ArrayList<String> elemContentsStrings = new ArrayList<>();
 
-            for (Sentence sent : elemContents) {
-                elemContentsStrings.add(sent.getContent());
-            }
+            if (elemContents != null) {
+                for (Sentence sent : elemContents) {
+                    elemContentsStrings.add(sent.getContent());
+                }
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout
-                    .simple_spinner_item, elemContentsStrings);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            mExistingSentenceSpinner.setAdapter(adapter);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout
+                        .simple_spinner_item, elemContentsStrings);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mExistingSentenceSpinner.setAdapter(adapter);
+            }
 
             mElementTextView.setText(element.name());
             mTurnTextView.setText(element.getSpeaker().toString());
@@ -159,7 +161,8 @@ public class ConversationListActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return mDialogue.size();
+
+            return mOrderedElements.length;
         }
     }
 }
