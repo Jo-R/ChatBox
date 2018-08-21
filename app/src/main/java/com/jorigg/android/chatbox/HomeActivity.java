@@ -163,6 +163,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    //todo 75 should be configurable - also what happens here when goal is reached?
     private void setRewardMessage() {
         int needThisManyMore = 75 - UserPreferences.getUserScore(getApplicationContext());
         String message = "";
