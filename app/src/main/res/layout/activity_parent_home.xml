@@ -35,7 +35,7 @@
         <Spinner
             android:id="@+id/create_new_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></Spinner>
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -43,22 +43,26 @@
             android:orientation="horizontal">
 
 
-            <EditText
-                android:id="@+id/create_new_title"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:text="@string/create_new_title" />
-
-            <Button
-                android:id="@+id/create_new_button"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/create_button_text" />
+                android:text="@string/enter_title"/>
+
+            <EditText
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
+
+
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/create_new_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="270dp"
+            android:text="@string/create_button_text" />
 
     </LinearLayout>
 
@@ -115,22 +119,28 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewGuidance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:text="@string/config_input_sentence_description"/>
-
-    <TextView
         android:id="@+id/textViewGuidanceHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:padding="8dp"
+        android:textStyle="bold"
+        android:textColor="@color/green"
         android:text="@string/config_guide_head"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textViewGuidance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:padding="8dp"
+            android:text="@string/config_input_sentence_description"/>
+    </ScrollView>
+
 
 </LinearLayout>

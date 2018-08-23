@@ -16,6 +16,7 @@
     <string name="edit_convo">Choose an existing conversation</string>
     <string name="edit_button_text">Edit</string>
     <string name="delete_button_text">Delete</string>
+    <string name="enter_title">Enter title for conversation</string>
 
 
     <string name="config_input_sentence">Input a sentence</string>

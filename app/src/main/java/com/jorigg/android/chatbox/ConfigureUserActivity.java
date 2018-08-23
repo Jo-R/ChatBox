@@ -155,6 +155,8 @@ public class ConfigureUserActivity extends AppCompatActivity {
                 mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+                Toast.makeText(ConfigureUserActivity.this, "Avatar Changed", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
@@ -169,6 +171,8 @@ public class ConfigureUserActivity extends AppCompatActivity {
                 mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+                Toast.makeText(ConfigureUserActivity.this, "Avatar Changed", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
@@ -183,6 +187,8 @@ public class ConfigureUserActivity extends AppCompatActivity {
                 mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+                Toast.makeText(ConfigureUserActivity.this, "Avatar Changed", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
@@ -197,6 +203,8 @@ public class ConfigureUserActivity extends AppCompatActivity {
                 mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+                Toast.makeText(ConfigureUserActivity.this, "Avatar Changed", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
@@ -211,6 +219,8 @@ public class ConfigureUserActivity extends AppCompatActivity {
                 mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+                Toast.makeText(ConfigureUserActivity.this, "Avatar Changed", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
@@ -225,6 +235,8 @@ public class ConfigureUserActivity extends AppCompatActivity {
                 mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectPolice.setBackgroundColor(getResources().getColor(R.color.white));
+                Toast.makeText(ConfigureUserActivity.this, "Avatar Changed", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
@@ -239,6 +251,8 @@ public class ConfigureUserActivity extends AppCompatActivity {
                 mSelectGirlBlue.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirlPink.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
+                Toast.makeText(ConfigureUserActivity.this, "Avatar Changed", Toast.LENGTH_SHORT)
+                        .show();
             }
         });
 
