@@ -20,7 +20,11 @@
     <string name="config_sentence_bank_choose">OR choose from sentence bank</string>
     <string name="config_edit_existing">OR remove an existing sentence from chat</string>
     <string name="config_whose_turn">Whose turn is it?</string>
-    <string name="config_input_sentence_description">Each chat is made up of elements.
+    <string name="config_input_sentence_description">Each chat is made up of elements. When you
+        edit or create a chat you will be shown each element in either green or red boxes.
+        The colours flag whether an element has at least one sentence assigned to it or not
+        (green for former, red for latter). \n Click on the element to enter the configuration
+        screen.
         \n Select each element in turn from the drop down and add one or more sentences/phrases for
         it. \nFor Child turns they will be able to choose from a list of these and for the Agent turns
         one will be chosen at random. \nAll sentences are added to the sentence bank (making them

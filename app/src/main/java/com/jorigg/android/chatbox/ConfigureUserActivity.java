@@ -128,19 +128,19 @@ public class ConfigureUserActivity extends AppCompatActivity {
         int selectedAvatar = UserPreferences.getUserAvatar(getApplicationContext());
 
         if (selectedAvatar == R.drawable.boy_figure_test) {
-            mSelectBoy.setBackground(getResources().getDrawable(R.drawable.highlight));
+            mSelectBoy.setBackground(getResources().getDrawable(R.drawable.highlight_green));
         } else if (selectedAvatar == R.drawable.girl_figure) {
-            mSelectGirl.setBackground(getResources().getDrawable(R.drawable.highlight));
+            mSelectGirl.setBackground(getResources().getDrawable(R.drawable.highlight_green));
         } else if (selectedAvatar == R.drawable.boy_red) {
-            mSelectBoyRed.setBackground(getResources().getDrawable(R.drawable.highlight));
+            mSelectBoyRed.setBackground(getResources().getDrawable(R.drawable.highlight_green));
         } else if (selectedAvatar == R.drawable.boy_toy) {
-            mSelectBoyToy.setBackground(getResources().getDrawable(R.drawable.highlight));
+            mSelectBoyToy.setBackground(getResources().getDrawable(R.drawable.highlight_green));
         } else if (selectedAvatar == R.drawable.girl_blue) {
-            mSelectGirlBlue.setBackground(getResources().getDrawable(R.drawable.highlight));
+            mSelectGirlBlue.setBackground(getResources().getDrawable(R.drawable.highlight_green));
         } else if (selectedAvatar == R.drawable.girl_pink) {
-            mSelectGirlPink.setBackground(getResources().getDrawable(R.drawable.highlight));
+            mSelectGirlPink.setBackground(getResources().getDrawable(R.drawable.highlight_green));
         } else if (selectedAvatar == R.drawable.police) {
-            mSelectPolice.setBackground(getResources().getDrawable(R.drawable.highlight));
+            mSelectPolice.setBackground(getResources().getDrawable(R.drawable.highlight_green));
         }
 
 
@@ -148,7 +148,7 @@ public class ConfigureUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.girl_figure);
-                mSelectGirl.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectGirl.setBackground(getResources().getDrawable(R.drawable.highlight_green));
                 mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
@@ -162,7 +162,7 @@ public class ConfigureUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.boy_figure_test);
-                mSelectBoy.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectBoy.setBackground(getResources().getDrawable(R.drawable.highlight_green));
                 mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
@@ -176,7 +176,7 @@ public class ConfigureUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.boy_red);
-                mSelectBoyRed.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectBoyRed.setBackground(getResources().getDrawable(R.drawable.highlight_green));
                 mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
@@ -190,7 +190,7 @@ public class ConfigureUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.boy_toy);
-                mSelectBoyToy.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectBoyToy.setBackground(getResources().getDrawable(R.drawable.highlight_green));
                 mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
@@ -204,7 +204,7 @@ public class ConfigureUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.girl_blue);
-                mSelectGirlBlue.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectGirlBlue.setBackground(getResources().getDrawable(R.drawable.highlight_green));
                 mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));
@@ -218,7 +218,7 @@ public class ConfigureUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.girl_pink);
-                mSelectGirlPink.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectGirlPink.setBackground(getResources().getDrawable(R.drawable.highlight_green));
                 mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyRed.setBackgroundColor(getResources().getColor(R.color.white));
@@ -232,7 +232,7 @@ public class ConfigureUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserPreferences.setUserAvatar(getApplicationContext(), R.drawable.police);
-                mSelectPolice.setBackground(getResources().getDrawable(R.drawable.highlight));
+                mSelectPolice.setBackground(getResources().getDrawable(R.drawable.highlight_green));
                 mSelectBoy.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectGirl.setBackgroundColor(getResources().getColor(R.color.white));
                 mSelectBoyToy.setBackgroundColor(getResources().getColor(R.color.white));

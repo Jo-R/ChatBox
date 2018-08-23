@@ -6,4 +6,6 @@
     <color name="colorBackgroundLight">#abd3f4</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="green">#009900</color>
+    <color name="red">#FF0000</color>
 </resources>
