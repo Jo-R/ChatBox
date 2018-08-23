@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -75,6 +76,7 @@ public class ConversationListActivity extends AppCompatActivity {
         private TextView mTurnTextView;
         private TextView mDescriptionTextView;
         private Spinner mExistingSentenceSpinner;
+        private LinearLayout mListItem;
 
         public ElementHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_conversation, parent, false));
@@ -83,6 +85,7 @@ public class ConversationListActivity extends AppCompatActivity {
             mTurnTextView = itemView.findViewById(R.id.list_item_whose_turn);
             mDescriptionTextView = itemView.findViewById(R.id.list_item_description);
             mExistingSentenceSpinner = itemView.findViewById(R.id.list_existing_items);
+            mListItem = itemView.findViewById(R.id.list_item);
             itemView.setOnClickListener(this);
         }
 
@@ -90,14 +93,20 @@ public class ConversationListActivity extends AppCompatActivity {
 
             ArrayList<String> elemContentsStrings = new ArrayList<>();
 
-            for (Sentence sent : elemContents) {
-                elemContentsStrings.add(sent.getContent());
-            }
+            if (elemContents != null) {
+                for (Sentence sent : elemContents) {
+                    elemContentsStrings.add(sent.getContent());
+                }
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout
-                    .simple_spinner_item, elemContentsStrings);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            mExistingSentenceSpinner.setAdapter(adapter);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout
+                        .simple_spinner_item, elemContentsStrings);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mExistingSentenceSpinner.setAdapter(adapter);
+                mListItem.setBackground(getResources().getDrawable(R.drawable.highlight_green));
+            } else {
+                mExistingSentenceSpinner.setAdapter(null);
+                mListItem.setBackground(getResources().getDrawable(R.drawable.highlight_red));
+            }
 
             mElementTextView.setText(element.name());
             mTurnTextView.setText(element.getSpeaker().toString());
@@ -159,7 +168,7 @@ public class ConversationListActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return mDialogue.size();
+            return mOrderedElements.length;
         }
     }
 }
