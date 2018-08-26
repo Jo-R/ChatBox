@@ -198,6 +198,17 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    protected void onPause() {
+        if (mTextToSpeech != null) {
+            mTextToSpeech.stop();
+            mTextToSpeech.shutdown();
+        }
+
+        super.onPause();
+    }
+
+
     private void initialiseUI() {
         if (mCurrentConversation.getInitiator() == UserPreferences.UserType.CHILD && mChildMoveElement ==
          null) {
