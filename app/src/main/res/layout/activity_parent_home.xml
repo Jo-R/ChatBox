@@ -51,7 +51,8 @@
             <EditText
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:id="@+id/create_new_title"/>
 
 
 

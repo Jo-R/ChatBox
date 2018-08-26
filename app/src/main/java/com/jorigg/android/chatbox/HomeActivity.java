@@ -137,8 +137,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
-                .simple_spinner_item, chatTitles);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_layout, chatTitles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mChooseConvoSpinner.setAdapter(adapter);
     }

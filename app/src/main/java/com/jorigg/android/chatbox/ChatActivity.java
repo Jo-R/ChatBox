@@ -257,8 +257,8 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
 
         Collections.shuffle(nextMoves);
 
-        ArrayAdapter<Sentence> adapter = new ArrayAdapter<>(this, android.R.layout
-                .simple_spinner_item, nextMoves);
+        ArrayAdapter<Sentence> adapter = new ArrayAdapter<>(this, R.layout
+                .spinner_layout, nextMoves);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mResponseSpinner.setAdapter(adapter);
     }
