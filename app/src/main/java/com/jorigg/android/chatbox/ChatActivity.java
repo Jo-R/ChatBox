@@ -65,6 +65,15 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if (i != TextToSpeech.ERROR) {
+                    mTextToSpeech.setLanguage(Locale.UK);
+                }
+            }
+        });
+
         mUserAvatar = findViewById(R.id.user_avatar);
         int userAvatar = UserPreferences.getUserAvatar(getApplicationContext());
         if (userAvatar == R.drawable.boy_figure_test) {
@@ -89,16 +98,6 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
             Drawable avatar = getResources().getDrawable(R.drawable.police);
             mUserAvatar.setImageDrawable(avatar);
         }
-
-        mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if (i != TextToSpeech.ERROR) {
-                    mTextToSpeech.setLanguage(Locale.UK);
-                }
-            }
-        });
-
 
         mLeftSpeechBubbleText = findViewById(R.id.left_speech_bubble_text);
         mLeftSpeechBubbleText.setVisibility(View.INVISIBLE);
