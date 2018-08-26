@@ -3,6 +3,7 @@ package com.jorigg.android.chatbox;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,9 +23,12 @@ import com.jorigg.android.chatbox.model.Greeting;
 import com.jorigg.android.chatbox.model.Sentence;
 import com.jorigg.android.chatbox.model.UserPreferences;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.jorigg.android.chatbox.HomeActivity.SELECTED_CONVO;
@@ -53,6 +57,8 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
     private TextView mLeftSpeechBubbleText;
     private TextView mRightSpeechBubbleText;
     private ImageView mUserAvatar;
+
+    private TextToSpeech mTextToSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +90,15 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
             mUserAvatar.setImageDrawable(avatar);
         }
 
+        mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if (i != TextToSpeech.ERROR) {
+                    mTextToSpeech.setLanguage(Locale.UK);
+                }
+            }
+        });
+
 
         mLeftSpeechBubbleText = findViewById(R.id.left_speech_bubble_text);
         mLeftSpeechBubbleText.setVisibility(View.INVISIBLE);
@@ -104,6 +119,8 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
 
                 mRightSpeechBubbleText.setText(response);
                 mRightSpeechBubbleText.setVisibility(View.VISIBLE);
+
+                mTextToSpeech.speak(response, TextToSpeech.QUEUE_FLUSH, null);
 
 
                 //establish which element the child response belongs to and update
@@ -133,7 +150,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
                         mRightSpeechBubbleText.setText("");
                         mRightSpeechBubbleText.setVisibility(View.INVISIBLE);
                     }
-                }, 1500);
+                }, 2000);
 
 
             }
@@ -226,6 +243,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
         }
         mLeftSpeechBubbleText.setText(nextMove);
         mLeftSpeechBubbleText.setVisibility(View.VISIBLE);
+        mTextToSpeech.speak(nextMove, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     private void getNextItemsForUserResponseSpinner() {
