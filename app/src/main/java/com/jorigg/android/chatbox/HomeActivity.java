@@ -119,8 +119,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         populateSpinner();
         if (!mChatBank.getConversationLibrary().isEmpty()) {
             mStartChattingBtn.setEnabled(true);
@@ -179,6 +179,11 @@ public class HomeActivity extends AppCompatActivity {
             message = "CONGRATULATIONS you have won your reward: " + UserPreferences
                     .getReward(getApplicationContext());
         }
-        mRewardLabel.setText(message);
+
+        if (UserPreferences.getReward(getApplicationContext()).equals("")) {
+            mRewardLabel.setVisibility(View.INVISIBLE);
+        } else {
+            mRewardLabel.setText(message);
+        }
     }
 }
