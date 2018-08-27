@@ -5,11 +5,11 @@
     <string name="home_prompt_choose">Choose a conversation:</string>
     <string name="home_page_button">Start Chatting</string>
     <string name="home_badges_heading">Your badges:</string>
-    <string name="parent_mode">Set Up</string>
+    <string name="parent_mode">Set Up Chat</string>
 
     <string name="chat_speak">Say it!</string>
 
-    <string name="user_config">Configure User</string>
+    <string name="user_config">Set Up User</string>
     <string name="create_new_convo">Create a new conversation from selected template</string>
     <string name="create_new_title">Enter title for conversation</string>
     <string name="create_button_text">Create</string>

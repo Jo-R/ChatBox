@@ -119,7 +119,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
                 mRightSpeechBubbleText.setText(response);
                 mRightSpeechBubbleText.setVisibility(View.VISIBLE);
 
-                mTextToSpeech.speak(response, TextToSpeech.QUEUE_FLUSH, null);
+                mTextToSpeech.speak(response, TextToSpeech.QUEUE_ADD, null);
 
 
                 //establish which element the child response belongs to and update

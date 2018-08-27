@@ -103,9 +103,14 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.parent_mode:
+            case R.id.convo_config:
                 Intent intent = new Intent(HomeActivity.this, ParentHomeActivity.class);
                 startActivity(intent);
+                return true;
+            case R.id.user_config:
+                Intent intentUser = new Intent(HomeActivity.this, ConfigureUserActivity
+                        .class);
+                startActivity(intentUser);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
