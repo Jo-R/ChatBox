@@ -24,8 +24,10 @@
     <string name="config_sentence_bank_choose">OR choose from sentence bank</string>
     <string name="config_edit_existing">OR remove an existing sentence from chat</string>
     <string name="config_whose_turn">Whose turn is it?</string>
-    <string name="config_input_sentence_description">Each chat is made up of elements. When you
-        edit or create a chat you will be shown each element in either green or red boxes.
+    <string name="config_input_sentence_description">There are two templates to choose from
+        that act as a framework for the chat. Each one is made up of pre-defined turns and the
+        child\'s selections at various points determines the course of the conversation.
+        \nWhen you edit or create a chat you will be shown each element in either green or red boxes.
         The colours flag whether an element has at least one sentence assigned to it or not
         (green for former, red for latter). \n Click on the element to enter the configuration
         screen.
