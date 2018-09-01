@@ -4,7 +4,7 @@
     <string name="user_prompt">Choose what you\'d like to say:</string>
     <string name="home_prompt_choose">Choose a conversation:</string>
     <string name="home_page_button">Start Chatting</string>
-    <string name="home_badges_heading">Your badges:</string>
+    <string name="home_badges_heading">Your badges (for perfect conversations):</string>
     <string name="parent_mode">Set Up Chat</string>
 
     <string name="chat_speak">Say it!</string>
