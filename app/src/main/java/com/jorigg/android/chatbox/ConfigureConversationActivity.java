@@ -1,9 +1,14 @@
 package com.jorigg.android.chatbox;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +29,7 @@ import com.jorigg.android.chatbox.model.XmlWriteRead;
 
 import java.util.ArrayList;
 
+import static com.jorigg.android.chatbox.ConversationListActivity.CONVO_TYPE;
 import static com.jorigg.android.chatbox.ConversationListActivity.ELEMENT_TO_CONFIG;
 import static com.jorigg.android.chatbox.ParentHomeActivity.TITLE_TO_CONFIG;
 
@@ -89,18 +95,28 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ConversationElementEnum element = getElementFromString();
-                if (mCurrentConversation.addToConversation(element, mInputSentenceField.getText()
+                if (mInputSentenceField.getText().toString().equals("")) {
+                    Toast toast = Toast.makeText(ConfigureConversationActivity.this, "Please " +
+                            "input a " + "sentence", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+
+                } else if (mCurrentConversation.addToConversation(element, mInputSentenceField.getText()
                         .toString())) {
                     mSentenceBank.addSentence(new Sentence(mInputSentenceField.getText().toString(),
                             element.getSpeechType()));
                     mInputSentenceField.setText("");
                     populateExistingChatSentenceSpinner();
                     populateSentenceBankSpinner();
-                    Toast.makeText(ConfigureConversationActivity.this, "Added", Toast.LENGTH_LONG)
-                            .show();
+                    Toast toast = Toast.makeText(ConfigureConversationActivity.this, "Added",
+                            Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 } else {
-                    Toast.makeText(ConfigureConversationActivity.this, "This sentence is " +
-                            "already in the chat", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(ConfigureConversationActivity.this, "This " +
+                            "sentence is " + "already in the chat", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             }
         });
@@ -117,11 +133,15 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                     if (mCurrentConversation.addToConversation(element, mSentenceBankSpinner
                             .getSelectedItem().toString())) {
                         populateExistingChatSentenceSpinner();
-                        Toast.makeText(ConfigureConversationActivity.this, "Added", Toast.LENGTH_LONG)
-                                .show();
+                        Toast toast = Toast.makeText(ConfigureConversationActivity.this, "Added",
+                                Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
                     } else {
-                        Toast.makeText(ConfigureConversationActivity.this, "This sentence is " +
-                                "already in the chat", Toast.LENGTH_LONG).show();
+                        Toast toast = Toast.makeText(ConfigureConversationActivity.this, "This " +
+                                "sentence is " + "already in the chat", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0,0);
+                        toast.show();
                     }
                 }
             }
@@ -136,9 +156,10 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                     mSentenceBank.removeSentence(mSentenceBankSpinner
                             .getSelectedItem().toString(), element.getSpeechType());
                     populateSentenceBankSpinner();
-                    Toast.makeText(ConfigureConversationActivity.this, "Removed from sentence " +
-                            "bank", Toast.LENGTH_LONG)
-                            .show();
+                    Toast toast = Toast.makeText(ConfigureConversationActivity.this, "Removed " +
+                            "from sentence " + "bank", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0,0);
+                    toast.show();
                 }
             }
         });
@@ -158,9 +179,10 @@ public class ConfigureConversationActivity extends AppCompatActivity {
                     //call method on convo elem
                     mCurrentConversation.removeSentenceFromConversation(contentToRem, element);
                     populateExistingChatSentenceSpinner();
-                    Toast.makeText(ConfigureConversationActivity.this, "Removed from chat", Toast
-                            .LENGTH_LONG)
-                            .show();
+                    Toast toast = Toast.makeText(ConfigureConversationActivity.this, "Removed " +
+                            "from chat", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             }
         });
@@ -168,11 +190,38 @@ public class ConfigureConversationActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.config_convo_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.view_diagram:
+                Intent intent = new Intent(ConfigureConversationActivity.this, ViewDiagramActivity
+                        .class);
+                String convoType = mCurrentConversation.getClass().getSimpleName().toString();
+                intent.putExtra(CONVO_TYPE, convoType);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         if (!mCurrentConversation.hasAnEntryPerElement()) {
-            Toast.makeText(ConfigureConversationActivity.this, "Conversation not complete. " +
-                    "Saving for later", Toast.LENGTH_LONG).show();
+
+            Toast toast = Toast.makeText(ConfigureConversationActivity.this, "Conversation not " +
+                    "complete. " +"Saving for later", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
         }
         Context ctxt = this.getApplicationContext();
         XmlWriteRead.writeChatsToXML(mChatBank.getConversationLibrary(), ctxt);
