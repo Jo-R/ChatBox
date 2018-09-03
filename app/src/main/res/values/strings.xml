@@ -43,6 +43,8 @@
     <string name="dialog_positive_btn">Yes</string>
     <string name="dialog_negative_btn">No</string>
 
+    <string name="view_diagram">View diagram</string>
+
     <string name="user_config_name_input">Enter your child\'s name:</string>
     <string name="user_config_img_select_prompt">Select an avatar:</string>
     <string name="adult_config_name_input">Enter supervising adult\'s name/title (e.g. Mum,

@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -38,6 +41,7 @@ public class ConversationListActivity extends AppCompatActivity {
     private ElementAdapter mElementAdapter;
 
     public final static String ELEMENT_TO_CONFIG = "elemForConfig";
+    public final static String CONVO_TYPE = "convoType";
 
 
     @Override
@@ -49,6 +53,30 @@ public class ConversationListActivity extends AppCompatActivity {
         mConversationRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         updateUI();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.config_convo_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.view_diagram:
+                Intent intent = new Intent(ConversationListActivity.this, ViewDiagramActivity
+                        .class);
+                String convoType = mCurrentConversation.getClass().getSimpleName().toString();
+                intent.putExtra(CONVO_TYPE, convoType);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
     }
 

@@ -21,6 +21,7 @@
         <activity android:name=".ConfigureConversationActivity"/>
         <activity android:name=".ConfigureUserActivity"/>
         <activity android:name=".ConversationListActivity"/>
+        <activity android:name=".ViewDiagramActivity"/>
     </application>
 
 </manifest>
