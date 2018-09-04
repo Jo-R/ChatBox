@@ -17,6 +17,7 @@ public class ConfigureUserActivity extends AppCompatActivity {
     private EditText mEditName;
     private EditText mEditAdultName;
     private EditText mEditPraise;
+    private EditText mEditTarget;
     private EditText mEditReward;
     private ImageView mSelectGirl;
     private ImageView mSelectBoy;
@@ -94,6 +95,32 @@ public class ConfigureUserActivity extends AppCompatActivity {
 
             }
         });
+
+
+        mEditTarget = findViewById(R.id.edit_reward_target);
+        mEditTarget.setText(Integer.toString(UserPreferences.getTarget(getApplicationContext())));
+        mEditTarget.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!mEditTarget.getText().toString().equals("")) {
+                    UserPreferences.setTarget(getApplicationContext(), Integer.parseInt(mEditTarget
+                            .getText().toString()));
+                    Toast.makeText(ConfigureUserActivity.this, "Target updated", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
 
         mEditReward = findViewById(R.id.edit_reward);
         mEditReward.setText(UserPreferences.getReward(getApplicationContext()));

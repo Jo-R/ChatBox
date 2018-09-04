@@ -18,6 +18,7 @@ public class UserPreferences {
     private static final String PREF_ADULT_NAME = "adultName";
     private static final String PREF_PRAISE = "praisePhrase";
     private static final String PREF_REWARD = "prefReward";
+    private static final String PREF_TARGET = "prefTarget";
 
     public static String getUserName(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getString(PREF_USER_NAME,
@@ -37,6 +38,11 @@ public class UserPreferences {
     public static String getReward(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getString(PREF_REWARD,
                 "");
+    }
+
+    public static int getTarget(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getInt(PREF_TARGET,
+                0);
     }
 
     public static int getUserAvatar(Context context) {
@@ -67,6 +73,11 @@ public class UserPreferences {
     public static void setReward(Context context, String reward) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString(PREF_REWARD,
                 reward).apply();
+    }
+
+    public static void setTarget(Context context, int target) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(PREF_TARGET,
+                target).apply();
     }
 
     public static void setUserAvatar(Context context, int avatarId) {

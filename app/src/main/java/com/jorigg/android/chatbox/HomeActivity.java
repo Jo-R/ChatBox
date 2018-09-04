@@ -167,9 +167,12 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    //todo 75 should be configurable - also what happens here when goal is reached?
+    //todo what happens here when goal is reached?
+    //todo also doesn't show when wasn't there and go back from user prefs - have to close app
+    // and go back in
     private void setRewardMessage() {
-        int needThisManyMore = 75 - UserPreferences.getUserScore(getApplicationContext());
+        int needThisManyMore = UserPreferences.getTarget(getApplicationContext()) - UserPreferences.getUserScore
+                (getApplicationContext());
         String message = "";
 
         if (needThisManyMore > 0) {
