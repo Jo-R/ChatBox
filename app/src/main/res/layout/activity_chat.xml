@@ -1,65 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="top"
-        android:layout_weight="1">
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/agent_figure_test"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="29dp"
-            android:src="@drawable/agent_figure_test" />
+    <TextView
+        android:id="@+id/left_speech_bubble_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/speech_bubble_left"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/left_speech_bubble_text"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="70dp"
-            android:background="@drawable/speech_bubble_left"
-            android:gravity="center" />
+    <ImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/girl_figure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/user_avatar"
-            android:layout_width="84dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="41dp"
-            android:layout_marginTop="98dp"
-            android:src="@drawable/girl_figure" />
-
-        <TextView
-            android:id="@+id/right_speech_bubble_text"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="114dp"
-            android:layout_marginTop="116dp"
-            android:background="@drawable/speech_bubble_right"
-            android:gravity="center" />
-
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/right_speech_bubble_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/speech_bubble_right"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/user_avatar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_weight="2"
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/chat_border"
         android:orientation="vertical"
-        android:background="@drawable/chat_border">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_avatar">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -73,7 +72,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         </LinearLayout>
-    
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,19 +84,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="0.5"
-                android:background="@null"/>
+                android:background="@null" />
 
             <Button
                 android:id="@+id/user_response_button"
-                android:layout_marginStart="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_weight="0.3"
-                android:text="@string/chat_speak"
-                android:drawableStart="@drawable/ic_choose_user_response"/>
+                android:drawableStart="@drawable/ic_choose_user_response"
+                android:text="@string/chat_speak" />
 
         </LinearLayout>
 
     </LinearLayout>
+</android.support.constraint.ConstraintLayout>
 
-</LinearLayout>
+
