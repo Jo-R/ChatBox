@@ -276,8 +276,11 @@ public class XmlWriteRead {
                         xpp.next(); //SType
                         xpp.next();
                         String speechType = xpp.getText();
+                        //todo have got null pointer here on loading on tablet - didn't review xml
+                        //need to sort this out - pref when reproduce bug so can review xml!
                         Sentence.SpeechType st = Sentence.SpeechType.valueOf(speechType);
                         sb.addSentence(new Sentence(content, st));
+
                     }
                 }
 
