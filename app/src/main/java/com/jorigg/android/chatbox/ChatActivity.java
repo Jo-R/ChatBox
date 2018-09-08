@@ -57,6 +57,7 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
     private TextView mLeftSpeechBubbleText;
     private TextView mRightSpeechBubbleText;
     private ImageView mUserAvatar;
+    private TextView mUserPrompt;
 
     private TextToSpeech mTextToSpeech;
 
@@ -104,6 +105,8 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
         mRightSpeechBubbleText = findViewById(R.id.right_speech_bubble_text);
         mRightSpeechBubbleText.setVisibility(View.INVISIBLE);
 
+        mUserPrompt = findViewById(R.id.user_prompt);
+
         mResponseSpinner = findViewById(R.id.user_response_spinner);
         mUserResponseButton = findViewById(R.id.user_response_button);
         mUserResponseButton.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +121,8 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
 
                 mRightSpeechBubbleText.setText(response);
                 mRightSpeechBubbleText.setVisibility(View.VISIBLE);
+
+                mUserPrompt.setVisibility(View.INVISIBLE);
 
                 mTextToSpeech.speak(response, TextToSpeech.QUEUE_ADD, null);
 
@@ -260,9 +265,11 @@ public class ChatActivity extends AppCompatActivity implements GameOverPerfectDi
         if (mChildMoveElement == null) {
             mCurrentChildMoves = mCurrentConversation.getInitialUserMoves();
             addNextItemsToUserResponseSpinner();
+            mUserPrompt.setVisibility(View.VISIBLE);
         } else if (mCurrentConversation.isInProgress()) {
             mCurrentChildMoves = mCurrentConversation.getNextUserMoves(mCurrentAgentElement);
             addNextItemsToUserResponseSpinner();
+            mUserPrompt.setVisibility(View.VISIBLE);
         } else {
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {

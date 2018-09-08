@@ -203,7 +203,7 @@ public class ConfigureConversationActivity extends AppCompatActivity {
             case R.id.view_diagram:
                 Intent intent = new Intent(ConfigureConversationActivity.this, ViewDiagramActivity
                         .class);
-                String convoType = mCurrentConversation.getClass().getSimpleName().toString();
+                String convoType = mCurrentConversation.getClass().getSimpleName();
                 intent.putExtra(CONVO_TYPE, convoType);
                 startActivity(intent);
                 return true;

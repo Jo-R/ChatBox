@@ -23,6 +23,7 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint="enter child name"
         app:layout_constraintStart_toEndOf="@+id/name_input_prompt" />
 
     <TextView
@@ -119,6 +120,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint="enter name"
         app:layout_constraintStart_toEndOf="@+id/adult_name_input_prompt"
         app:layout_constraintTop_toBottomOf="@+id/scroll_avatars" />
 
@@ -140,8 +142,31 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="text"
+        android:hint="enter praise"
         app:layout_constraintStart_toEndOf="@+id/praise_input_prompt"
         app:layout_constraintTop_toBottomOf="@+id/adult_name_input_prompt" />
+
+    <TextView
+        android:id="@+id/reward_input_target__prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/reward_target_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/praise_input_prompt" />
+
+    <EditText
+        android:id="@+id/edit_reward_target"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="enter target"
+        app:layout_constraintStart_toEndOf="@+id/reward_input_target__prompt"
+        app:layout_constraintTop_toBottomOf="@+id/edit_praise" />
 
     <TextView
         android:id="@+id/reward_input_prompt"
@@ -151,17 +176,18 @@
         android:layout_marginTop="32dp"
         android:text="@string/reward_input"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/praise_input_prompt" />
+        app:layout_constraintTop_toBottomOf="@+id/reward_input_target__prompt" />
 
     <EditText
         android:id="@+id/edit_reward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="enter reward"
         android:inputType="text"
         app:layout_constraintStart_toEndOf="@+id/reward_input_prompt"
-        app:layout_constraintTop_toBottomOf="@+id/praise_input_prompt" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_reward_target" />
 
 </android.support.constraint.ConstraintLayout>

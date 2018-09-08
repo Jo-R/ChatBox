@@ -51,5 +51,7 @@
     <string name="adult_config_name_input">Enter supervising adult\'s name/title (e.g. Mum,
     Mrs Jones)</string>
     <string name="praise_input">Enter a phrase to praise a perfect conversation</string>
-    <string name="reward_input">Enter reward to be won after 50 perfect conversations</string>
+    <string name="reward_target_input">Enter no of perfect conversations to win reward</string>
+    <string name="reward_input">Enter reward to be won after above no of perfect
+        conversations</string>
 </resources>

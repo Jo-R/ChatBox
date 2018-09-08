@@ -70,7 +70,7 @@ public class ConversationListActivity extends AppCompatActivity {
             case R.id.view_diagram:
                 Intent intent = new Intent(ConversationListActivity.this, ViewDiagramActivity
                         .class);
-                String convoType = mCurrentConversation.getClass().getSimpleName().toString();
+                String convoType = mCurrentConversation.getClass().getSimpleName();
                 intent.putExtra(CONVO_TYPE, convoType);
                 startActivity(intent);
                 return true;
@@ -92,7 +92,7 @@ public class ConversationListActivity extends AppCompatActivity {
         mCurrentConversation = mChatBank.getConversation(convoTitle);
 
         mElementAdapter = new ElementAdapter(mCurrentConversation.getDialogue(),
-                mCurrentConversation.getClass().getSimpleName().toString());
+                mCurrentConversation.getClass().getSimpleName());
         mConversationRecycler.setAdapter(mElementAdapter);
 
     }
